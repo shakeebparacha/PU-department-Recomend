@@ -138,81 +138,90 @@ def get_all_programs(df, student_merit, selected_years):
 
 # ==================== PDF EXPORT ====================
 def generate_pdf(student_merit, year, recommendations_df):
-    """Generate PDF report with recommendations"""
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", "B", 16)
+    """Generate PDF report with recommendations using ReportLab"""
+    if not HAS_REPORTLAB:
+        return None
     
-    # Header
-    pdf.cell(0, 15, "University of the Punjab", ln=True, align="C")
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Merit-Based Program Recommendation Report", ln=True, align="C")
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5*inch, bottomMargin=0.5*inch)
+    
+    elements = []
+    styles = getSampleStyleSheet()
+    
+    # Title
+    title_style = ParagraphStyle(
+        'CustomTitle',
+        parent=styles['Heading1'],
+        fontSize=18,
+        textColor=colors.HexColor('#1f77b4'),
+        spaceAfter=6,
+        alignment=1  # Center
+    )
+    elements.append(Paragraph("University of the Punjab", title_style))
+    elements.append(Paragraph("Merit-Based Program Recommendation Report", styles['Heading2']))
+    elements.append(Spacer(1, 0.2*inch))
     
     # Student Info
-    pdf.set_font("Arial", "", 10)
-    pdf.ln(5)
-    pdf.set_font("Arial", "B", 10)
-    pdf.cell(50, 8, "Student Merit:")
-    pdf.set_font("Arial", "", 10)
-    pdf.cell(0, 8, f"{student_merit}%", ln=True)
-    
-    pdf.set_font("Arial", "B", 10)
-    pdf.cell(50, 8, "Year:")
-    pdf.set_font("Arial", "", 10)
-    pdf.cell(0, 8, str(year), ln=True)
-    
-    pdf.set_font("Arial", "B", 10)
-    pdf.cell(50, 8, "Generated:")
-    pdf.set_font("Arial", "", 10)
-    pdf.cell(0, 8, datetime.now().strftime("%d-%m-%Y %H:%M"), ln=True)
+    student_info_style = ParagraphStyle('StudentInfo', parent=styles['Normal'], fontSize=10)
+    info_text = f"<b>Student Merit:</b> {student_merit}% | <b>Year:</b> {year} | <b>Generated:</b> {datetime.now().strftime('%d-%m-%Y %H:%M')}"
+    elements.append(Paragraph(info_text, student_info_style))
+    elements.append(Spacer(1, 0.15*inch))
     
     # Summary Stats
-    pdf.ln(5)
-    pdf.set_font("Arial", "B", 10)
-    pdf.cell(0, 10, "Summary Statistics", ln=True)
-    pdf.set_font("Arial", "", 9)
-    
     safe_count = len(recommendations_df[recommendations_df['Difficulty'] == 'Safe ✅'])
     moderate_count = len(recommendations_df[recommendations_df['Difficulty'] == 'Moderate ⚠️'])
     risky_count = len(recommendations_df[recommendations_df['Difficulty'] == 'Risky ⚠️⚠️'])
     
-    pdf.cell(50, 7, f"Safe Programs: {safe_count}")
-    pdf.cell(50, 7, f"Moderate Programs: {moderate_count}", ln=True)
-    pdf.cell(50, 7, f"Risky Programs: {risky_count}", ln=True)
-    pdf.cell(50, 7, f"Total Eligible: {len(recommendations_df)}", ln=True)
+    summary_text = f"""
+    <b>Summary Statistics:</b><br/>
+    Safe Programs: {safe_count} | Moderate Programs: {moderate_count} | Risky Programs: {risky_count} | Total Eligible: {len(recommendations_df)}
+    """
+    elements.append(Paragraph(summary_text, student_info_style))
+    elements.append(Spacer(1, 0.2*inch))
     
-    # Programs Table
-    pdf.ln(5)
-    pdf.set_font("Arial", "B", 10)
-    pdf.cell(0, 10, "Eligible Programs", ln=True)
-    pdf.set_font("Arial", "B", 8)
+    # Table
+    elements.append(Paragraph("<b>Eligible Programs</b>", styles['Heading3']))
     
-    # Table header
-    col_widths = [25, 35, 20, 20, 20, 20]
-    headers = ["Faculty", "Program", "Campus", "Semester", "Cutoff %", "Difficulty"]
-    for i, header in enumerate(headers):
-        pdf.cell(col_widths[i], 8, header, border=1, align="C")
-    pdf.ln()
+    # Prepare table data
+    table_data = [['Faculty', 'Program', 'Campus', 'Semester', 'Cutoff %', 'Difficulty']]
     
-    # Table data
-    pdf.set_font("Arial", "", 7)
     for _, row in recommendations_df.iterrows():
-        pdf.cell(col_widths[0], 7, str(row['Faculty'])[:20], border=1)
-        pdf.cell(col_widths[1], 7, str(row['Program'])[:30], border=1)
-        pdf.cell(col_widths[2], 7, str(row['Campus'])[:15], border=1)
-        pdf.cell(col_widths[3], 7, str(row['Semester_Type'])[:15], border=1)
-        pdf.cell(col_widths[4], 7, f"{row['Merit_Percentage']:.1f}%", border=1, align="C")
-        difficulty_short = "Safe" if "Safe" in row['Difficulty'] else "Mod" if "Moderate" in row['Difficulty'] else "Risky"
-        pdf.cell(col_widths[5], 7, difficulty_short, border=1, align="C")
-        pdf.ln()
+        table_data.append([
+            str(row['Faculty'])[:15],
+            str(row['Program'])[:20],
+            str(row['Campus'])[:12],
+            str(row['Semester_Type'])[:12],
+            f"{row['Merit_Percentage']:.1f}%",
+            'Safe' if 'Safe' in row['Difficulty'] else 'Mod' if 'Moderate' in row['Difficulty'] else 'Risky'
+        ])
+    
+    # Create table
+    table = Table(table_data, colWidths=[1.2*inch, 1.5*inch, 1*inch, 1.2*inch, 1*inch, 1*inch])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#1f77b4')),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 9),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('FONTSIZE', (0, 1), (-1, -1), 8),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f0f0f0')]),
+    ]))
+    
+    elements.append(table)
+    elements.append(Spacer(1, 0.2*inch))
     
     # Footer
-    pdf.ln(10)
-    pdf.set_font("Arial", "", 8)
-    pdf.cell(0, 5, "This report is generated based on 2024 University of the Punjab merit data.", ln=True)
-    pdf.cell(0, 5, "For official admissions information, visit: www.pu.edu.pk", ln=True)
+    footer_style = ParagraphStyle('Footer', parent=styles['Normal'], fontSize=8, textColor=colors.grey)
+    elements.append(Paragraph("This report is generated based on 2024 University of the Punjab merit data.", footer_style))
+    elements.append(Paragraph("For official admissions information, visit: www.pu.edu.pk", footer_style))
     
-    return io.BytesIO(pdf.output().encode('latin-1'))
+    # Build PDF
+    doc.build(elements)
+    buffer.seek(0)
+    return buffer
 
 # ==================== MAIN APP ====================
 # Title
@@ -360,20 +369,34 @@ if merit_df is not None:
         
         col1, col2 = st.columns([2, 1])
         with col1:
-            st.markdown("Generate a detailed PDF report with all your recommendations.")
+            if HAS_REPORTLAB:
+                st.markdown("Generate a detailed PDF report with all your recommendations.")
+            else:
+                st.warning("⚠️ PDF generation requires ReportLab library. CSV export available instead.")
         
         with col2:
-            # Generate PDF
-            all_recommendations = get_all_programs(merit_df, student_merit, selected_years)
-            pdf_buffer = generate_pdf(student_merit, selected_years[0], all_recommendations)
-            
-            st.download_button(
-                label="📄 Download PDF Report",
-                data=pdf_buffer,
-                file_name=f"pu_merit_recommendation_{int(student_merit)}.pdf",
-                mime="application/pdf",
-                use_container_width=True
-            )
+            if HAS_REPORTLAB:
+                # Generate PDF
+                all_recommendations = get_all_programs(merit_df, student_merit, selected_years)
+                pdf_buffer = generate_pdf(student_merit, selected_years[0], all_recommendations)
+                
+                st.download_button(
+                    label="📄 Download PDF Report",
+                    data=pdf_buffer,
+                    file_name=f"pu_merit_recommendation_{int(student_merit)}.pdf",
+                    mime="application/pdf",
+                    use_container_width=True
+                )
+            else:
+                # Fallback: CSV export
+                csv = display_df.to_csv(index=False)
+                st.download_button(
+                    label="📊 Download CSV Report",
+                    data=csv,
+                    file_name=f"pu_merit_recommendation_{int(student_merit)}.csv",
+                    mime="text/csv",
+                    use_container_width=True
+                )
     
     # Help Section
     st.divider()
