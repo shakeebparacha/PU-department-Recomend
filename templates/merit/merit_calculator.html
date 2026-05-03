@@ -1,0 +1,920 @@
+{% extends 'base.html' %}
+
+{% block title %}Merit Calculator - PU Merit Recommendation System{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <h1><i class="fas fa-calculator"></i> BS Merit Calculator 2025</h1>
+        <p>Calculate your merit percentage based on PU criteria</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <!-- Note Alert -->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="fas fa-info-circle"></i>
+        <strong>Important Note:</strong> This is a basic merit calculator. The exact merit will be calculated by the concerned department after certain additions/subtractions before display of merit lists.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Main Tabs Navigation -->
+    <ul class="nav nav-tabs nav-fill mb-4" id="mainCalculatorTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="semester1-tab" data-bs-toggle="tab" data-bs-target="#semester1" type="button" role="tab" aria-controls="semester1" aria-selected="true">
+                <i class="fas fa-graduation-cap"></i> Basic Criteria for 1st Semester BS (4-Yrs) Program
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="semester5-tab" data-bs-toggle="tab" data-bs-target="#semester5" type="button" role="tab" aria-controls="semester5" aria-selected="false">
+                <i class="fas fa-book"></i> Basic Criteria for BS 5th Semester or Equivalent
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="calculatorTabContent">
+        <!-- Semester 1: 1st Semester BS (4-Yrs) Program -->
+        <div class="tab-pane fade show active" id="semester1" role="tabpanel" aria-labelledby="semester1-tab">
+            <!-- Sub Tabs for 1st Semester -->
+            <ul class="nav nav-tabs nav-fill mb-4" id="semester1Tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="type2-tab" data-bs-toggle="tab" data-bs-target="#type2" type="button" role="tab" aria-controls="type2" aria-selected="true">
+                        <i class="fas fa-graduation-cap"></i> 2nd Year Result
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="type1-tab" data-bs-toggle="tab" data-bs-target="#type1" type="button" role="tab" aria-controls="type1" aria-selected="false">
+                        <i class="fas fa-book"></i> 1st Year Result
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="semester1TabContent">
+        <!-- Type 2: 2nd Year Result -->
+        <div class="tab-pane fade show active" id="type2" role="tabpanel" aria-labelledby="type2-tab">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h5 class="mb-0"><i class="fas fa-book-open"></i> For Those Students who are applying based on their 2nd year result</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="type2Form">
+                                {% csrf_token %}
+
+                                <!-- Matric/SSC/O-Level Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-graduation-cap"></i> Matric/SSC/O-Level Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control matric-obtained" id="type2_matric_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control matric-total" id="type2_matric_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Inter/A-Level Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-book"></i> Inter/A-Level Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control inter-obtained" id="type2_inter_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control inter-total" id="type2_inter_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Entry Test Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-pencil-alt"></i> PU Entry Test Marks
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control entry-obtained" id="type2_entry_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control entry-total" id="type2_entry_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Marks Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-star"></i> Additional Marks (Hafiz-e-Quran)
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Additional Marks</label>
+                                            <input type="number" class="form-control additional-marks" id="type2_additional_marks" placeholder="Enter additional marks" step="0.01" min="0" value="0" max="100">
+                                            <small class="text-muted"><i class="fas fa-info-circle"></i> Enter your additional marks (e.g., 20 for Hafiz-e-Quran)</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <!-- Calculate Button -->
+                                <button type="button" class="btn btn-primary btn-lg w-100 mb-3" onclick="calculateMeritType2()">
+                                    <i class="fas fa-calculator"></i> Calculate Merit
+                                </button>
+                            </form>
+
+                            <!-- Results Section -->
+                            <div id="type2Results" style="display: none;">
+                                <div class="alert alert-success" role="alert">
+                                    <h6 class="alert-heading"><i class="fas fa-check-circle"></i> Merit Marks Calculated</h6>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Academic Score (75%)</h6>
+                                                <p class="card-text">
+                                                    <strong id="type2_academic_score">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Based on Matric & Inter marks</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Entry Test Score (25%)</h6>
+                                                <p class="card-text">
+                                                    <strong id="type2_entry_score">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Out of 25 marks</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                            <div class="card-body">
+                                                <h6 class="card-title" style="color: white;">Total Merit (%)</h6>
+                                                <p class="card-text">
+                                                    <strong style="font-size: 1.8rem;" id="type2_total_merit">0.00</strong>
+                                                </p>
+                                                <small>Final merit percentage</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Step-by-Step Calculation (Hidden by default) -->
+                                <div class="row mt-4">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-outline-secondary w-100" onclick="toggleType2Steps()">
+                                            <i class="fas fa-chevron-down"></i> Show Step-by-Step Calculation
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3" id="type2_steps_container" style="display: none;">
+                                    <div class="col-12">
+                                        <div class="card border-secondary">
+                                            <div class="card-header bg-secondary text-white">
+                                                <h6 class="mb-0"><i class="fas fa-list-ol"></i> Step-by-Step Calculation</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="type2_calculation_steps" style="font-size: 0.95rem; line-height: 1.8;">
+                                                    <!-- Steps will be filled by JavaScript -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Type 1: 1st Year Result -->
+        <div class="tab-pane fade" id="type1" role="tabpanel" aria-labelledby="type1-tab">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-header" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white;">
+                            <h5 class="mb-0"><i class="fas fa-book-open"></i> For Those Students who are applying based on their 1st year result</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="type1Form">
+                                {% csrf_token %}
+
+                                <!-- Matric/SSC/O-Level Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-graduation-cap"></i> Matric/SSC/O-Level Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control" id="type1_matric_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control" id="type1_matric_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Inter/A-Level Part 1 Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-book"></i> Inter/A-Level Part 1 Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control" id="type1_inter_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control" id="type1_inter_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Entry Test Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-pencil-alt"></i> PU Entry Test Marks
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control" id="type1_entry_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control" id="type1_entry_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Marks Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-star"></i> Additional Marks (Hafiz-e-Quran)
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Additional Marks</label>
+                                            <input type="number" class="form-control" id="type1_additional_marks" placeholder="Enter additional marks" step="0.01" min="0" value="0" max="100">
+                                            <small class="text-muted"><i class="fas fa-info-circle"></i> Enter your additional marks (e.g., 20 for Hafiz-e-Quran)</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <!-- Calculate Button -->
+                                <button type="button" class="btn btn-success btn-lg w-100 mb-3" onclick="calculateMeritType1()">
+                                    <i class="fas fa-calculator"></i> Calculate Merit
+                                </button>
+                            </form>
+
+                            <!-- Results Section -->
+                            <div id="type1Results" style="display: none;">
+                                <div class="alert alert-success" role="alert">
+                                    <h6 class="alert-heading"><i class="fas fa-check-circle"></i> Merit Marks Calculated</h6>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Academic Score (75%)</h6>
+                                                <p class="card-text">
+                                                    <strong id="type1_academic_score">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Based on Matric & Inter Part 1 marks</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Entry Test Score (25%)</h6>
+                                                <p class="card-text">
+                                                    <strong id="type1_entry_score">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Out of 25 marks</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div class="card" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white;">
+                                            <div class="card-body">
+                                                <h6 class="card-title" style="color: white;">Total Merit (%)</h6>
+                                                <p class="card-text">
+                                                    <strong style="font-size: 1.8rem;" id="type1_total_merit">0.00</strong>
+                                                </p>
+                                                <small>Final merit percentage</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Step-by-Step Calculation (Hidden by default) -->
+                                <div class="row mt-4">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-outline-secondary w-100" onclick="toggleType1Steps()">
+                                            <i class="fas fa-chevron-down"></i> Show Step-by-Step Calculation
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3" id="type1_steps_container" style="display: none;">
+                                    <div class="col-12">
+                                        <div class="card border-secondary">
+                                            <div class="card-header bg-secondary text-white">
+                                                <h6 class="mb-0"><i class="fas fa-list-ol"></i> Step-by-Step Calculation</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="type1_calculation_steps" style="font-size: 0.95rem; line-height: 1.8;">
+                                                    <!-- Steps will be filled by JavaScript -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <!-- Semester 5: BS 5th Semester or Equivalent -->
+        <div class="tab-pane fade" id="semester5" role="tabpanel" aria-labelledby="semester5-tab">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-header" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white;">
+                            <h5 class="mb-0"><i class="fas fa-book-open"></i> Basic Criteria for BS 5th Semester or Equivalent</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="type5Form">
+                                {% csrf_token %}
+
+                                <!-- Matric/SSC/O-Level Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-graduation-cap"></i> Matric/SSC/O-Level Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control" id="type5_matric_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control" id="type5_matric_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Inter/A-Level Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-book"></i> Inter/A-Level Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control" id="type5_inter_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control" id="type5_inter_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- BA/BSc Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-certificate"></i> BA/BSc Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control" id="type5_ba_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control" id="type5_ba_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Marks Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-star"></i> Additional Marks (Hafiz-e-Quran)
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Additional Marks</label>
+                                            <input type="number" class="form-control" id="type5_additional_marks" placeholder="Enter additional marks" step="0.01" min="0" value="0" max="100">
+                                            <small class="text-muted"><i class="fas fa-info-circle"></i> Enter your additional marks (e.g., 20 for Hafiz-e-Quran)</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <!-- Calculate Button -->
+                                <button type="button" class="btn btn-danger btn-lg w-100 mb-3" onclick="calculateMeritType5()">
+                                    <i class="fas fa-calculator"></i> Calculate Merit
+                                </button>
+                            </form>
+
+                            <!-- Results Section -->
+                            <div id="type5Results" style="display: none;">
+                                <div class="alert alert-success" role="alert">
+                                    <h6 class="alert-heading"><i class="fas fa-check-circle"></i> Merit Marks Calculated</h6>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Matric Component (25%)</h6>
+                                                <p class="card-text">
+                                                    <strong id="type5_matric_component">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Obtained × 0.25</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Inter Component (20%)</h6>
+                                                <p class="card-text">
+                                                    <strong id="type5_inter_component">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Obtained × 0.20</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">BA/BSc Component</h6>
+                                                <p class="card-text">
+                                                    <strong id="type5_ba_component">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Obtained marks</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Additional Marks</h6>
+                                                <p class="card-text">
+                                                    <strong id="type5_additional_display">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Hafiz ul Quran bonus</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div class="card" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white;">
+                                            <div class="card-body">
+                                                <h6 class="card-title" style="color: white;">Total Merit (%)</h6>
+                                                <p class="card-text">
+                                                    <strong style="font-size: 1.8rem;" id="type5_total_merit">0.00</strong>
+                                                </p>
+                                                <small>Final merit percentage</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Step-by-Step Calculation (Hidden by default) -->
+                                <div class="row mt-4">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-outline-secondary w-100" onclick="toggleType5Steps()">
+                                            <i class="fas fa-chevron-down"></i> Show Step-by-Step Calculation
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3" id="type5_steps_container" style="display: none;">
+                                    <div class="col-12">
+                                        <div class="card border-secondary">
+                                            <div class="card-header bg-secondary text-white">
+                                                <h6 class="mb-0"><i class="fas fa-list-ol"></i> Step-by-Step Calculation</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="type5_calculation_steps" style="font-size: 0.95rem; line-height: 1.8;">
+                                                    <!-- Steps will be filled by JavaScript -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Formula Reference Section -->
+    <div class="row mt-5">
+        <div class="col-lg-10 mx-auto">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0"><i class="fas fa-calculator"></i> Merit Calculation Formulas</h6>
+                </div>
+                <div class="card-body">
+                    <h6 class="mb-3"><strong>1st Semester BS (4-Yrs) Program - Type 2 (2nd Year Result):</strong></h6>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <code>Merit = ((((Matric_Obtained × 0.25) + Inter_Obtained + Additional_Marks) / ((Matric_Total × 0.25) + Inter_Total)) × 75) + ((Entry_Test_Obtained / Entry_Test_Total) × 25)</code>
+                    </div>
+
+                    <h6 class="mb-3"><strong>1st Semester BS (4-Yrs) Program - Type 1 (1st Year Result):</strong></h6>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <code>Merit = ((((Matric_Obtained × 0.25) + Inter_Part1_Obtained + Additional_Marks) / ((Matric_Total × 0.25) + Inter_Part1_Total)) × 75) + ((Entry_Test_Obtained / Entry_Test_Total) × 25)</code>
+                    </div>
+
+                    <h6 class="mb-3"><strong>BS 5th Semester or Equivalent:</strong></h6>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <code>Merit % = (Marks_Earned / Total_Marks) × 100</code><br><br>
+                        <strong>Where:</strong><br>
+                        Marks_Earned = (Matric_Obtained × 0.25) + (Inter_Obtained × 0.20) + BA_BSc_Obtained + Additional_Marks<br>
+                        Total_Marks = (Matric_Total × 0.25) + (Inter_Total × 0.20) + BA_BSc_Total
+                    </div>
+
+                    <hr>
+                    <h6 class="mb-3"><strong>Rules:</strong></h6>
+                    <ul>
+                        <li><strong>Additional_Marks:</strong> This is 20 for Hafiz-e-Quran candidates, otherwise 0.</li>
+                        <li><strong>1st Semester (Type 1 & 2):</strong> Academic Component (75%) + Entry Test Component (25%)</li>
+                        <li><strong>5th Semester:</strong> Weighted average of Matric (25%), Inter (20%), and BA/BSc (55%) components</li>
+                        <li><strong>Final Result:</strong> Rounded to two decimal places</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.section-divider {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #667eea;
+    border-radius: 4px;
+}
+
+.section-title {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.nav-tabs .nav-item {
+    display: inline-block;
+}
+
+.nav-tabs .nav-link {
+    color: #555 !important;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-weight: 500;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom-color: #667eea;
+    color: #667eea !important;
+    background-color: rgba(102, 126, 234, 0.05);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: transparent !important;
+    border-bottom-color: #667eea !important;
+    color: #667eea !important;
+    font-weight: 600;
+}
+
+.tab-content {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+</style>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function toggleType2Steps() {
+    const container = document.getElementById('type2_steps_container');
+    const button = event.target.closest('button');
+    if (container.style.display === 'none') {
+        container.style.display = 'block';
+        button.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Step-by-Step Calculation';
+    } else {
+        container.style.display = 'none';
+        button.innerHTML = '<i class="fas fa-chevron-down"></i> Show Step-by-Step Calculation';
+    }
+}
+
+function toggleType1Steps() {
+    const container = document.getElementById('type1_steps_container');
+    const button = event.target.closest('button');
+    if (container.style.display === 'none') {
+        container.style.display = 'block';
+        button.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Step-by-Step Calculation';
+    } else {
+        container.style.display = 'none';
+        button.innerHTML = '<i class="fas fa-chevron-down"></i> Show Step-by-Step Calculation';
+    }
+}
+
+function calculateMeritType2() {
+    // Get values
+    const matricObtained = parseFloat(document.getElementById('type2_matric_obtained').value) || 0;
+    const matricTotal = parseFloat(document.getElementById('type2_matric_total').value) || 1;
+    const interObtained = parseFloat(document.getElementById('type2_inter_obtained').value) || 0;
+    const interTotal = parseFloat(document.getElementById('type2_inter_total').value) || 1;
+    const entryObtained = parseFloat(document.getElementById('type2_entry_obtained').value) || 0;
+    const entryTotal = parseFloat(document.getElementById('type2_entry_total').value) || 1;
+    const additionalMarks = parseFloat(document.getElementById('type2_additional_marks').value) || 0;
+
+    // Validation
+    if (matricTotal === 0 || interTotal === 0 || entryTotal === 0) {
+        alert('Please enter valid total marks for all fields');
+        return;
+    }
+
+    // Step-by-step calculations
+    const steps = [];
+    
+    // Step 1: Calculate Matric component
+    const matricComponent = matricObtained * 0.25;
+    steps.push(`<strong>Step 1: Matric Component</strong><br/>Matric Obtained × 0.25 = ${matricObtained} × 0.25 = ${matricComponent.toFixed(2)}`);
+    
+    // Step 2: Calculate numerator
+    const numerator = matricComponent + interObtained + additionalMarks;
+    steps.push(`<strong>Step 2: Numerator (Academic)</strong><br/>Matric Component + Inter Obtained + Additional Marks<br/>= ${matricComponent.toFixed(2)} + ${interObtained} + ${additionalMarks} = ${numerator.toFixed(2)}`);
+    
+    // Step 3: Calculate Matric denominator component
+    const matricDenominator = matricTotal * 0.25;
+    steps.push(`<strong>Step 3: Matric Denominator Component</strong><br/>Matric Total × 0.25 = ${matricTotal} × 0.25 = ${matricDenominator.toFixed(2)}`);
+    
+    // Step 4: Calculate denominator
+    const denominator = matricDenominator + interTotal;
+    steps.push(`<strong>Step 4: Denominator (Academic)</strong><br/>Matric Denominator + Inter Total<br/>= ${matricDenominator.toFixed(2)} + ${interTotal} = ${denominator.toFixed(2)}`);
+    
+    // Step 5: Calculate percentage ratio
+    const percentageRatio = numerator / denominator;
+    steps.push(`<strong>Step 5: Percentage Ratio</strong><br/>Numerator ÷ Denominator = ${numerator.toFixed(2)} ÷ ${denominator.toFixed(2)} = ${percentageRatio.toFixed(4)}`);
+    
+    // Step 6: Calculate academic score (75%)
+    const academicScore = percentageRatio * 75;
+    steps.push(`<strong>Step 6: Academic Score (75%)</strong><br/>Percentage Ratio × 75 = ${percentageRatio.toFixed(4)} × 75 = ${academicScore.toFixed(2)}`);
+    
+    // Step 7: Calculate entry test score (25%)
+    const entryScore = (entryObtained / entryTotal) * 25;
+    steps.push(`<strong>Step 7: Entry Test Score (25%)</strong><br/>(Entry Obtained ÷ Entry Total) × 25<br/>= (${entryObtained} ÷ ${entryTotal}) × 25 = ${entryScore.toFixed(2)}`);
+    
+    // Step 8: Calculate total merit
+    const totalMerit = academicScore + entryScore;
+    steps.push(`<strong>Step 8: Total Merit</strong><br/>Academic Score + Entry Test Score<br/>= ${academicScore.toFixed(2)} + ${entryScore.toFixed(2)} = <strong style="color: #667eea; font-size: 1.1em;">${totalMerit.toFixed(2)}</strong>`);
+
+    // Display results
+    document.getElementById('type2_academic_score').textContent = academicScore.toFixed(2);
+    document.getElementById('type2_entry_score').textContent = entryScore.toFixed(2);
+    document.getElementById('type2_total_merit').textContent = totalMerit.toFixed(2);
+    
+    // Display step-by-step calculation (in hidden container - user can toggle to view)
+    document.getElementById('type2_calculation_steps').innerHTML = steps.map((step, idx) => `<div style="margin-bottom: 12px; padding: 10px; background-color: #f0f0f0; border-radius: 4px; border-left: 3px solid #667eea;">${step}</div>`).join('');
+    
+    document.getElementById('type2Results').style.display = 'block';
+
+    // Scroll to results
+    document.getElementById('type2Results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function calculateMeritType1() {
+    // Get values
+    const matricObtained = parseFloat(document.getElementById('type1_matric_obtained').value) || 0;
+    const matricTotal = parseFloat(document.getElementById('type1_matric_total').value) || 1;
+    const interObtained = parseFloat(document.getElementById('type1_inter_obtained').value) || 0;
+    const interTotal = parseFloat(document.getElementById('type1_inter_total').value) || 1;
+    const entryObtained = parseFloat(document.getElementById('type1_entry_obtained').value) || 0;
+    const entryTotal = parseFloat(document.getElementById('type1_entry_total').value) || 1;
+    const additionalMarks = parseFloat(document.getElementById('type1_additional_marks').value) || 0;
+
+    // Validation
+    if (matricTotal === 0 || interTotal === 0 || entryTotal === 0) {
+        alert('Please enter valid total marks for all fields');
+        return;
+    }
+
+    // Step-by-step calculations
+    const steps = [];
+    
+    // Step 1: Calculate Matric component
+    const matricComponent = matricObtained * 0.25;
+    steps.push(`<strong>Step 1: Matric Component</strong><br/>Matric Obtained × 0.25 = ${matricObtained} × 0.25 = ${matricComponent.toFixed(2)}`);
+    
+    // Step 2: Calculate numerator
+    const numerator = matricComponent + interObtained + additionalMarks;
+    steps.push(`<strong>Step 2: Numerator (Academic)</strong><br/>Matric Component + Inter Part 1 Obtained + Additional Marks<br/>= ${matricComponent.toFixed(2)} + ${interObtained} + ${additionalMarks} = ${numerator.toFixed(2)}`);
+    
+    // Step 3: Calculate Matric denominator component
+    const matricDenominator = matricTotal * 0.25;
+    steps.push(`<strong>Step 3: Matric Denominator Component</strong><br/>Matric Total × 0.25 = ${matricTotal} × 0.25 = ${matricDenominator.toFixed(2)}`);
+    
+    // Step 4: Calculate denominator
+    const denominator = matricDenominator + interTotal;
+    steps.push(`<strong>Step 4: Denominator (Academic)</strong><br/>Matric Denominator + Inter Part 1 Total<br/>= ${matricDenominator.toFixed(2)} + ${interTotal} = ${denominator.toFixed(2)}`);
+    
+    // Step 5: Calculate percentage ratio
+    const percentageRatio = numerator / denominator;
+    steps.push(`<strong>Step 5: Percentage Ratio</strong><br/>Numerator ÷ Denominator = ${numerator.toFixed(2)} ÷ ${denominator.toFixed(2)} = ${percentageRatio.toFixed(4)}`);
+    
+    // Step 6: Calculate academic score (75%)
+    const academicScore = percentageRatio * 75;
+    steps.push(`<strong>Step 6: Academic Score (75%)</strong><br/>Percentage Ratio × 75 = ${percentageRatio.toFixed(4)} × 75 = ${academicScore.toFixed(2)}`);
+    
+    // Step 7: Calculate entry test score (25%)
+    const entryScore = (entryObtained / entryTotal) * 25;
+    steps.push(`<strong>Step 7: Entry Test Score (25%)</strong><br/>(Entry Obtained ÷ Entry Total) × 25<br/>= (${entryObtained} ÷ ${entryTotal}) × 25 = ${entryScore.toFixed(2)}`);
+    
+    // Step 8: Calculate total merit
+    const totalMerit = academicScore + entryScore;
+    steps.push(`<strong>Step 8: Total Merit</strong><br/>Academic Score + Entry Test Score<br/>= ${academicScore.toFixed(2)} + ${entryScore.toFixed(2)} = <strong style="color: #28a745; font-size: 1.1em;">${totalMerit.toFixed(2)}</strong>`);
+
+    // Display results
+    document.getElementById('type1_academic_score').textContent = academicScore.toFixed(2);
+    document.getElementById('type1_entry_score').textContent = entryScore.toFixed(2);
+    document.getElementById('type1_total_merit').textContent = totalMerit.toFixed(2);
+    
+    // Display step-by-step calculation (in hidden container - user can toggle to view)
+    document.getElementById('type1_calculation_steps').innerHTML = steps.map((step, idx) => `<div style="margin-bottom: 12px; padding: 10px; background-color: #f0f0f0; border-radius: 4px; border-left: 3px solid #28a745;">${step}</div>`).join('');
+    
+    document.getElementById('type1Results').style.display = 'block';
+
+    // Scroll to results
+    document.getElementById('type1Results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function toggleType5Steps() {
+    const container = document.getElementById('type5_steps_container');
+    const button = event.target.closest('button');
+    if (container.style.display === 'none') {
+        container.style.display = 'block';
+        button.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Step-by-Step Calculation';
+    } else {
+        container.style.display = 'none';
+        button.innerHTML = '<i class="fas fa-chevron-down"></i> Show Step-by-Step Calculation';
+    }
+}
+
+function calculateMeritType5() {
+    // Get values
+    const matricObtained = parseFloat(document.getElementById('type5_matric_obtained').value) || 0;
+    const matricTotal = parseFloat(document.getElementById('type5_matric_total').value) || 1;
+    const interObtained = parseFloat(document.getElementById('type5_inter_obtained').value) || 0;
+    const interTotal = parseFloat(document.getElementById('type5_inter_total').value) || 1;
+    const baObtained = parseFloat(document.getElementById('type5_ba_obtained').value) || 0;
+    const baTotal = parseFloat(document.getElementById('type5_ba_total').value) || 1;
+    const additionalMarks = parseFloat(document.getElementById('type5_additional_marks').value) || 0;
+
+    // Validation
+    if (matricTotal === 0 || interTotal === 0 || baTotal === 0) {
+        alert('Please enter valid total marks for all fields');
+        return;
+    }
+
+    // Step-by-step calculations
+    const steps = [];
+    
+    // Step 1: Calculate Matric component (25%)
+    const matricComponent = matricObtained * 0.25;
+    steps.push(`<strong>Step 1: Matric Component (25% weight)</strong><br/>Matric Obtained × 0.25 = ${matricObtained} × 0.25 = ${matricComponent.toFixed(2)}`);
+    
+    // Step 2: Calculate Inter component (20%)
+    const interComponent = interObtained * 0.20;
+    steps.push(`<strong>Step 2: Inter Component (20% weight)</strong><br/>Inter Obtained × 0.20 = ${interObtained} × 0.20 = ${interComponent.toFixed(2)}`);
+    
+    // Step 3: BA/BSc component
+    const baComponent = baObtained;
+    steps.push(`<strong>Step 3: BA/BSc Component</strong><br/>BA/BSc Obtained = ${baComponent.toFixed(2)}`);
+    
+    // Step 4: Calculate total numerator (Marks Earned)
+    const numerator = matricComponent + interComponent + baComponent + additionalMarks;
+    steps.push(`<strong>Step 4: Total Marks Earned</strong><br/>Matric Component + Inter Component + BA/BSc Component + Additional Marks<br/>= ${matricComponent.toFixed(2)} + ${interComponent.toFixed(2)} + ${baComponent.toFixed(2)} + ${additionalMarks.toFixed(2)} = ${numerator.toFixed(2)}`);
+    
+    // Step 5: Calculate Matric denominator component (25%)
+    const matricDenominator = matricTotal * 0.25;
+    steps.push(`<strong>Step 5: Matric Denominator Component (25% weight)</strong><br/>Matric Total × 0.25 = ${matricTotal} × 0.25 = ${matricDenominator.toFixed(2)}`);
+    
+    // Step 6: Calculate Inter denominator component (20%)
+    const interDenominator = interTotal * 0.20;
+    steps.push(`<strong>Step 6: Inter Denominator Component (20% weight)</strong><br/>Inter Total × 0.20 = ${interTotal} × 0.20 = ${interDenominator.toFixed(2)}`);
+    
+    // Step 7: Calculate total denominator (Total Marks)
+    const denominator = matricDenominator + interDenominator + baTotal;
+    steps.push(`<strong>Step 7: Total Marks Available</strong><br/>Matric Denominator + Inter Denominator + BA/BSc Total<br/>= ${matricDenominator.toFixed(2)} + ${interDenominator.toFixed(2)} + ${baTotal.toFixed(2)} = ${denominator.toFixed(2)}`);
+    
+    // Step 8: Calculate final merit percentage
+    const totalMerit = (numerator / denominator) * 100;
+    steps.push(`<strong>Step 8: Final Merit %</strong><br/>Merit = (Marks Earned ÷ Total Marks) × 100<br/>= (${numerator.toFixed(2)} ÷ ${denominator.toFixed(2)}) × 100 = <strong style="color: #ff6b6b; font-size: 1.1em;">${totalMerit.toFixed(2)}</strong>`);
+
+    // Display results
+    document.getElementById('type5_matric_component').textContent = matricComponent.toFixed(2);
+    document.getElementById('type5_inter_component').textContent = interComponent.toFixed(2);
+    document.getElementById('type5_ba_component').textContent = baComponent.toFixed(2);
+    document.getElementById('type5_additional_display').textContent = additionalMarks.toFixed(2);
+    document.getElementById('type5_total_merit').textContent = totalMerit.toFixed(2);
+    
+    // Display step-by-step calculation (in hidden container - user can toggle to view)
+    document.getElementById('type5_calculation_steps').innerHTML = steps.map((step, idx) => `<div style="margin-bottom: 12px; padding: 10px; background-color: #f0f0f0; border-radius: 4px; border-left: 3px solid #ff6b6b;">${step}</div>`).join('');
+    
+    document.getElementById('type5Results').style.display = 'block';
+
+    // Scroll to results
+    document.getElementById('type5Results').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Allow Enter key to trigger calculation
+document.addEventListener('DOMContentLoaded', function() {
+    ['type2', 'type1', 'type5'].forEach(type => {
+        const form = document.getElementById(type + 'Form');
+        if (form) {
+            form.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (type === 'type2') calculateMeritType2();
+                    else if (type === 'type1') calculateMeritType1();
+                    else if (type === 'type5') calculateMeritType5();
+                }
+            });
+        }
+    });
+});
+</script>
+{% endblock %}

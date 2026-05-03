@@ -1,0 +1,727 @@
+{% extends 'base.html' %}
+
+{% block title %}Merit Calculator - PU Merit Recommendation System{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <h1><i class="fas fa-calculator"></i> BS Merit Calculator 2025</h1>
+        <p>Calculate your merit percentage based on PU criteria</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <!-- Note Alert -->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="fas fa-info-circle"></i>
+        <strong>Important Note:</strong> This is a basic merit calculator. The exact merit will be calculated by the concerned department after certain additions/subtractions before display of merit lists.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabs nav-fill mb-4" id="calculatorTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="type2-tab" data-bs-toggle="tab" data-bs-target="#type2" type="button" role="tab" aria-controls="type2" aria-selected="true">
+                <i class="fas fa-graduation-cap"></i> 2nd Year Result
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="type1-tab" data-bs-toggle="tab" data-bs-target="#type1" type="button" role="tab" aria-controls="type1" aria-selected="false">
+                <i class="fas fa-book"></i> 1st Year Result
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="calculatorTabContent">
+        <!-- Type 2: 2nd Year Result -->
+        <div class="tab-pane fade show active" id="type2" role="tabpanel" aria-labelledby="type2-tab">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h5 class="mb-0"><i class="fas fa-book-open"></i> For Those Students who are applying based on their 2nd year result</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="type2Form">
+                                {% csrf_token %}
+
+                                <!-- Matric/SSC/O-Level Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-graduation-cap"></i> Matric/SSC/O-Level Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control matric-obtained" id="type2_matric_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control matric-total" id="type2_matric_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Inter/A-Level Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-book"></i> Inter/A-Level Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control inter-obtained" id="type2_inter_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control inter-total" id="type2_inter_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Entry Test Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-pencil-alt"></i> PU Entry Test Marks
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control entry-obtained" id="type2_entry_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control entry-total" id="type2_entry_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Marks Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-star"></i> Additional Marks (Optional - Hafiz ul Quran)
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Additional Marks</label>
+                                            <input type="number" class="form-control additional-marks" id="type2_additional_marks" placeholder="Enter additional marks (if any)" step="0.01" min="0" value="0">
+                                            <small class="text-muted"><i class="fas fa-info-circle"></i> Please check Admission Regulations</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <!-- Calculate Button -->
+                                <button type="button" class="btn btn-primary btn-lg w-100 mb-3" onclick="calculateMeritType2()">
+                                    <i class="fas fa-calculator"></i> Calculate Merit
+                                </button>
+                            </form>
+
+                            <!-- Results Section -->
+                            <div id="type2Results" style="display: none;">
+                                <div class="alert alert-success" role="alert">
+                                    <h6 class="alert-heading"><i class="fas fa-check-circle"></i> Merit Marks Calculated</h6>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Academic Score (75%)</h6>
+                                                <p class="card-text">
+                                                    <strong id="type2_academic_score">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Based on Matric & Inter marks</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Entry Test Score</h6>
+                                                <p class="card-text">
+                                                    <strong id="type2_entry_score">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">PU Entry Test marks</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Additional Marks</h6>
+                                                <p class="card-text">
+                                                    <strong id="type2_additional_display">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Hafiz ul Quran bonus</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                            <div class="card-body">
+                                                <h6 class="card-title" style="color: white;">Total Merit (%)</h6>
+                                                <p class="card-text">
+                                                    <strong style="font-size: 1.8rem;" id="type2_total_merit">0.00</strong>
+                                                </p>
+                                                <small>Final merit percentage</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Type 1: 1st Year Result -->
+        <div class="tab-pane fade" id="type1" role="tabpanel" aria-labelledby="type1-tab">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-header" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white;">
+                            <h5 class="mb-0"><i class="fas fa-book-open"></i> For Those Students who are applying based on their 1st year result</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="type1Form">
+                                {% csrf_token %}
+
+                                <!-- Matric/SSC/O-Level Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-graduation-cap"></i> Matric/SSC/O-Level Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control" id="type1_matric_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control" id="type1_matric_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Inter/A-Level Part 1 Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-book"></i> Inter/A-Level Part 1 Marks Detail
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control" id="type1_inter_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control" id="type1_inter_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Entry Test Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-pencil-alt"></i> PU Entry Test Marks
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Marks Obtained</label>
+                                            <input type="number" class="form-control" id="type1_entry_obtained" placeholder="Enter marks obtained" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Total Marks</label>
+                                            <input type="number" class="form-control" id="type1_entry_total" placeholder="Enter total marks" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Marks Section -->
+                                <div class="section-divider mb-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-star"></i> Additional Marks (Optional - Hafiz ul Quran)
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Additional Marks</label>
+                                            <input type="number" class="form-control" id="type1_additional_marks" placeholder="Enter additional marks (if any)" step="0.01" min="0" value="0">
+                                            <small class="text-muted"><i class="fas fa-info-circle"></i> Please check Admission Regulations</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <!-- Calculate Button -->
+                                <button type="button" class="btn btn-success btn-lg w-100 mb-3" onclick="calculateMeritType1()">
+                                    <i class="fas fa-calculator"></i> Calculate Merit
+                                </button>
+                            </form>
+
+                            <!-- Results Section -->
+                            <div id="type1Results" style="display: none;">
+                                <div class="alert alert-success" role="alert">
+                                    <h6 class="alert-heading"><i class="fas fa-check-circle"></i> Merit Marks Calculated</h6>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Academic Score (75%)</h6>
+                                                <p class="card-text">
+                                                    <strong id="type1_academic_score">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Based on Matric & Inter Part 1 marks</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Entry Test Score</h6>
+                                                <p class="card-text">
+                                                    <strong id="type1_entry_score">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">PU Entry Test marks</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Additional Marks</h6>
+                                                <p class="card-text">
+                                                    <strong id="type1_additional_display">0.00</strong>
+                                                </p>
+                                                <small class="text-muted">Hafiz ul Quran bonus</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white;">
+                                            <div class="card-body">
+                                                <h6 class="card-title" style="color: white;">Total Merit (%)</h6>
+                                                <p class="card-text">
+                                                    <strong style="font-size: 1.8rem;" id="type1_total_merit">0.00</strong>
+                                                </p>
+                                                <small>Final merit percentage</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formula Reference Section -->
+    <div class="row mt-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0"><i class="fas fa-calculator"></i> Merit Calculation Formula</h6>
+                </div>
+                <div class="card-body">
+                    <h6 class="mb-3">Type 2 (2nd Year Result):</h6>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <code>Merit = [(Matric Obtained × 0.25) + Inter Obtained] / [(Matric Total × 0.25) + Inter Total] × 75 + Entry Test + Additional Marks</code>
+                    </div>
+
+                    <h6 class="mb-3">Type 1 (1st Year Result):</h6>
+                    <div class="bg-light p-3 rounded">
+                        <code>Merit = [(Matric Obtained × 0.25) + Inter Part 1 Obtained] / [(Matric Total × 0.25) + Inter Part 1 Total] × 75 + Entry Test + Additional Marks</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.section-divider {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #667eea;
+    border-radius: 4px;
+}
+
+.section-title {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-tabs .nav-link {
+    color: #666;
+    border-bottom: 3px solid transparent;
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom-color: #667eea;
+    color: #667eea;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: transparent;
+    border-bottom-color: #667eea;
+    color: #667eea;
+}
+</style>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function calculateMeritType2() {
+    // Get values
+    const matricObtained = parseFloat(document.getElementById('type2_matric_obtained').value) || 0;
+    const matricTotal = parseFloat(document.getElementById('type2_matric_total').value) || 1;
+    const interObtained = parseFloat(document.getElementById('type2_inter_obtained').value) || 0;
+    const interTotal = parseFloat(document.getElementById('type2_inter_total').value) || 1;
+    const entryObtained = parseFloat(document.getElementById('type2_entry_obtained').value) || 0;
+    const entryTotal = parseFloat(document.getElementById('type2_entry_total').value) || 1;
+    const additionalMarks = parseFloat(document.getElementById('type2_additional_marks').value) || 0;
+
+    // Validation
+    if (matricTotal === 0 || interTotal === 0 || entryTotal === 0) {
+        alert('Please enter valid total marks for all fields');
+        return;
+    }
+
+    // Calculate academic score (75%)
+    // Formula: [(Matric Obtained × 0.25) + Inter Obtained] / [(Matric Total × 0.25) + Inter Total] × 75
+    const academicScore = ((matricObtained * 0.25 + interObtained) / (matricTotal * 0.25 + interTotal)) * 75;
+
+    // Calculate entry test score
+    const entryScore = (entryObtained / entryTotal) * 100;
+
+    // Calculate total merit
+    const totalMerit = academicScore + entryScore + additionalMarks;
+
+    // Display results
+    document.getElementById('type2_academic_score').textContent = academicScore.toFixed(2);
+    document.getElementById('type2_entry_score').textContent = entryScore.toFixed(2);
+    document.getElementById('type2_additional_display').textContent = additionalMarks.toFixed(2);
+    document.getElementById('type2_total_merit').textContent = totalMerit.toFixed(2);
+    document.getElementById('type2Results').style.display = 'block';
+
+    // Scroll to results
+    document.getElementById('type2Results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function calculateMeritType1() {
+    // Get values
+    const matricObtained = parseFloat(document.getElementById('type1_matric_obtained').value) || 0;
+    const matricTotal = parseFloat(document.getElementById('type1_matric_total').value) || 1;
+    const interObtained = parseFloat(document.getElementById('type1_inter_obtained').value) || 0;
+    const interTotal = parseFloat(document.getElementById('type1_inter_total').value) || 1;
+    const entryObtained = parseFloat(document.getElementById('type1_entry_obtained').value) || 0;
+    const entryTotal = parseFloat(document.getElementById('type1_entry_total').value) || 1;
+    const additionalMarks = parseFloat(document.getElementById('type1_additional_marks').value) || 0;
+
+    // Validation
+    if (matricTotal === 0 || interTotal === 0 || entryTotal === 0) {
+        alert('Please enter valid total marks for all fields');
+        return;
+    }
+
+    // Calculate academic score (75%)
+    // Formula: [(Matric Obtained × 0.25) + Inter Part 1 Obtained] / [(Matric Total × 0.25) + Inter Part 1 Total] × 75
+    const academicScore = ((matricObtained * 0.25 + interObtained) / (matricTotal * 0.25 + interTotal)) * 75;
+
+    // Calculate entry test score
+    const entryScore = (entryObtained / entryTotal) * 100;
+
+    // Calculate total merit
+    const totalMerit = academicScore + entryScore + additionalMarks;
+
+    // Display results
+    document.getElementById('type1_academic_score').textContent = academicScore.toFixed(2);
+    document.getElementById('type1_entry_score').textContent = entryScore.toFixed(2);
+    document.getElementById('type1_additional_display').textContent = additionalMarks.toFixed(2);
+    document.getElementById('type1_total_merit').textContent = totalMerit.toFixed(2);
+    document.getElementById('type1Results').style.display = 'block';
+
+    // Scroll to results
+    document.getElementById('type1Results').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Allow Enter key to trigger calculation
+document.addEventListener('DOMContentLoaded', function() {
+    ['type2', 'type1'].forEach(type => {
+        const form = document.getElementById(type + 'Form');
+        if (form) {
+            form.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (type === 'type2') calculateMeritType2();
+                    else calculateMeritType1();
+                }
+            });
+        }
+    });
+});
+</script>
+    <div class="row">
+        <!-- Filter Form -->
+        <div class="col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-sliders-h"></i> Filters & Criteria
+                </div>
+                <div class="card-body">
+                    <form method="POST" id="filterForm">
+                        {% csrf_token %}
+                        
+                        <!-- Merit Percentage Input -->
+                        <div class="mb-3">
+                            <label for="studentMerit" class="form-label">
+                                <i class="fas fa-percentage"></i> Your Merit Percentage <span class="text-danger">*</span>
+                            </label>
+                            <input type="number" class="form-control form-control-lg" id="studentMerit" 
+                                   name="student_merit" placeholder="Enter merit percentage" 
+                                   step="0.01" min="0" max="100" required
+                                   value="{{ student_merit|default:'' }}">
+                            <small class="text-muted d-block mt-2">
+                                <i class="fas fa-info-circle"></i> Enter your merit percentage (0-100)
+                            </small>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Faculty Filter -->
+                        <div class="mb-3">
+                            <label for="faculties" class="form-label">
+                                <i class="fas fa-building"></i> Faculty
+                            </label>
+                            <select multiple class="form-select" name="faculties" id="faculties">
+                                {% for faculty in filter_options.faculties %}
+                                    <option value="{{ faculty }}">{{ faculty }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="text-muted d-block mt-2">Hold Ctrl (Cmd on Mac) to select multiple</small>
+                        </div>
+
+                        <!-- Campus Filter -->
+                        <div class="mb-3">
+                            <label for="campuses" class="form-label">
+                                <i class="fas fa-map-marker-alt"></i> Campus
+                            </label>
+                            <select multiple class="form-select" name="campuses" id="campuses">
+                                {% for campus in filter_options.campuses %}
+                                    <option value="{{ campus }}">{{ campus }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="text-muted d-block mt-2">Hold Ctrl (Cmd on Mac) to select multiple</small>
+                        </div>
+
+                        <!-- Semester Filter -->
+                        <div class="mb-3">
+                            <label for="semesters" class="form-label">
+                                <i class="fas fa-calendar"></i> Semester
+                            </label>
+                            <select multiple class="form-select" name="semesters" id="semesters">
+                                {% for semester in filter_options.semesters %}
+                                    <option value="{{ semester }}">{{ semester }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="text-muted d-block mt-2">Hold Ctrl (Cmd on Mac) to select multiple</small>
+                        </div>
+
+                        <!-- Year Filter -->
+                        <div class="mb-3">
+                            <label for="years" class="form-label">
+                                <i class="fas fa-calendar-alt"></i> Year
+                            </label>
+                            <select multiple class="form-select" name="years" id="years">
+                                {% for year in filter_options.years %}
+                                    <option value="{{ year }}">{{ year }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="text-muted d-block mt-2">Hold Ctrl (Cmd on Mac) to select multiple</small>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Action Buttons -->
+                        <button type="submit" class="btn btn-primary w-100 mb-2">
+                            <i class="fas fa-search"></i> Search Programs
+                        </button>
+                        <button type="reset" class="btn btn-secondary w-100">
+                            <i class="fas fa-redo"></i> Clear All
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Legend Card -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <i class="fas fa-legend"></i> Difficulty Legend
+                </div>
+                <div class="card-body p-3">
+                    <div class="mb-2">
+                        <span class="badge badge-success">Safe ✅</span>
+                        <small class="text-muted d-block mt-1">Program cutoff 10%+ below your merit</small>
+                    </div>
+                    <div class="mb-2">
+                        <span class="badge badge-warning">Moderate ⚠️</span>
+                        <small class="text-muted d-block mt-1">Program cutoff within 10% of your merit</small>
+                    </div>
+                    <div class="mb-2">
+                        <span class="badge badge-danger">Risky ⚠️⚠️</span>
+                        <small class="text-muted d-block mt-1">Program cutoff above your merit but within 10%</small>
+                    </div>
+                    <div>
+                        <span class="badge badge-dark">Not Eligible ❌</span>
+                        <small class="text-muted d-block mt-1">Program cutoff above your merit by more than 10%</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="col-lg-8">
+            <!-- Error Message -->
+            {% if error_message %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle"></i> {{ error_message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endif %}
+
+            <!-- No Submission Message -->
+            {% if not recommendations and not student_merit and not error_message %}
+            <div class="card">
+                <div class="card-body p-5 text-center">
+                    <i class="fas fa-search fa-5x text-muted mb-3" style="opacity: 0.3;"></i>
+                    <h5>Enter your merit percentage to get started</h5>
+                    <p class="text-muted">Fill in your details on the left and click "Search Programs" to see recommendations.</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Results Count -->
+            {% if student_merit and not error_message %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <strong>Merit Percentage:</strong> {{ student_merit }}%
+                {% if recommendations %}
+                    | <strong>Programs Found:</strong> {{ recommendations|length }}
+                {% else %}
+                    | <strong>No programs found</strong>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- Recommendations Table -->
+            {% if recommendations %}
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Program</th>
+                                <th>Faculty</th>
+                                <th>Merit %</th>
+                                <th class="d-none d-md-table-cell">Campus</th>
+                                <th class="d-none d-sm-table-cell">Category</th>
+                                <th class="d-none d-md-table-cell">Margin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for rec in recommendations %}
+                            <tr>
+                                <td>
+                                    <strong>{{ rec.program }}</strong>
+                                </td>
+                                <td>
+                                    <small class="text-muted">{{ rec.faculty }}</small>
+                                </td>
+                                <td>
+                                    <strong>{{ rec.merit }}</strong>
+                                </td>
+                                <td class="d-none d-md-table-cell">
+                                    <small>{{ rec.campus }}</small>
+                                </td>
+                                <td class="d-none d-sm-table-cell">
+                                    <span class="badge" 
+                                          style="background-color: {% if rec.badge == 'success' %}#28a745{% elif rec.badge == 'warning' %}#ffc107; color: #212529{% elif rec.badge == 'danger' %}#dc3545{% else %}#6c757d{% endif %};">
+                                        {{ rec.category }}
+                                    </span>
+                                </td>
+                                <td class="d-none d-md-table-cell">
+                                    <small>
+                                        {% if rec.margin|first != '-' %}
+                                            <span class="text-success">+{{ rec.margin }}</span>
+                                        {% else %}
+                                            <span class="text-danger">{{ rec.margin }}</span>
+                                        {% endif %}
+                                    </small>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Additional Details -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h3 class="text-success">{{ recommendations|length }}</h3>
+                            <p class="text-muted mb-0">Programs Found</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h3 class="text-primary">{{ student_merit }}%</h3>
+                            <p class="text-muted mb-0">Your Merit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Optional: Add client-side validation
+    const form = document.getElementById('filterForm');
+    form.addEventListener('submit', function(e) {
+        const merit = document.getElementById('studentMerit').value;
+        if (!merit || merit <= 0 || merit > 100) {
+            e.preventDefault();
+            alert('Please enter a valid merit percentage between 0 and 100');
+        }
+    });
+});
+</script>
+{% endblock %}
