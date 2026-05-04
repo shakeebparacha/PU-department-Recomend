@@ -1,8 +1,10 @@
-🎓 PU Merit Recommendation System
-
-A smart web application helping Punjab University students discover the right academic programs based on their merit percentage.
-
-🌐 Live Demo: https://aftab-t0xq.onrender.com/
+# 🎓 PU Merit Recommendation System
+ 
+> A smart web application helping **Punjab University students** discover the right academic programs based on their merit percentage.
+ 
+🌐 **Live Demo:** [https://aftab-t0xq.onrender.com/](https://aftab-t0xq.onrender.com/)
+ 
+---
 
 ✨ **Core Features:**
 - 🧮 Merit Calculator - Get personalized program recommendations
