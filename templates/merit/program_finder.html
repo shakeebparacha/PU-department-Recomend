@@ -106,23 +106,23 @@
             <!-- Legend Card -->
             <div class="card mt-3">
                 <div class="card-header">
-                    <i class="fas fa-legend"></i> Difficulty Legend
+                    <i class="fas fa-list-ul"></i> Difficulty Legend
                 </div>
                 <div class="card-body p-3">
                     <div class="mb-2">
-                        <span class="badge badge-success">Safe ✅</span>
+                        <span class="badge bg-success">Safe ✅</span>
                         <small class="text-muted d-block mt-1">Program cutoff 10%+ below your merit</small>
                     </div>
                     <div class="mb-2">
-                        <span class="badge badge-warning">Moderate ⚠️</span>
+                        <span class="badge bg-warning text-dark">Moderate ⚠️</span>
                         <small class="text-muted d-block mt-1">Program cutoff within 10% of your merit</small>
                     </div>
                     <div class="mb-2">
-                        <span class="badge badge-danger">Risky ⚠️⚠️</span>
+                        <span class="badge bg-danger">Risky ⚠️⚠️</span>
                         <small class="text-muted d-block mt-1">Program cutoff above your merit but within 10%</small>
                     </div>
                     <div>
-                        <span class="badge badge-dark">Not Eligible ❌</span>
+                        <span class="badge bg-dark">Not Eligible ❌</span>
                         <small class="text-muted d-block mt-1">Program cutoff above your merit by more than 10%</small>
                     </div>
                 </div>
@@ -194,8 +194,7 @@
                                     <small>{{ rec.campus }}</small>
                                 </td>
                                 <td class="d-none d-sm-table-cell">
-                                    <span class="badge" 
-                                          style="background-color: {% if rec.badge == 'success' %}#28a745{% elif rec.badge == 'warning' %}#ffc107; color: #212529{% elif rec.badge == 'danger' %}#dc3545{% else %}#6c757d{% endif %};">
+                                                                        <span class="badge {% if rec.badge == 'success' %}bg-success{% elif rec.badge == 'warning' %}bg-warning text-dark{% elif rec.badge == 'danger' %}bg-danger{% else %}bg-secondary{% endif %}">
                                         {{ rec.category }}
                                     </span>
                                 </td>
