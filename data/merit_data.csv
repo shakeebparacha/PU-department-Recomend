@@ -1,0 +1,557 @@
+Year,Faculty,Department,Program,Campus,Semester_Type,Merit_Percentage
+2023,Arts & Humanities,Department of Archaeology,BS (Hons.),Main,1st Semester Morning,59.1
+2023,Arts & Humanities,Department of Archaeology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,63.5
+2023,Arts & Humanities,Department of Archaeology,BS (Hons.),Main,5th Semester Morning,60.85
+2023,Arts & Humanities,Institute of English Studies,BS (Hons.),Main,1st Semester Morning,91.33
+2023,Arts & Humanities,Institute of English Studies,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,84.99
+2023,Arts & Humanities,Institute of English Studies,BS (Hons.),Main,5th Semester Morning,72.43
+2023,Arts & Humanities,Institute of English Studies,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,62.33
+2023,Arts & Humanities,Department of French Language & Literature,BS (Hons.),Main,1st Semester Morning,49.85
+2023,Arts & Humanities,Department of History & Pakistan Studies,BS (Hons.),Main,5th Semester Morning,56.95
+2023,Arts & Humanities,Department of Philosophy,BS (Hons.),Main,1st Semester Morning,55.24
+2023,Arts & Humanities,Department of Philosophy,BS (Hons.),Main,5th Semester Morning,53.74
+2023,Arts & Humanities,Department of Sports Science s & Physical Education,BS (Hons.),Main,1st Semester Morning,71.04
+2023,Arts & Humanities,Department of Sports Science s & Physical Education,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,44.43
+2023,Arts & Humanities,Department of Sports Science s & Physical Education,BS (Hons.),Main,5th Semester Morning,59.79
+2023,Arts & Humanities,Department of Sports Science s & Physical Education,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,49.16
+2023,Arts & Humanities,College of Art & Design - Fine Arts,BS (Hons.),Main,1st Semester Morning,69.086
+2023,Arts & Humanities,College of Art & Design - Graphics Arts,BS (Hons.),Main,1st Semester Morning,63.58
+2023,Arts & Humanities,College of Art & Design - Graphics Design,BS (Hons.),Main,1st Semester Morning,68.414
+2023,Arts & Humanities,College of Art & Design - Textile Design,BS (Hons.),Main,1st Semester Morning,69.68
+2023,Arts & Humanities,College of Art & Design - B. Architecture,BS (Hons.),Main,1st Semester Morning,52.73
+2023,Arts & Humanities,College of Art & Design - Sculpture,BS (Hons.),Main,1st Semester Morning,45.38
+2023,Arts & Humanities,College of Art & Design,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,51.918
+2023,Arts & Humanities,College of Art & Design - Graphics Arts,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,37.596
+2023,Arts & Humanities,College of Art & Design - Graphics Design,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,57.267
+2023,Behavioral & Social Sciences,Department of Political Science,BS (Hons.),Main,1st Semester Morning,86.0
+2023,Behavioral & Social Sciences,Department of Political Science - Intl. Relation,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,82.0
+2023,Behavioral & Social Sciences,Department of Political Science - Political Sc,BS (Hons.),Main,5th Semester Morning,68.0
+2023,Behavioral & Social Sciences,Department of Political Science - Intl. Relations,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,66.0
+2023,Behavioral & Social Sciences,Department of Political Science - Studies,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,50.0
+2023,Behavioral & Social Sciences,Department of Social Work,BS (Hons.),Main,1st Semester Morning,65.4
+2023,Behavioral & Social Sciences,Department of Social Work - Entrepreneurship,BS (Hons.),Main,1st Semester Morning,51.6
+2023,Behavioral & Social Sciences,Department of Social Work,BS (Hons.),Main,5th Semester Morning,58.1
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Sociology,BS (Hons.),Main,1st Semester Morning,82.0
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Public Health,BS (Hons.),Main,1st Semester Morning,76.89
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Criminology,BS (Hons.),Main,1st Semester Morning,77.0
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Demography,BS (Hons.),Main,1st Semester Morning,50.51
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Dietitics,BS (Hons.),Main,1st Semester Morning,87.89
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Promotion,BS (Hons.),Main,1st Semester Morning,62.0
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Sociology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,70.0
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Public Health,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,50.88
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Criminology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,60.0
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Demography,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,48.73
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Dietitics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,81.72
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Promotion,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,48.0
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Sociology,BS (Hons.),Main,5th Semester Morning,62.0
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Sociology,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,50.0
+2023,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Criminology,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,50.0
+2023,Behavioral & Social Sciences,Department of Gender Studies,BS (Hons.),Main,1st Semester Morning,58.0
+2023,Behavioral & Social Sciences,Department of Gender Studies,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,50.0
+2023,Behavioral & Social Sciences,Department of Gender Studies,BS (Hons.),Main,5th Semester Morning,55.0
+2023,Behavioral & Social Sciences,Institute of Applied Psychology,BS (Hons.),Main,1st Semester Morning,84.6
+2023,Behavioral & Social Sciences,Institute of Applied Psychology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,75.21
+2023,Behavioral & Social Sciences,Institute of Applied Psychology,BS (Hons.),Main,5th Semester Morning,64.34
+2023,Behavioral & Social Sciences,Institute of Applied Psychology,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,48.0
+2023,Behavioral & Social Sciences,Centre for Clinical Psychology,BS (Hons.),Main,1st Semester Morning,88.41
+2023,Behavioral & Social Sciences,Centre for Clinical Psychology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,84.11
+2023,Information and Media Studies,Department of Development Communication - Communication,BS (Hons.),Main,1st Semester Morning,65.0
+2023,Information and Media Studies,Department of Development Communication - Communication,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,50.0
+2023,Information and Media Studies,Department of Digital Media - Communication,BS (Hons.),Main,1st Semester Morning,79.67
+2023,Information and Media Studies,Department of Digital Media - Communication,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,68.14
+2023,Information and Media Studies,Department of Communication & Media Research - Media,BS (Hons.),Main,1st Semester Morning,75.0
+2023,Information and Media Studies,Department of Communication & Media Research,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,60.0
+2023,Information and Media Studies,Department of Communication & Media Research,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,55.0
+2023,Information and Media Studies,Department of Film and Broadcasting,BS (Hons.),Main,1st Semester Morning,70.0
+2023,Information and Media Studies,Department of Film and Broadcasting,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,65.0
+2023,Information and Media Studies,Institute of Information Management,BS (Hons.),Main,1st Semester Morning,74.0
+2023,Information and Media Studies,Institute of Information Management,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,52.0
+2023,Information and Media Studies,Institute of Information Management,BS (Hons.),Main,5th Semester Morning,62.0
+2023,Information and Media Studies,Institute of Information Management,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,50.0
+2023,Commerce,Hailey College of Commerce,BS Commerce - Finance,Main,1st Semester Morning,79.38
+2023,Commerce,Hailey College of Commerce,BS Commerce - E-commerce,Main,1st Semester Morning,72.18
+2023,Commerce,Hailey College of Commerce,BS Commerce - Taxation,Main,1st Semester Morning,68.26
+2023,Commerce,Hailey College of Commerce,BS Commerce - Commerce,Main,1st Semester Morning,56.16
+2023,Commerce,Hailey College of Commerce,BS Commerce - Finance,Main,1st Semester Evening/Replica/Self Support,74.17
+2023,Commerce,Hailey College of Commerce,BS Commerce - E-commerce,Main,1st Semester Evening/Replica/Self Support,50.27
+2023,Commerce,Hailey College of Commerce,BS Commerce - Taxation,Main,1st Semester Evening/Replica/Self Support,60.75
+2023,Commerce,Hailey College of Commerce,BS Commerce - Commerce,Main,1st Semester Evening/Replica/Self Support,50.27
+2023,Commerce,Hailey College of Commerce,B.S Commerce,Main,5th Semester Morning,52.39
+2023,Commerce,Hailey College of Commerce,B.S Commerce,Main,5th Semester Evening/Replica/Self Support,50.29
+2023,Commerce,Hailey College of Banking & Finance,BBA (Hons.),Main,1st Semester Morning,75.92
+2023,Commerce,Hailey College of Banking & Finance,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,34.52
+2023,Commerce,Hailey College of Banking & Finance,BBA (2 Years),Main,5th Semester Morning,58.13
+2023,"Business, Economics & Administrative Sciences",School of Economics,BS (Hons.),Main,1st Semester Morning,71.57
+2023,"Business, Economics & Administrative Sciences",School of Economics - Economics,BS (Hons.),Main,1st Semester Morning,58.2
+2023,"Business, Economics & Administrative Sciences",School of Economics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,51.51
+2023,"Business, Economics & Administrative Sciences",School of Economics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,49.0
+2023,"Business, Economics & Administrative Sciences",Institute of Administrative Sciences - Management,BS (Hons.),Main,1st Semester Morning,78.17
+2023,"Business, Economics & Administrative Sciences",Institute of Administrative Sciences,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,50.57
+2023,"Business, Economics & Administrative Sciences",Institute of Administrative Sciences - Management,BS (Hons.),Main,5th Semester Morning,55.2
+2023,"Business, Economics & Administrative Sciences",Institute of Administrative Sciences - Management,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,52.94
+2023,"Business, Economics & Administrative Sciences",Institute of Business Administration,BS (Hons.),Main,1st Semester Morning,86.89
+2023,"Business, Economics & Administrative Sciences",Institute of Business Administration,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,76.97
+2023,"Business, Economics & Administrative Sciences",Institute of Business & Information Technology - BBIT,BS (Hons.),Main,1st Semester Morning,86.236
+2023,"Business, Economics & Administrative Sciences",Institute of Business & Information Technology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,81.108
+2023,"Electrical, Energy & Environmental Engineering","Institute of Electrical, Electronic & Computer Engineering - Electrical Eng.",BS (Hons.),Main,1st Semester Morning,79.319
+2023,"Electrical, Energy & Environmental Engineering",Institute of Energy & Environmental Engineering - Energy Engineering,BS (Hons.),Main,1st Semester Morning,60.68
+2023,"Electrical, Energy & Environmental Engineering",Institute of Energy & Environmental Engineering - Energy Engineering,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,50.632
+2023,"Electrical, Energy & Environmental Engineering",Institute of Energy & Environmental Engineering,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,51.833
+2023,Quality & Industrial System Engineering,Department of Industrial Engineering & Management,BS (Hons.),Main,1st Semester Morning,73.89
+2023,Quality & Industrial System Engineering,BS Quality & Performance Management,BS (Hons.),Main,5th Semester Morning,58.14
+2023,Quality & Industrial System Engineering,BS Quality & Performance Management,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,54.94
+2023,Chemical and Materials Engineering,Institute of Chemical Engineering & Technology - Chemical Engineering,BS (Hons.),Main,1st Semester Morning,77.545
+2023,Chemical and Materials Engineering,Institute of Chemical Engineering & Technology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,63.507
+2023,Chemical and Materials Engineering,Institute of Chemical Engineering & Technology - Petroleum & Gas,BS (Hons.),Main,1st Semester Morning,77.819
+2023,Chemical and Materials Engineering,Institute of Chemical Engineering & Technology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,63.73
+2023,Chemical and Materials Engineering,Institute of Metallurgy & Material Engineering,BS (Hons.),Main,1st Semester Morning,67.077
+2023,Chemical and Materials Engineering,Institute of Metallurgy & Material Engineering,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,50.817
+2023,Education,Institute of Special Education,BS (Hons.),Main,5th Semester Morning,58.78
+2023,Education,E ducation Elementary,BS (Hons.),Main,1st Semester Morning,59.6
+2023,Education,E ducation Elementary,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,54.7
+2023,Education,E ducation Elementary - Education Elementary,BS (Hons.),Main,5th Semester Morning,57.4
+2023,Education,E ducation Elementary,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,51.3
+2023,Education,E ducation Secondary,BS (Hons.),Main,1st Semester Morning,64.63
+2023,Education,E ducation Secondary,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,58.11
+2023,Education,E ducation Secondary,BS (Hons.),Main,5th Semester Morning,57.56
+2023,Education,E ducation Secondary,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,46.6
+2023,Education,E ducation Islamic,BS (Hons.),Main,1st Semester Morning,47.17
+2023,Education,E ducation Islamic,BS (Hons.),Main,5th Semester Morning,45.44
+2023,Education,E ducation Science,BS (Hons.),Main,1st Semester Morning,63.22
+2023,Education,E ducation Science,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,50.76
+2023,Education,E ducation Science,BS (Hons.),Main,5th Semester Morning,50.07
+2023,Education,B usiness Education,BS (Hons.),Main,1st Semester Morning,70.95
+2023,Education,B usiness Education,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,58.5
+2023,Education,B usiness Education,BS (Hons.),Main,5th Semester Morning,54.74
+2023,Education,T echnology Education,BS (Hons.),Main,1st Semester Morning,51.31
+2023,Education,T echnology Education,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,43.04
+2023,Education,E ducational Research & Assessment,BS (Hons.),Main,1st Semester Morning,48.16
+2023,Education,E ducational Research & Assessment,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,51.45
+2023,Education,E ducational Research & Assessment,BS (Hons.),Main,5th Semester Morning,46.56
+2023,Education,E ducational Research & Assessment,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,59.37
+2023,Education,E nglish (Applied Linguistics),BS (Hons.),Main,1st Semester Morning,83.18
+2023,Education,E nglish (Applied Linguistics),BS (Hons.),Main,1st Semester Evening/Replica/Self Support,68.9
+2023,Education,E nglish (Applied Linguistics) - B.A With English Literature,BS (Hons.),Main,5th Semester Morning,74.86
+2023,Education,E nglish (Applied Linguistics) - B.A General Group,BS (Hons.),Main,5th Semester Morning,67.38
+2023,Education,E nglish (Applied Linguistics),BS (Hons.),Main,5th Semester Evening/Replica/Self Support,52.2
+2023,Education,E nglish (Applied Linguistics),BS (Hons.),Main,5th Semester Evening/Replica/Self Support,49.52
+2023,Education,E arly Childhood Education,BS (Hons.),Main,1st Semester Morning,49.28
+2023,Education,E arly Childhood Education,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,42.8
+2023,Education,E arly Childhood Education,BS (Hons.),Main,5th Semester Morning,50.14
+2023,Islamic Studies,Ins titute of Islamic Studies,BS (Hons.),Main,1st Semester Morning,67.82
+2023,Islamic Studies,Ins titute of Islamic Studies,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,41.54
+2023,Islamic Studies,Sh eikh Zayed Islamic Centre - Boys,BS (Hons.),Main,1st Semester Morning,58.27
+2023,Islamic Studies,Sh eikh Zayed Islamic Centre - Girls,BS (Hons.),Main,1st Semester Morning,70.82
+2023,Islamic Studies,Sh eikh Zayed Islamic Centre - Boys,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,47.53
+2023,Islamic Studies,Sh eikh Zayed Islamic Centre - Girls,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,46.02
+2023,Islamic Studies,Sh eikh Zayed Islamic Centre - Boys,BS (Hons.),Main,5th Semester Morning,60.63
+2023,Islamic Studies,Sh eikh Zayed Islamic Centre - Girls,BS (Hons.),Main,5th Semester Morning,61.35
+2023,Law,University Law College * Entry test for LLB (05 years) is mandatory,BS (Hons.),Main,1st Semester Morning,84.65
+2023,Life Sciences,Institute of Botany,BS (Hons.),Main,1st Semester Morning,76.0
+2023,Life Sciences,Institute of Botany,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,65.0
+2023,Life Sciences,Institute of Botany,BS (Hons.),Main,5th Semester Morning,69.5
+2023,Life Sciences,Institute of Botany,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,55.0
+2023,Life Sciences,Institute of Microbiology & Molecular Genetics,BS (Hons.),Main,1st Semester Morning,85.95
+2023,Life Sciences,Institute of Microbiology & Molecular Genetics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,72.06
+2023,Life Sciences,Institute of Zoology,BS (Hons.),Main,1st Semester Morning,84.7
+2023,Life Sciences,Institute of Zoology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,62.55
+2023,Life Sciences,Institute of Zoology,BS (Hons.),Main,5th Semester Morning,69.31
+2023,Life Sciences,Institute of Zoology,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,55.93
+2023,Life Sciences,School of Biochemistry & Biotechnology - Bio-technology,BS (Hons.),Main,1st Semester Morning,87.91
+2023,Life Sciences,School of Biochemistry & Biotechnology - Bio-chemistry,BS (Hons.),Main,1st Semester Morning,85.6
+2023,Life Sciences,School of Biochemistry & Biotechnology - Bio-technology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,80.12
+2023,Life Sciences,School of Biochemistry & Biotechnology - Bio-chemistry,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,67.5
+2023,Life Sciences,School of Biochemistry & Biotechnology - Biochemistry,BS (Hons.),Main,5th Semester Morning,59.55
+2023,Agricultural Sciences,Institute of Agriculture Sciences,BS (Hons.),Main,1st Semester Morning,80.93
+2023,Agricultural Sciences,Institute of Agriculture Sciences,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,61.0
+2023,Agricultural Sciences,Department of Food Sciences,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,86.11
+2023,Oriental Learning,Department of Arabic,BS (Hons.),Main,1st Semester Morning,39.3
+2023,Oriental Learning,Department of Arabic - B.A Elective,BS (Hons.),Main,5th Semester Morning,47.76
+2023,Oriental Learning,Department of Arabic - B.A Optional,BS (Hons.),Main,5th Semester Morning,48.55
+2023,Oriental Learning,Department of Kashmir Studies,BS (Hons.),Main,1st Semester Morning,45.57
+2023,Oriental Learning,Department of Kashmir Studies,BS (Hons.),Main,5th Semester Morning,53.32
+2023,Oriental Learning,Department of Persian,BS (Hons.),Main,1st Semester Morning,61.0
+2023,Oriental Learning,Department of Persian,BS (Hons.),Main,5th Semester Morning,58.0
+2023,Oriental Learning,Institute of Punjabi and Cultural Studies,BS (Hons.),Main,1st Semester Morning,46.48
+2023,Oriental Learning,Institute of Punjabi and Cultural Studies,BS (Hons.),Main,5th Semester Morning,50.81
+2023,Oriental Learning,Institute of Urdu Language & Literature - Urdu Advance,BS (Hons.),Main,1st Semester Morning,47.61
+2023,Oriental Learning,Institute of Urdu Language & Literature,BS (Hons.),Main,1st Semester Morning,45.24
+2023,Oriental Learning,Institute of Urdu Language & Literature - Intermediate,BS (Hons.),Main,1st Semester Morning,75.63
+2023,Oriental Learning,Institute of Urdu Language & Literature - As Urdu Elective,BS (Hons.),Main,5th Semester Morning,67.39
+2023,Oriental Learning,Institute of Urdu Language & Literature - Elective,BS (Hons.),Main,5th Semester Morning,47.57
+2023,Pharmacy,Punjab University College of Pharmacy (5 Years Program),BS (Hons.),Main,1st Semester Morning,90.99
+2023,Pharmacy,Punjab University College of Pharmacy (5 Years Program),BS (Hons.),Main,1st Semester Evening/Replica/Self Support,90.13
+2023,Science,Department of Mathematics,BS (Hons.),Main,1st Semester Morning,82.5
+2023,Science,Department of Mathematics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,61.98
+2023,Science,Department of Mathematics - PU Graduate,BS (Hons.),Main,5th Semester Morning,65.59
+2023,Science,Department of Mathematics - Other Graduate,BS (Hons.),Main,5th Semester Morning,70.76
+2023,Science,Department of Mathematics,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,56.49
+2023,Science,Department of Physics,BS (Hons.),Main,1st Semester Morning,82.63
+2023,Science,Department of Physics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,58.7
+2023,Science,Department of Physics - Open Merit,BS (Hons.),Main,5th Semester Morning,78.74
+2023,Science,Department of Physics - PU Graduates,BS (Hons.),Main,5th Semester Morning,65.64
+2023,Science,Department of Space Science,BS (Hons.),Main,1st Semester Morning,69.16
+2023,Science,Department of Space Science,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,59.36
+2023,Science,Centre for High Energy Physics - Computational Physics,BS (Hons.),Main,1st Semester Morning,73.31
+2023,Science,Centre for High Energy Physics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,54.03
+2023,Science,Centre for High Energy Physics,BS (Hons.),Main,5th Semester Morning,52.84
+2023,Science,Centre for High Energy Physics,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,52.78
+2023,Science,College of Statistical & Actuarial Sciences - Statistics,BS (Hons.),Main,1st Semester Morning,65.368
+2023,Science,College of Statistical & Actuarial Sciences - Biostatistics,BS (Hons.),Main,1st Semester Morning,42.823
+2023,Science,College of Statistical & Actuarial Sciences - Statistics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,48.9
+2023,Science,College of Statistical & Actuarial Sciences,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,44.223
+2023,Science,College of Statistical & Actuarial Sciences - Statistics,BS (Hons.),Main,5th Semester Morning,53.92
+2023,Science,College of Statistical & Actuarial Sciences - Statistics,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,54.569
+2023,Science,School of Chemistry,BS (Hons.),Main,1st Semester Morning,88.08
+2023,Science,School of Chemistry,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,77.64
+2023,Science,School of Chemistry - PU Graduate all,BS (Hons.),Main,5th Semester Morning,65.31
+2023,Science,School of Chemistry - All graduate,BS (Hons.),Main,5th Semester Morning,73.01
+2023,Science,School of Chemistry,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,51.06
+2023,Geo-Science,College of Earth & Environmental Sciences - Environmental Sc,BS (Hons.),Main,1st Semester Morning,83.99
+2023,Geo-Science,College of Earth & Environmental Sciences - Management,BS (Hons.),Main,1st Semester Morning,54.87
+2023,Geo-Science,College of Earth & Environmental Sciences - Management,BS (Hons.),Main,1st Semester Morning,66.14
+2023,Geo-Science,College of Earth & Environmental Sciences,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,67.33
+2023,Geo-Science,College of Earth & Environmental Sciences,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,59.05
+2023,Geo-Science,College of Earth & Environmental Sciences - HWRM,BS (Hons.),Main,5th Semester Morning,55.37
+2023,Geo-Science,College of Earth & Environmental Sciences,BS (Hons.),Main,5th Semester Morning,55.37
+2023,Geo-Science,College of Earth & Environmental Sciences,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,51.32
+2023,Geo-Science,Institute of Geology - Applied Geology,BS (Hons.),Main,1st Semester Morning,63.48
+2023,Geo-Science,Institute of Geology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,48.25
+2023,Geo-Science,Centre for Geographical Information System (CIGS),BS (Hons.),Main,1st Semester Morning,66.83
+2023,Geo-Science,Centre for Geographical Information System (CIGS),BS (Hons.),Main,1st Semester Evening/Replica/Self Support,49.04
+2023,Geo-Science,Centre for Geographical Information System (CIGS),BS (Hons.),Main,5th Semester Morning,52.8
+2023,Geo-Science,Centre for Integrated Mountain Research - Disaster Management,BS (Hons.),Main,1st Semester Morning,53.27
+2023,Geo-Science,Institute of Geography,BS (Hons.),Main,1st Semester Morning,58.53
+2023,Geo-Science,Institute of Geography,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,49.94
+2023,Geo-Science,Institute of Geography,BS (Hons.),Main,5th Semester Morning,52.42
+2023,Computing & Information Technology,Software Engineering,BS (Hons.),Main,1st Semester Morning,89.23
+2023,Computing & Information Technology,Software Engineering,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,88.06
+2023,Computing & Information Technology,Computer Science,BS (Hons.),Main,1st Semester Morning,90.13
+2023,Computing & Information Technology,Information Technology,BS (Hons.),Main,1st Semester Morning,88.46
+2023,Computing & Information Technology,Data Sciences,BS (Hons.),Main,1st Semester Morning,88.72
+2023,Computing & Information Technology,Data Sciences,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,87.18
+2023,Campus Programs,Department of Business Administration,BBA (Hons.),Gujranwala,1st Semester Morning,70.2
+2023,Campus Programs,Department of Business Administration,BBA,Gujranwala,1st Semester Evening/Replica/Self Support,52.12
+2023,Campus Programs,Department of Banking & Finance,BBA (B&F),Gujranwala,1st Semester Morning,65.42
+2023,Campus Programs,Department of Banking & Finance,BBA (B&F),Gujranwala,1st Semester Evening/Replica/Self Support,50.44
+2023,Campus Programs,Department of Banking & Finance,BS (Hons.),Gujranwala,5th Semester Morning,56.82
+2023,Campus Programs,Department of Banking & Finance,BS (Hons.),Gujranwala,5th Semester Evening/Replica/Self Support,53.09
+2023,Campus Programs,BS (Accounting & Finance),BS (Hons.),Gujranwala,1st Semester Morning,53.7
+2023,Campus Programs,BS (Accounting & Finance),BS (Hons.),Gujranwala,1st Semester Evening/Replica/Self Support,39.81
+2023,Campus Programs,Department of Commerce,BS (Hons.),Gujranwala,1st Semester Morning,63.93
+2023,Campus Programs,Department of Commerce - Non Commerce,BS (Hons.),Gujranwala,1st Semester Morning,58.58
+2023,Campus Programs,Department of Commerce,BS Commerce,Gujranwala,1st Semester Evening/Replica/Self Support,43.27
+2023,Campus Programs,Department of Commerce - Non Commerce,BS (Hons.),Gujranwala,1st Semester Evening/Replica/Self Support,58.91
+2023,Campus Programs,Department of Commerce,B.Com,Gujranwala,5th Semester Morning,39.8
+2023,Campus Programs,Department of Commerce,B.Com,Gujranwala,5th Semester Evening/Replica/Self Support,53.28
+2023,Campus Programs,Department of Information Technology,BS CS,Gujranwala,1st Semester Morning,86.12
+2023,Campus Programs,Department of Information Technology,BS IT,Gujranwala,1st Semester Morning,84.41
+2023,Campus Programs,Department of English (humanities),BS English Humanities,Gujranwala,1st Semester Morning,67.05
+2023,Campus Programs,Department of English (humanities),BS English Humanities - Sciences,Gujranwala,1st Semester Morning,82.01
+2023,Campus Programs,Department of English (humanities),BS (Hons.),Gujranwala,1st Semester Evening/Replica/Self Support,52.42
+2023,Campus Programs,Department of English (humanities),BS (Hons.),Gujranwala,1st Semester Evening/Replica/Self Support,51.84
+2023,Campus Programs,Department of Law * Entry test for LLB (05 years) is mandatory,LLB (05 Years),Gujranwala,1st Semester Morning,75.18
+2023,Campus Programs,Department of Computer Science,BS CS,Jhelum,1st Semester Morning,82.23
+2023,Campus Programs,Department of Business Administration,BBA,Jhelum,1st Semester Morning,45.87
+2023,Campus Programs,Department of Business Administration,BBA,Jhelum,1st Semester Evening/Replica/Self Support,50.93
+2023,Campus Programs,Department of English,BS (Hons.),Jhelum,1st Semester Morning,61.99
+2023,Campus Programs,Department of Commerce - Commerce,BS (Hons.),Jhelum,1st Semester Morning,45.0
+2023,Campus Programs,Department of Commerce,BS (Hons.),Jhelum,1st Semester Evening/Replica/Self Support,45.0
+2023,Campus Programs,Accounting & Finance,BS (Hons.),Jhelum,1st Semester Morning,58.91
+2023,Campus Programs,Accounting & Finance,BS (Hons.),Jhelum,1st Semester Evening/Replica/Self Support,43.82
+2023,Campus Programs,Department of Law * Entry test for LLB (05 years) is mandatory,LLB (05 years),Jhelum,1st Semester Morning,75.97
+2023,Campus Programs,Management - BSM,BS (Hons.),Jhelum,1st Semester Morning,44.93
+2023,Campus Programs,Management,BS (Hons.),Jhelum,1st Semester Evening/Replica/Self Support,39.8
+2023,Campus Programs,BSIT,BS (Hons.),Pothohar,1st Semester Morning,59.99
+2023,Campus Programs,Department of Law * Entry test for LLB (Hons.) (05 years) is mandatory,LLB (Hons.),Pothohar,1st Semester Morning,50.35
+2024,Arts & Humanities,Department of Archaeology,BS (Hons.),Main,1st Semester Morning,42.11
+2024,Arts & Humanities,Department of Archaeology,BS (Hons.),Main,5th Semester Morning,49.56
+2024,Arts & Humanities,Institute of English Studies,BS (Hons.),Main,1st Semester Morning,80.0
+2024,Arts & Humanities,Institute of English Studies,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,70.0
+2024,Arts & Humanities,Institute of English Studies,BS (Hons.),Main,5th Semester Morning,71.91
+2024,Arts & Humanities,Institute of English Studies,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,54.08
+2024,Arts & Humanities,Department of French Language & Literature,BS (Hons.),Main,1st Semester Morning,52.71
+2024,Arts & Humanities,Department of French Language & Literature,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,54.4
+2024,Arts & Humanities,Department of History & Pakistan Studies,BS (Hons.),Main,1st Semester Morning,0.0
+2024,Arts & Humanities,Department of History & Pakistan Studies,BS (Hons.),Main,5th Semester Morning,0.0
+2024,Arts & Humanities,Department of Philosophy,BS (Hons.),Main,1st Semester Morning,48.8
+2024,Arts & Humanities,Department of Philosophy,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,50.17
+2024,Arts & Humanities,Department of Sports Science & Physical Education,BS (Hons.),Main,1st Semester Morning,57.41
+2024,Arts & Humanities,Department of Sports Science & Physical Education,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,51.2
+2024,Arts & Humanities,College of Art & Design - Fine Arts,BS (Hons.),Main,1st Semester Morning,72.304
+2024,Arts & Humanities,College of Art & Design - Fine Arts,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,52.458
+2024,Arts & Humanities,College of Art & Design - Fine Arts,BS (Hons.),Main,5th Semester Morning,61.363
+2024,Arts & Humanities,College of Art & Design - Graphics Arts,BS (Hons.),Main,1st Semester Morning,66.241
+2024,Arts & Humanities,College of Art & Design - Graphics Arts,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,45.72
+2024,Arts & Humanities,College of Art & Design - Textile Design,BS (Hons.),Main,1st Semester Morning,69.797
+2024,Arts & Humanities,College of Art & Design - Textile Design,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,58.399
+2024,Arts & Humanities,College of Art & Design - Sculpture,BS (Hons.),Main,1st Semester Morning,47.882
+2024,Arts & Humanities,College of Art & Design - Sculpture,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,45.72
+2024,Arts & Humanities,College of Art & Design - Graphic Design,BS (Hons.),Main,1st Semester Morning,72.885
+2024,Arts & Humanities,College of Art & Design - Graphic Design,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,61.043
+2024,Arts & Humanities,College of Art & Design - B. Architecture,BS (Hons.),Main,1st Semester Morning,74.65
+2024,Behavioral & Social Sciences,Department of Political Science,BS (Hons.) - Political Science,Main,1st Semester Morning,80.42
+2024,Behavioral & Social Sciences,Department of Political Science,BS (Hons.) - International Relations,Main,1st Semester Morning,81.77
+2024,Behavioral & Social Sciences,Department of Political Science,BS (Hons.) - Diplomacy & Strategic Studies,Main,1st Semester Evening/Replica/Self Support,55.66
+2024,Behavioral & Social Sciences,Department of Political Science,BS (Hons.) - Political Science,Main,5th Semester Morning,70.96
+2024,Behavioral & Social Sciences,Department of Political Science,BS (Hons.) - International Relations,Main,5th Semester Morning,65.72
+2024,Behavioral & Social Sciences,Department of Social Work,BS (Hons.) - Social Work,Main,1st Semester Morning,54.94
+2024,Behavioral & Social Sciences,Department of Social Work,BS (Hons.) - Entrepreneurship,Main,1st Semester Morning,42.52
+2024,Behavioral & Social Sciences,Department of Social Work,BS (Hons.) - Social Work,Main,1st Semester Evening/Replica/Self Support,46.17
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Sociology,BS (Hons.),Main,1st Semester Morning,77.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Sociology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,68.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Sociology,BS (Hons.),Main,5th Semester Morning,74.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Sociology,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,60.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Criminology,BS (Hons.),Main,1st Semester Morning,65.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Criminology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,55.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Criminology,BS (Hons.),Main,5th Semester Morning,56.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Demography,BS (Hons.),Main,1st Semester Morning,62.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Public Health,BS (Hons.),Main,1st Semester Morning,76.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Public Health,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,69.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Public Health,BS (Hons.),Main,5th Semester Morning,69.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Human Nutrition & Dietetics,BS (Hons.),Main,1st Semester Morning,85.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Human Nutrition & Dietetics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,71.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Human Nutrition & Dietetics,BS (Hons.),Main,5th Semester Morning,71.0
+2024,Behavioral & Social Sciences,Institute of Social & Cultural Studies - Workplace Health Safety Promotion,BS (Hons.),Main,1st Semester Morning,65.0
+2024,Behavioral & Social Sciences,Department of Gender Studies,BS (Hons.),Main,1st Semester Morning,58.0
+2024,Behavioral & Social Sciences,Department of Gender Studies - Gender And Climate Change,BS (Hons.),Main,1st Semester Morning,55.0
+2024,Behavioral & Social Sciences,Department of Gender Studies,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,50.0
+2024,Behavioral & Social Sciences,Department of Gender Studies,BS (Hons.),Main,5th Semester Morning,54.0
+2024,Behavioral & Social Sciences,Institute of Applied Psychology,BS (Hons.),Main,1st Semester Morning,78.14
+2024,Behavioral & Social Sciences,Institute of Applied Psychology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,57.28
+2024,Behavioral & Social Sciences,Institute of Applied Psychology,BS (Hons.),Main,5th Semester Morning,63.42
+2024,Behavioral & Social Sciences,Institute of Applied Psychology,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,47.03
+2024,Behavioral & Social Sciences,Centre for Clinical Psychology,BS (Hons.),Main,1st Semester Morning,83.71
+2024,Behavioral & Social Sciences,Centre for Clinical Psychology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,77.11
+2024,Information & Media Studies,Department of Development Communication,BS (Hons.),Main,1st Semester Morning,65.0
+2024,Information & Media Studies,Department of Development Communication,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,55.0
+2024,Information & Media Studies,Department of Digital Media,BS (Hons.),Main,1st Semester Morning,79.3
+2024,Information & Media Studies,Department of Digital Media,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,67.2
+2024,Information & Media Studies,Department of Communication & Media Research,BS (Hons.),Main,1st Semester Morning,73.28
+2024,Information & Media Studies,Department of Communication & Media Research,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,52.42
+2024,Information & Media Studies,Department of Public Relations and Advertising,BS (Hons.),Main,1st Semester Morning,65.88
+2024,Information & Media Studies,Department of Public Relations and Advertising,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,55.85
+2024,Information & Media Studies,Department of Film and Broadcasting,BS (Hons.),Main,1st Semester Morning,65.78
+2024,Information & Media Studies,Department of Film and Broadcasting,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,57.98
+2024,Information & Media Studies,Institute of Information Management,BS (Hons.),Main,1st Semester Morning,74.13
+2024,Information & Media Studies,Institute of Information Management,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,49.01
+2024,Information & Media Studies,Institute of Information Management,BS (Hons.),Main,5th Semester Morning,55.23
+2024,Information & Media Studies,Institute of Information Management,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,48.86
+2024,Commerce,Hailey College of Commerce - BS Commerce,BS (Hons.),Main,1st Semester Morning,63.44
+2024,Commerce,Hailey College of Commerce - Accounting & Finance,BS (Hons.),Main,1st Semester Morning,80.95
+2024,Commerce,Hailey College of Commerce - Electronic Commerce,BS (Hons.),Main,1st Semester Morning,79.25
+2024,Commerce,Hailey College of Commerce - Accounting & Taxation,BS (Hons.),Main,1st Semester Morning,76.52
+2024,Commerce,Hailey College of Commerce - BS Commerce,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,52.0
+2024,Commerce,Hailey College of Commerce - Accounting & Finance,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,72.5
+2024,Commerce,Hailey College of Commerce - Electronic Commerce,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,70.03
+2024,Commerce,Hailey College of Commerce - Accounting & Taxation,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,68.2
+2024,Commerce,Hailey College of Commerce - Commerce,BS (Hons.),Main,5th Semester Morning,75.5
+2024,Commerce,Hailey College of Commerce - Commerce,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,64.5
+2024,Commerce,Hailey College of Banking & Finance - BBA (Hons.),BBA (Hons.),Main,1st Semester Morning,73.77
+2024,Commerce,Hailey College of Banking & Finance - Afternoon,BBA (Hons.),Main,1st Semester Evening/Replica/Self Support,66.89
+2024,Commerce,Hailey College of Banking & Finance - Evening,BBA (Hons.),Main,1st Semester Evening/Replica/Self Support,48.56
+2024,Commerce,Hailey College of Banking & Finance - Other University Graduate (OM),BBA (Hons.),Main,1st Semester Evening/Replica/Self Support,64.12
+2024,Commerce,Hailey College of Banking & Finance - PU Graduate,BBA (Hons.),Main,1st Semester Evening/Replica/Self Support,58.15
+2024,Commerce,Hailey College of Banking & Finance - Other University Graduate (OM),BBA (Hons.),Main,5th Semester Evening/Replica/Self Support,54.07
+2024,Commerce,Hailey College of Banking & Finance - PU Graduate,BBA (Hons.),Main,5th Semester Evening/Replica/Self Support,44.43
+2024,Business Economics & Admin Sciences,School of Economics,BS (Hons.),Main,1st Semester Morning,66.34
+2024,Business Economics & Admin Sciences,School of Economics - Economics & Finance,BS (Hons.),Main,1st Semester Morning,50.41
+2024,Business Economics & Admin Sciences,School of Economics - Business Economics,BS (Hons.),Main,1st Semester Morning,59.26
+2024,Business Economics & Admin Sciences,School of Economics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,49.91
+2024,Business Economics & Admin Sciences,School of Economics - Economics & Finance,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,47.17
+2024,Business Economics & Admin Sciences,School of Economics - Business Economics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,45.59
+2024,Business Economics & Admin Sciences,Institute of Administrative Sciences - Management,BS (Hons.),Main,1st Semester Morning,75.08
+2024,Business Economics & Admin Sciences,Institute of Administrative Sciences - Management,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,52.35
+2024,Business Economics & Admin Sciences,Institute of Administrative Sciences - Replica,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,56.91
+2024,Business Economics & Admin Sciences,Institute of Administrative Sciences - Management,BS (Hons.),Main,5th Semester Morning,54.03
+2024,Business Economics & Admin Sciences,Institute of Administrative Sciences - Replica,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,47.16
+2024,Business Economics & Admin Sciences,Institute of Administrative Sciences - Evening,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,47.62
+2024,Business Economics & Admin Sciences,Institute of Business Administration - BBA,BBA (Hons.),Main,1st Semester Morning,82.91
+2024,Business Economics & Admin Sciences,Institute of Business Administration - BBA,BBA (Hons.),Main,1st Semester Evening/Replica/Self Support,71.78
+2024,Business Economics & Admin Sciences,Institute of Business & Information Technology - BBIT,BBIT,Main,1st Semester Morning,84.836
+2024,Business Economics & Admin Sciences,Institute of Business & Information Technology - BBIT,BBIT,Main,1st Semester Evening/Replica/Self Support,76.115
+2024,Business Economics & Admin Sciences,Institute of Business & Information Technology - BBIT Evening,BBIT,Main,1st Semester Evening/Replica/Self Support,78.456
+2024,Electrical Energy & Environmental Engineering,Institute of Electrical Electronic & Computer Engineering,B.Sc. Electrical Engineering,Main,1st Semester Morning,78.301
+2024,Electrical Energy & Environmental Engineering,Institute of Energy & Environmental Engineering - Energy Engineering,BS (Hons.),Main,1st Semester Morning,60.277
+2024,Electrical Energy & Environmental Engineering,Institute of Energy & Environmental Engineering - Energy & Environmental Engineering,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,45.5
+2024,Electrical Energy & Environmental Engineering,Institute of Energy & Environmental Engineering - Energy & Environmental Engineering,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,45.5
+2024,Quality & Industrial System Engineering,Department of Industrial Engineering & Management,B.Sc.,Main,1st Semester Morning,69.504
+2024,Quality & Industrial System Engineering,Institute of Quality & Technology Management - BS Quality & Performance Management,BS (Hons.),Main,1st Semester Morning,60.1
+2024,Quality & Industrial System Engineering,Institute of Quality & Technology Management - BS Quality & Performance Management,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,54.48
+2024,Chemical & Materials Engineering,Institute of Chemical Engineering & Technology - Chemical Engineering,Chemical Engineering,Main,1st Semester Morning,79.141
+2024,Chemical & Materials Engineering,Institute of Chemical Engineering & Technology - Chemical Engineering,Chemical Engineering,Main,1st Semester Evening/Replica/Self Support,66.741
+2024,Chemical & Materials Engineering,Institute of Chemical Engineering & Technology - Chemical Engineering with Specialization Petroleum & Gas,Chemical Engineering,Main,1st Semester Morning,77.853
+2024,Chemical & Materials Engineering,Institute of Chemical Engineering & Technology - Chemical Engineering with Specialization Petroleum & Gas,Chemical Engineering,Main,1st Semester Evening/Replica/Self Support,70.206
+2024,Chemical & Materials Engineering,Institute of Metallurgy & Material Engineering,BS (Hons.),Main,1st Semester Morning,67.595
+2024,Chemical & Materials Engineering,Institute of Metallurgy & Material Engineering,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,48.075
+2024,Education,Institute of Special Education,BS (Hons.),Main,1st Semester Morning,55.19
+2024,Education,Institute of Special Education,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,51.18
+2024,Education,Institute of Education & Research - Business Education,BS (Hons.),Main,1st Semester Morning,64.0
+2024,Education,Institute of Education & Research - Business Education,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,60.0
+2024,Education,Institute of Education & Research - Business Education,BS (Hons.),Main,5th Semester Morning,58.0
+2024,Education,Institute of Education & Research - Science Education,BS (Hons.),Main,1st Semester Morning,46.34
+2024,Education,Institute of Education & Research - Science Education,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,45.86
+2024,Education,Institute of Education & Research - Science Education,BS (Hons.),Main,5th Semester Morning,46.24
+2024,Education,Institute of Education & Research - Technology Education,BS (Hons.),Main,1st Semester Morning,56.6
+2024,Education,Institute of Education & Research - Technology Education,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,43.2
+2024,Education,Institute of Education & Research - English (Applied Linguistics),BA,Main,1st Semester Morning,81.0
+2024,Education,Institute of Education & Research - English (Applied Linguistics),BA,Main,1st Semester Evening/Replica/Self Support,76.0
+2024,Education,Institute of Education & Research - English (Applied Linguistics),BA With English Literature,Main,5th Semester Morning,78.0
+2024,Education,Institute of Education & Research - English (Applied Linguistics),BA,Main,5th Semester Morning,76.0
+2024,Education,Institute of Education & Research - English (Applied Linguistics),BA,Main,5th Semester Evening/Replica/Self Support,67.0
+2024,Education,Institute of Education & Research - English (Applied Linguistics),BA,Main,5th Semester Evening/Replica/Self Support,65.0
+2024,Education,Institute of Education & Research - B.Ed. Elementary Education,B.Ed.,Main,1st Semester Morning,59.1
+2024,Education,Institute of Education & Research - B.Ed. Elementary Education,B.Ed.,Main,1st Semester Evening/Replica/Self Support,53.3
+2024,Education,Institute of Education & Research - B.Ed. Elementary Education,B.Ed.,Main,5th Semester Morning,52.4
+2024,Education,Institute of Education & Research - B.Ed. Secondary Education,B.Ed.,Main,1st Semester Morning,60.49
+2024,Education,Institute of Education & Research - B.Ed. Secondary Education,B.Ed.,Main,1st Semester Evening/Replica/Self Support,53.35
+2024,Education,Institute of Education & Research - B.Ed. (1.5 Secondary),B.Ed.,Main,1st Semester Evening/Replica/Self Support,47.5
+2024,Education,Institute of Education & Research - B.Ed. Islamic Education,B.Ed.,Main,1st Semester Morning,44.04
+2024,Education,Institute of Education & Research - B.Ed. Islamic Education,B.Ed.,Main,1st Semester Evening/Replica/Self Support,47.08
+2024,Education,Institute of Education & Research - B.Ed. Research & Assessment Educational,B.Ed.,Main,1st Semester Morning,44.66
+2024,Education,Institute of Education & Research - B.Ed. Early Childhood Education,B.Ed.,Main,1st Semester Morning,46.0
+2024,Education,Institute of Education & Research - B.Ed. Early Childhood Education,B.Ed.,Main,1st Semester Evening/Replica/Self Support,46.1
+2024,Education,Institute of Education & Research - B.Ed. Early Childhood Education,B.Ed.,Main,5th Semester Morning,46.61
+2024,Education,Institute of Education & Research - B.Ed. Policy & Planning Education,B.Ed.,Main,1st Semester Morning,45.99
+2024,Education,Institute of Education & Research - B.Ed. Policy & Planning Education,B.Ed.,Main,1st Semester Evening/Replica/Self Support,45.99
+2024,Education,Institute of Education & Research - B.Ed. Child Rights and Safety Education,B.Ed.,Main,1st Semester Morning,44.51
+2024,Education,Institute of Education & Research - B.Ed. Weekend,B.Ed.,Main,1st Semester Morning,50.0
+2024,Life Sciences,Institute of Botany,BS (Hons.),Main,1st Semester Morning,75.0
+2024,Life Sciences,Institute of Botany,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,60.0
+2024,Life Sciences,Institute of Botany,BS (Hons.),Main,5th Semester Morning,65.0
+2024,Life Sciences,Institute of Microbiology & Molecular Genetics,BS (Hons.),Main,1st Semester Morning,85.95
+2024,Life Sciences,Institute of Microbiology & Molecular Genetics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,72.06
+2024,Life Sciences,Institute of Zoology,BS (Hons.),Main,1st Semester Morning,75.46
+2024,Life Sciences,Institute of Zoology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,60.87
+2024,Life Sciences,Institute of Zoology,BS (Hons.),Main,5th Semester Morning,64.08
+2024,Life Sciences,Institute of Zoology,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,54.32
+2024,Life Sciences,School of Biochemistry & Biotechnology - Biotechnology,BS (Hons.),Main,1st Semester Morning,84.0
+2024,Life Sciences,School of Biochemistry & Biotechnology - Biochemistry,BS (Hons.),Main,1st Semester Morning,78.94
+2024,Life Sciences,School of Biochemistry & Biotechnology - Biotechnology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,71.2
+2024,Life Sciences,School of Biochemistry & Biotechnology - Biochemistry,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,51.12
+2024,Life Sciences,School of Biochemistry & Biotechnology - Biochemistry,BS (Hons.),Main,5th Semester Morning,52.57
+2024,Agricultural Sciences,Institute of Agriculture Sciences,B.Sc.,Main,1st Semester Morning,71.82
+2024,Agricultural Sciences,Institute of Agriculture Sciences,B.Sc.,Main,1st Semester Evening/Replica/Self Support,56.62
+2024,Agricultural Sciences,Department of Horticulture - BS Agribusiness,BS,Main,1st Semester Morning,58.51
+2024,Agricultural Sciences,Department of Food Sciences,BS (Hons.),Main,1st Semester Morning,76.65
+2024,Agricultural Sciences,Department of Food Sciences,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,54.31
+2024,Oriental Learning,Department of Arabic,BS (Hons.),Main,1st Semester Morning,49.51
+2024,Oriental Learning,Department of Arabic,BA Elective,Main,5th Semester Morning,64.27
+2024,Oriental Learning,Department of Arabic,BA Optional,Main,5th Semester Morning,56.46
+2024,Oriental Learning,Department of Kashmir Studies,BS (Hons.),Main,1st Semester Morning,53.77
+2024,Oriental Learning,Department of Persian,BS (Hons.),Main,1st Semester Morning,62.0
+2024,Oriental Learning,Department of Persian,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,59.0
+2024,Oriental Learning,Institute of Punjabi and Cultural Studies,BS (Hons.),Main,1st Semester Morning,45.32
+2024,Oriental Learning,Institute of Punjabi and Cultural Studies,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,46.07
+2024,Oriental Learning,Institute of Urdu Language & Literature,BS (Hons.),Main,1st Semester Morning,53.65
+2024,Oriental Learning,Institute of Urdu Language & Literature,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,54.08
+2024,Pharmacy,Punjab University College of Pharmacy,Pharm-D,Main,1st Semester Morning,92.36
+2024,Pharmacy,Punjab University College of Pharmacy,Pharm-D,Main,1st Semester Evening/Replica/Self Support,89.79
+2024,Pharmacy,Punjab University College of Pharmacy,Pharm-D,Main,5th Semester Morning,0.0
+2024,Science,Department of Mathematics,BS (Hons.),Main,1st Semester Morning,76.8
+2024,Science,Department of Mathematics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,55.0
+2024,Science,Department of Mathematics,BS (Hons.),Main,5th Semester Morning,54.42
+2024,Science,Department of Mathematics,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,41.27
+2024,Science,Department of Physics,BS (Hons.),Main,1st Semester Morning,74.05
+2024,Science,Department of Physics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,55.38
+2024,Science,Department of Physics,BS (Hons.),Main,5th Semester Morning,78.74
+2024,Science,Department of Physics,BS (Hons.),Main,5th Semester Morning,52.22
+2024,Science,Department of Physics,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,53.96
+2024,Science,Department of Physics,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,54.02
+2024,Science,Department of Space Science,BS (Hons.),Main,1st Semester Morning,64.58
+2024,Science,Department of Space Science,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,56.01
+2024,Science,Centre of Excellence in Solid State Physics - Biophysics and NanoBiotechnology,BS (Hons.),Main,1st Semester Morning,49.12
+2024,Science,Centre of Excellence in Solid State Physics - Nanoscience and Nanotechnology,BS (Hons.),Main,1st Semester Morning,49.42
+2024,Science,Centre of Excellence in Solid State Physics - Solid State Physics,BS (Hons.),Main,1st Semester Morning,48.85
+2024,Science,Centre for High Energy Physics - Computational Physics,BS (Hons.),Main,1st Semester Morning,64.25
+2024,Science,Centre for High Energy Physics - Computational Physics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,51.91
+2024,Science,Centre for High Energy Physics - Computational Physics,BS (Hons.),Main,5th Semester Morning,50.69
+2024,Science,College of Statistical & Actuarial Sciences - Statistics,BS (Hons.),Main,1st Semester Morning,64.867
+2024,Science,College of Statistical & Actuarial Sciences - Biostatistics,BS (Hons.),Main,1st Semester Morning,53.7
+2024,Science,College of Statistical & Actuarial Sciences - Statistics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,46.118
+2024,Science,College of Statistical & Actuarial Sciences - Biostatistics,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,47.386
+2024,Science,College of Statistical & Actuarial Sciences - Statistics,BS (Hons.),Main,5th Semester Morning,47.084
+2024,Science,School of Chemistry,BS (Hons.),Main,1st Semester Morning,79.33
+2024,Science,School of Chemistry,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,52.11
+2024,Science,School of Chemistry,BS (Hons.),Main,5th Semester Morning,51.47
+2024,Science,School of Chemistry,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,52.31
+2024,Geo-Science,College of Earth & Environmental Sciences - Environmental Science,BS (Hons.),Main,1st Semester Morning,80.85
+2024,Geo-Science,College of Earth & Environmental Sciences - Hydrology & Water Resources Management,BS (Hons.),Main,1st Semester Morning,59.88
+2024,Geo-Science,College of Earth & Environmental Sciences - Tourism & Hospitality Management,BS (Hons.),Main,1st Semester Morning,69.75
+2024,Geo-Science,College of Earth & Environmental Sciences - Tourism & Hospitality Management,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,71.35
+2024,Geo-Science,College of Earth & Environmental Sciences,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,63.62
+2024,Geo-Science,College of Earth & Environmental Sciences - Tourism & Hospitality Management,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,58.7
+2024,Geo-Science,Institute of Geology - Applied Geology,BS (Hons.),Main,1st Semester Morning,65.31
+2024,Geo-Science,Institute of Geology - Applied Geology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,56.14
+2024,Geo-Science,Centre for Geographical Information System (CIGS),BS (Hons.),Main,1st Semester Morning,58.99
+2024,Geo-Science,Centre for Geographical Information System (CIGS),BS (Hons.),Main,1st Semester Evening/Replica/Self Support,44.99
+2024,Geo-Science,Centre for Geographical Information System (CIGS),BS (Hons.),Main,5th Semester Morning,48.02
+2024,Geo-Science,Centre for Integrated Mountain Research - Disaster Management,BS (Hons.),Main,1st Semester Morning,55.0
+2024,Geo-Science,Institute of Geography,BS (Hons.),Main,1st Semester Morning,65.5383
+2024,Geo-Science,Institute of Geography,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,30.7708
+2024,Geo-Science,Institute of Geography,BS (Hons.),Main,5th Semester Morning,41.3913
+2024,Geo-Science,Institute of Geography,BS (Hons.),Main,5th Semester Evening/Replica/Self Support,51.3512
+2024,Computing & Information Technology,Software Engineering,BS (Hons.),Main,1st Semester Morning,89.56
+2024,Computing & Information Technology,Software Engineering,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,85.27
+2024,Computing & Information Technology,Computer Science,BS (Hons.),Main,1st Semester Morning,90.26
+2024,Computing & Information Technology,Computer Science,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,86.74
+2024,Computing & Information Technology,Information Technology,BS (Hons.),Main,1st Semester Morning,89.68
+2024,Computing & Information Technology,Information Technology,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,83.8
+2024,Computing & Information Technology,Data Sciences,BS (Hons.),Main,1st Semester Morning,87.51
+2024,Computing & Information Technology,Data Sciences,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,84.62
+2024,Islamic Studies,Institute of Islamic Studies - Hadith & Hadith Science,BS (Hons.),Main,1st Semester Morning,26.62
+2024,Islamic Studies,Institute of Islamic Studies - Islamic Economics,BS (Hons.),Main,1st Semester Morning,30.15
+2024,Islamic Studies,Institute of Islamic Studies - Quran & Quranic Sciences,BS (Hons.),Main,1st Semester Morning,30.15
+2024,Islamic Studies,Institute of Islamic Studies - Search & History,BS (Hons.),Main,1st Semester Morning,30.15
+2024,Islamic Studies,Institute of Islamic Studies - Study of World Religious,BS (Hons.),Main,1st Semester Morning,42.77
+2024,Islamic Studies,Institute of Islamic Studies,BS (Hons.),Main,1st Semester Evening/Replica/Self Support,33.63
+2024,Islamic Studies,Sheikh Zayed Islamic Centre - Tafseer o Hadees Boys,Tafseer o Hadees,Main,1st Semester Morning,58.07
+2024,Islamic Studies,Sheikh Zayed Islamic Centre - Tafseer o Hadees Girls,Tafseer o Hadees,Main,1st Semester Morning,55.61
+2024,Islamic Studies,Sheikh Zayed Islamic Centre - Tafseer o Hadees Boys,Tafseer o Hadees,Main,1st Semester Evening/Replica/Self Support,50.11
+2024,Islamic Studies,Sheikh Zayed Islamic Centre - Tafseer o Hadees Girls,Tafseer o Hadees,Main,1st Semester Evening/Replica/Self Support,51.9
+2024,Islamic Studies,Sheikh Zayed Islamic Centre - Tafseer o Hadees Boys,Tafseer o Hadees,Main,5th Semester Morning,51.52
+2024,Islamic Studies,Sheikh Zayed Islamic Centre - Tafseer o Hadees Girls,Tafseer o Hadees,Main,5th Semester Morning,51.81
+2024,Islamic Studies,Sheikh Zayed Islamic Centre - Tafseer o Hadees Boys,Tafseer o Hadees,Main,5th Semester Evening/Replica/Self Support,54.08
+2024,Islamic Studies,Sheikh Zayed Islamic Centre - Tafseer o Hadees Girls,Tafseer o Hadees,Main,5th Semester Evening/Replica/Self Support,47.62
+2024,Law,University Law College,LLB (05 years) Annual System,Main,1st Semester Morning,83.67
+2024,Gujranwala,Department of Business Administration - BBA (Hons.),BBA (Hons.),Gujranwala,1st Semester Morning,65.04
+2024,Gujranwala,Department of Business Administration - BBA,BBA (Hons.),Gujranwala,1st Semester Evening/Replica/Self Support,49.64
+2024,Gujranwala,Department of Business Administration - BBA,BBA (Hons.),Gujranwala,5th Semester Morning,54.92
+2024,Gujranwala,Department of Business Administration - BBA,BBA (Hons.),Gujranwala,5th Semester Evening/Replica/Self Support,50.744
+2024,Gujranwala,Department of Business Administration - BBA,BBA (Hons.),Gujranwala,5th Semester Evening/Replica/Self Support,43.274
+2024,Gujranwala,Department of Banking & Finance - BBA (B&F),BBA (B&F),Gujranwala,1st Semester Morning,68.3
+2024,Gujranwala,Department of Banking & Finance - BBA (B&F),BBA (B&F),Gujranwala,1st Semester Evening/Replica/Self Support,44.26
+2024,Gujranwala,Department of Banking & Finance - BBA (B&F),BBA (B&F),Gujranwala,1st Semester Evening/Replica/Self Support,47.93
+2024,Gujranwala,BS (Accounting & Finance) - BS (A&F),BS (A&F),Gujranwala,1st Semester Morning,64.86
+2024,Gujranwala,BS (Accounting & Finance) - BS (A&F),BS (A&F),Gujranwala,1st Semester Evening/Replica/Self Support,43.17
+2024,Gujranwala,BS (Accounting & Finance) - BS (A&F),BS (A&F),Gujranwala,1st Semester Evening/Replica/Self Support,41.927
+2024,Gujranwala,Department of Commerce - BS Commerce,BS Commerce,Gujranwala,1st Semester Morning,40.09
+2024,Gujranwala,Department of Commerce - E-Commerce,E-Commerce,Gujranwala,1st Semester Morning,41.09
+2024,Gujranwala,Department of Commerce - BS Commerce,BS Commerce,Gujranwala,1st Semester Evening/Replica/Self Support,40.58
+2024,Gujranwala,Department of Commerce - E-Commerce,E-Commerce,Gujranwala,1st Semester Evening/Replica/Self Support,41.17
+2024,Gujranwala,Department of Commerce - B.Com Open,B.Com,Gujranwala,5th Semester Morning,45.47
+2024,Gujranwala,Department of Commerce - B.Com PU,B.Com,Gujranwala,5th Semester Morning,45.33
+2024,Gujranwala,Department of Commerce - B.Com Open,B.Com,Gujranwala,5th Semester Evening/Replica/Self Support,54.69
+2024,Gujranwala,Department of Commerce - B.Com PU,B.Com,Gujranwala,5th Semester Evening/Replica/Self Support,48.05
+2024,Gujranwala,Department of Information Technology - BS CS,BS CS,Gujranwala,1st Semester Morning,87.0
+2024,Gujranwala,Department of Information Technology - BS IT,BS IT,Gujranwala,1st Semester Morning,85.0
+2024,Gujranwala,Department of English (humanities) - BS English,BS English,Gujranwala,1st Semester Morning,75.13
+2024,Gujranwala,Department of English (humanities) - BS English,BS English,Gujranwala,1st Semester Evening/Replica/Self Support,43.17
+2024,Gujranwala,Department of Law - LLB (05 Years),LLB (05 Years),Gujranwala,1st Semester Morning,72.5
+2024,Jhelum,Department of Computer Science - BS CS,BS CS,Jhelum,1st Semester Morning,78.0
+2024,Jhelum,Department of Business Administration - BBA,BBA,Jhelum,1st Semester Morning,48.42
+2024,Jhelum,Department of Business Administration - Banking & Finance,Banking & Finance,Jhelum,1st Semester Morning,34.81
+2024,Jhelum,Department of Business Administration - BBA,BBA,Jhelum,1st Semester Self-Supporting,38.58
+2024,Jhelum,Department of Business Administration - Banking & Finance,Banking & Finance,Jhelum,1st Semester Self-Supporting,41.66
+2024,Jhelum,Department of English,BS English,Jhelum,1st Semester Morning,49.1
+2024,Jhelum,Department of Commerce - Commerce,Commerce,Jhelum,1st Semester Morning,29.19
+2024,Jhelum,Department of Commerce - E-Commerce,E-Commerce,Jhelum,1st Semester Morning,37.22
+2024,Jhelum,Department of Commerce,Commerce,Jhelum,1st Semester Self-Supporting,39.22
+2024,Jhelum,Department of Commerce - E-Commerce,E-Commerce,Jhelum,1st Semester Self-Supporting,39.22
+2024,Jhelum,Accounting & Finance,Accounting & Finance,Jhelum,1st Semester Morning,52.1
+2024,Jhelum,Accounting & Finance,Accounting & Finance,Jhelum,1st Semester Self-Supporting,39.22
+2024,Pothohar,Department of Law - LLB (Hons.) (05 years),LLB (Hons.),Pothohar,1st Semester Morning,51.6
+2024,Pothohar,BSIT,BSIT,Pothohar,1st Semester Morning,45.96
+2024,Pothohar,Department of Law - LLB (05 years),LLB (05 years),Pothohar,1st Semester Morning,49.1
+2024,Pothohar,Management - BSM,BSM,Pothohar,1st Semester Morning,49.36
+2024,Pothohar,Management,Management,Pothohar,1st Semester Self-Supporting,39.22

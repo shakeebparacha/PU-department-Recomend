@@ -1,21 +1,41 @@
 from django.shortcuts import render
 import pandas as pd
 from django.conf import settings
+from datetime import datetime
+from io import BytesIO
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+from reportlab.lib.units import inch
 import os
 
 
 def load_merit_data():
     """Load merit data from CSV file"""
     try:
-        if os.path.exists(settings.DATA_FILE_PATH):
-            df = pd.read_csv(settings.DATA_FILE_PATH)
-            # Remove rows where merit is 0.0 (missing data)
-            df = df[df['Merit_Percentage'] > 0]
-            return df
+        candidate_paths = [
+            settings.DATA_FILE_PATH,
+            settings.BASE_DIR / 'pu-merit-app' / 'data' / 'merit_data.csv'
+        ]
+        for path in candidate_paths:
+            if path and os.path.exists(path):
+                df = pd.read_csv(path)
+                merit_col = 'Merit_Percentage' if 'Merit_Percentage' in df.columns else 'merit_percentage'
+                if merit_col in df.columns:
+                    df = df[df[merit_col] > 0]
+                return df
         return None
     except Exception as e:
         print(f"Error loading data: {e}")
         return None
+
+
+def get_column_name(df, candidates):
+    for name in candidates:
+        if name in df.columns:
+            return name
+    return None
 
 
 def get_filter_options():
@@ -24,22 +44,32 @@ def get_filter_options():
     if df is None:
         return {
             'faculties': [],
+            'departments': [],
+            'programs': [],
             'campuses': [],
             'semesters': [],
             'years': []
         }
     
-    # Handle column name variations
-    faculty_col = 'Faculty' if 'Faculty' in df.columns else 'faculty'
-    campus_col = 'Campus' if 'Campus' in df.columns else 'campus'
-    semester_col = 'Semester' if 'Semester' in df.columns else 'semester'
-    year_col = 'Year' if 'Year' in df.columns else 'year'
+    faculty_col = get_column_name(df, ['Faculty', 'faculty'])
+    department_col = get_column_name(df, ['Department', 'department'])
+    program_col = get_column_name(df, ['Program', 'program'])
+    campus_col = get_column_name(df, ['Campus', 'campus'])
+    semester_col = get_column_name(df, ['Semester_Type', 'Semester', 'semester'])
+    year_col = get_column_name(df, ['Year', 'year'])
+
+    def unique_values(col_name):
+        if not col_name:
+            return []
+        return sorted(df[col_name].dropna().unique().tolist())
     
     return {
-        'faculties': sorted(df[faculty_col].unique().tolist()),
-        'campuses': sorted(df[campus_col].unique().tolist()),
-        'semesters': sorted(df[semester_col].unique().tolist()),
-        'years': sorted(df[year_col].unique().tolist())
+        'faculties': unique_values(faculty_col),
+        'departments': unique_values(department_col),
+        'programs': unique_values(program_col),
+        'campuses': unique_values(campus_col),
+        'semesters': unique_values(semester_col),
+        'years': unique_values(year_col)
     }
 
 
@@ -68,6 +98,78 @@ def categorize_difficulty(student_merit, program_merit):
     return category, badge, margin
 
 
+def generate_pdf_report(student_merit, year_label, recommendations_df):
+    if recommendations_df is None or recommendations_df.empty:
+        return None
+
+    reports_dir = settings.MEDIA_ROOT / 'reports'
+    os.makedirs(reports_dir, exist_ok=True)
+
+    merit_tag = str(student_merit).replace('.', '_')
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    filename = f"pu_merit_recommendations_{merit_tag}_{timestamp}.pdf"
+    output_path = reports_dir / filename
+
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5 * inch, bottomMargin=0.5 * inch)
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = ParagraphStyle(
+        'ReportTitle',
+        parent=styles['Heading1'],
+        fontSize=16,
+        textColor=colors.HexColor('#0d2d47'),
+        spaceAfter=6,
+        alignment=1
+    )
+    elements.append(Paragraph("University of the Punjab", title_style))
+    elements.append(Paragraph("Merit-Based Program Recommendation Report", styles['Heading2']))
+    elements.append(Spacer(1, 0.2 * inch))
+
+    info_style = ParagraphStyle('ReportInfo', parent=styles['Normal'], fontSize=10)
+    info_text = (
+        f"<b>Student Merit:</b> {student_merit}% | "
+        f"<b>Year:</b> {year_label} | "
+        f"<b>Generated:</b> {datetime.now().strftime('%d-%m-%Y %H:%M')}"
+    )
+    elements.append(Paragraph(info_text, info_style))
+    elements.append(Spacer(1, 0.15 * inch))
+
+    table_data = [['Faculty', 'Department', 'Program', 'Campus', 'Semester', 'Cutoff %', 'Category']]
+    for _, row in recommendations_df.iterrows():
+        table_data.append([
+            str(row.get('Faculty', ''))[:18],
+            str(row.get('Department', ''))[:20],
+            str(row.get('Program', ''))[:20],
+            str(row.get('Campus', ''))[:12],
+            str(row.get('Semester', row.get('Semester_Type', '')))[:14],
+            f"{row.get('Merit_Percentage', 0):.1f}%",
+            str(row.get('Category', ''))
+        ])
+
+    table = Table(table_data, colWidths=[1.2 * inch, 1.5 * inch, 1.5 * inch, 1.0 * inch, 1.2 * inch, 0.8 * inch, 1.0 * inch])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0d2d47')),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 9),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 10),
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+        ('FONTSIZE', (0, 1), (-1, -1), 8),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f4f4f4')])
+    ]))
+
+    elements.append(table)
+    doc.build(elements)
+
+    with open(output_path, 'wb') as output_file:
+        output_file.write(buffer.getvalue())
+
+    return f"{settings.MEDIA_URL}reports/{filename}"
+
+
 def home(request):
     """Home page view"""
     context = {
@@ -90,60 +192,110 @@ def program_finder(request):
     recommendations = []
     student_merit = None
     error_message = None
+    pdf_url = None
+    metrics = {
+        'total': 0,
+        'safe': 0,
+        'moderate': 0,
+        'risky': 0,
+        'not_eligible': 0,
+    }
+
+    selected_faculties = filter_options.get('faculties', [])
+    selected_departments = filter_options.get('departments', [])
+    selected_programs = filter_options.get('programs', [])
+    selected_campuses = filter_options.get('campuses', [])
+    selected_semesters = filter_options.get('semesters', [])
+    selected_years = [str(year) for year in filter_options.get('years', [])]
     
     if request.method == 'POST':
         try:
             student_merit = float(request.POST.get('student_merit', 0))
             
             # Get selected filters
-            selected_faculties = request.POST.getlist('faculties')
-            selected_campuses = request.POST.getlist('campuses')
-            selected_semesters = request.POST.getlist('semesters')
-            selected_years = request.POST.getlist('years')
+            selected_faculties = request.POST.getlist('faculties') or filter_options.get('faculties', [])
+            selected_departments = request.POST.getlist('departments') or filter_options.get('departments', [])
+            selected_programs = request.POST.getlist('programs') or filter_options.get('programs', [])
+            selected_campuses = request.POST.getlist('campuses') or filter_options.get('campuses', [])
+            selected_semesters = request.POST.getlist('semesters') or filter_options.get('semesters', [])
+            selected_years = request.POST.getlist('years') or [str(year) for year in filter_options.get('years', [])]
             
             if student_merit <= 0:
                 error_message = "Please enter a valid merit percentage (greater than 0)"
             else:
                 df = load_merit_data()
                 if df is not None:
-                    # Handle column name variations
-                    faculty_col = 'Faculty' if 'Faculty' in df.columns else 'faculty'
-                    campus_col = 'Campus' if 'Campus' in df.columns else 'campus'
-                    semester_col = 'Semester' if 'Semester' in df.columns else 'semester'
-                    year_col = 'Year' if 'Year' in df.columns else 'year'
-                    merit_col = 'Merit_Percentage' if 'Merit_Percentage' in df.columns else 'merit_percentage'
-                    program_col = 'Program' if 'Program' in df.columns else 'program'
+                    faculty_col = get_column_name(df, ['Faculty', 'faculty'])
+                    department_col = get_column_name(df, ['Department', 'department'])
+                    program_col = get_column_name(df, ['Program', 'program'])
+                    campus_col = get_column_name(df, ['Campus', 'campus'])
+                    semester_col = get_column_name(df, ['Semester_Type', 'Semester', 'semester'])
+                    year_col = get_column_name(df, ['Year', 'year'])
+                    merit_col = get_column_name(df, ['Merit_Percentage', 'merit_percentage'])
                     
-                    # Apply filters
-                    filtered_df = df[df[merit_col] <= student_merit]
+                    # Apply filters (show all suggestions, including not eligible)
+                    filtered_df = df.copy()
                     
-                    if selected_faculties:
-                        filtered_df = filtered_df[filtered_df[faculty_col].isin(selected_faculties)]
-                    if selected_campuses:
-                        filtered_df = filtered_df[filtered_df[campus_col].isin(selected_campuses)]
-                    if selected_semesters:
-                        filtered_df = filtered_df[filtered_df[semester_col].isin(selected_semesters)]
-                    if selected_years:
-                        filtered_df = filtered_df[filtered_df[year_col].isin(map(int, selected_years))]
+                    filtered_df = filtered_df[filtered_df[faculty_col].isin(selected_faculties)]
+                    if department_col:
+                        filtered_df = filtered_df[filtered_df[department_col].isin(selected_departments)]
+                    if program_col:
+                        filtered_df = filtered_df[filtered_df[program_col].isin(selected_programs)]
+                    filtered_df = filtered_df[filtered_df[campus_col].isin(selected_campuses)]
+                    filtered_df = filtered_df[filtered_df[semester_col].isin(selected_semesters)]
+                    year_values = selected_years
+                    if year_col:
+                        try:
+                            year_values = [int(year) for year in selected_years]
+                        except ValueError:
+                            year_values = selected_years
+                        filtered_df = filtered_df[filtered_df[year_col].isin(year_values)]
                     
-                    # Sort by merit percentage descending
-                    filtered_df = filtered_df.sort_values(merit_col, ascending=False)
+                    if merit_col:
+                        difficulty_data = filtered_df[merit_col].apply(
+                            lambda merit_value: categorize_difficulty(student_merit, merit_value)
+                        )
+                        filtered_df[['Category', 'Badge', 'Margin']] = pd.DataFrame(
+                            difficulty_data.tolist(),
+                            index=filtered_df.index
+                        )
+                        difficulty_order = {
+                            'Safe': 0,
+                            'Moderate': 1,
+                            'Risky': 2,
+                            'Not Eligible': 3
+                        }
+                        filtered_df['DifficultyOrder'] = filtered_df['Category'].map(difficulty_order)
+                        filtered_df = filtered_df.sort_values(
+                            ['DifficultyOrder', merit_col],
+                            ascending=[True, False]
+                        )
+                        filtered_df = filtered_df.drop('DifficultyOrder', axis=1)
                     
                     # Prepare recommendations
                     for idx, row in filtered_df.iterrows():
-                        category, badge, margin = categorize_difficulty(student_merit, row[merit_col])
                         recommendations.append({
-                            'faculty': row[faculty_col],
-                            'program': row[program_col],
-                            'merit': row[merit_col],
-                            'campus': row[campus_col],
-                            'semester': row[semester_col],
-                            'year': row[year_col],
-                            'category': category,
-                            'badge': badge,
-                            'margin': f"{margin:.1f}%"
+                            'faculty': row[faculty_col] if faculty_col else '',
+                            'department': row[department_col] if department_col else '',
+                            'program': row[program_col] if program_col else '',
+                            'merit': row[merit_col] if merit_col else '',
+                            'campus': row[campus_col] if campus_col else '',
+                            'semester': row[semester_col] if semester_col else '',
+                            'year': row[year_col] if year_col else '',
+                            'category': row.get('Category', ''),
+                            'badge': row.get('Badge', ''),
+                            'margin': f"{row.get('Margin', 0):.1f}%"
                         })
                     
+                    if not filtered_df.empty:
+                        metrics['total'] = len(filtered_df)
+                        metrics['safe'] = int((filtered_df['Category'] == 'Safe').sum())
+                        metrics['moderate'] = int((filtered_df['Category'] == 'Moderate').sum())
+                        metrics['risky'] = int((filtered_df['Category'] == 'Risky').sum())
+                        metrics['not_eligible'] = int((filtered_df['Category'] == 'Not Eligible').sum())
+                        year_label = ', '.join(selected_years) if selected_years else 'All'
+                        pdf_url = generate_pdf_report(student_merit, year_label, filtered_df)
+
                     if not recommendations:
                         error_message = "No programs found matching your merit and selected filters."
         
@@ -158,6 +310,14 @@ def program_finder(request):
         'recommendations': recommendations,
         'student_merit': student_merit,
         'error_message': error_message,
+        'pdf_url': pdf_url,
+        'metrics': metrics,
+        'selected_faculties': selected_faculties,
+        'selected_departments': selected_departments,
+        'selected_programs': selected_programs,
+        'selected_campuses': selected_campuses,
+        'selected_semesters': selected_semesters,
+        'selected_years': selected_years,
     }
     return render(request, 'merit/program_finder.html', context)
 

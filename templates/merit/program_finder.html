@@ -43,12 +43,47 @@
                             <label for="faculties" class="form-label">
                                 <i class="fas fa-building"></i> Faculty
                             </label>
-                            <select multiple class="form-select" name="faculties" id="faculties">
+                            <div class="border rounded p-2" style="max-height: 220px; overflow-y: auto;">
                                 {% for faculty in filter_options.faculties %}
-                                    <option value="{{ faculty }}">{{ faculty }}</option>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="faculties" id="faculty-{{ forloop.counter }}" value="{{ faculty }}" {% if faculty in selected_faculties %}checked{% endif %}>
+                                        <label class="form-check-label" for="faculty-{{ forloop.counter }}">{{ faculty }}</label>
+                                    </div>
                                 {% endfor %}
-                            </select>
-                            <small class="text-muted d-block mt-2">Hold Ctrl (Cmd on Mac) to select multiple</small>
+                            </div>
+                            <small class="text-muted d-block mt-2">All are selected by default.</small>
+                        </div>
+
+                        <!-- Department Filter -->
+                        <div class="mb-3">
+                            <label for="departments" class="form-label">
+                                <i class="fas fa-sitemap"></i> Department
+                            </label>
+                            <div class="border rounded p-2" style="max-height: 220px; overflow-y: auto;">
+                                {% for department in filter_options.departments %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="departments" id="department-{{ forloop.counter }}" value="{{ department }}" {% if department in selected_departments %}checked{% endif %}>
+                                        <label class="form-check-label" for="department-{{ forloop.counter }}">{{ department }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <small class="text-muted d-block mt-2">All are selected by default.</small>
+                        </div>
+
+                        <!-- Program Filter -->
+                        <div class="mb-3">
+                            <label for="programs" class="form-label">
+                                <i class="fas fa-book"></i> Program
+                            </label>
+                            <div class="border rounded p-2" style="max-height: 220px; overflow-y: auto;">
+                                {% for program in filter_options.programs %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="programs" id="program-{{ forloop.counter }}" value="{{ program }}" {% if program in selected_programs %}checked{% endif %}>
+                                        <label class="form-check-label" for="program-{{ forloop.counter }}">{{ program }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <small class="text-muted d-block mt-2">All are selected by default.</small>
                         </div>
 
                         <!-- Campus Filter -->
@@ -56,12 +91,15 @@
                             <label for="campuses" class="form-label">
                                 <i class="fas fa-map-marker-alt"></i> Campus
                             </label>
-                            <select multiple class="form-select" name="campuses" id="campuses">
+                            <div class="border rounded p-2" style="max-height: 180px; overflow-y: auto;">
                                 {% for campus in filter_options.campuses %}
-                                    <option value="{{ campus }}">{{ campus }}</option>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="campuses" id="campus-{{ forloop.counter }}" value="{{ campus }}" {% if campus in selected_campuses %}checked{% endif %}>
+                                        <label class="form-check-label" for="campus-{{ forloop.counter }}">{{ campus }}</label>
+                                    </div>
                                 {% endfor %}
-                            </select>
-                            <small class="text-muted d-block mt-2">Hold Ctrl (Cmd on Mac) to select multiple</small>
+                            </div>
+                            <small class="text-muted d-block mt-2">All are selected by default.</small>
                         </div>
 
                         <!-- Semester Filter -->
@@ -69,12 +107,15 @@
                             <label for="semesters" class="form-label">
                                 <i class="fas fa-calendar"></i> Semester
                             </label>
-                            <select multiple class="form-select" name="semesters" id="semesters">
+                            <div class="border rounded p-2" style="max-height: 180px; overflow-y: auto;">
                                 {% for semester in filter_options.semesters %}
-                                    <option value="{{ semester }}">{{ semester }}</option>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="semesters" id="semester-{{ forloop.counter }}" value="{{ semester }}" {% if semester in selected_semesters %}checked{% endif %}>
+                                        <label class="form-check-label" for="semester-{{ forloop.counter }}">{{ semester }}</label>
+                                    </div>
                                 {% endfor %}
-                            </select>
-                            <small class="text-muted d-block mt-2">Hold Ctrl (Cmd on Mac) to select multiple</small>
+                            </div>
+                            <small class="text-muted d-block mt-2">All are selected by default.</small>
                         </div>
 
                         <!-- Year Filter -->
@@ -82,12 +123,15 @@
                             <label for="years" class="form-label">
                                 <i class="fas fa-calendar-alt"></i> Year
                             </label>
-                            <select multiple class="form-select" name="years" id="years">
+                            <div class="border rounded p-2" style="max-height: 160px; overflow-y: auto;">
                                 {% for year in filter_options.years %}
-                                    <option value="{{ year }}">{{ year }}</option>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="years" id="year-{{ forloop.counter }}" value="{{ year }}" {% if year|stringformat:"s" in selected_years %}checked{% endif %}>
+                                        <label class="form-check-label" for="year-{{ forloop.counter }}">{{ year }}</label>
+                                    </div>
                                 {% endfor %}
-                            </select>
-                            <small class="text-muted d-block mt-2">Hold Ctrl (Cmd on Mac) to select multiple</small>
+                            </div>
+                            <small class="text-muted d-block mt-2">All are selected by default.</small>
                         </div>
 
                         <hr class="my-4">
@@ -163,6 +207,58 @@
             </div>
             {% endif %}
 
+            {% if student_merit and not error_message %}
+            <div class="row g-3 mb-3">
+                <div class="col-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="text-muted">Total</div>
+                            <div class="h4 mb-0">{{ metrics.total }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="text-muted">Safe</div>
+                            <div class="h4 mb-0 text-success">{{ metrics.safe }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="text-muted">Moderate</div>
+                            <div class="h4 mb-0 text-warning">{{ metrics.moderate }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="text-muted">Risky</div>
+                            <div class="h4 mb-0 text-danger">{{ metrics.risky }}</div>
+                            <small class="text-muted d-block">Not Eligible: {{ metrics.not_eligible }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if pdf_url %}
+            <div class="card mb-3">
+                <div class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                    <div>
+                        <h6 class="mb-1">Recommendation Report</h6>
+                        <small class="text-muted">Your PDF report is ready to download.</small>
+                    </div>
+                    <a class="btn btn-primary mt-3 mt-md-0" href="{{ pdf_url }}" target="_blank" rel="noopener">
+                        Download PDF
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
             <!-- Recommendations Table -->
             {% if recommendations %}
             <div class="card">
@@ -171,11 +267,14 @@
                         <thead>
                             <tr>
                                 <th>Program</th>
+                                <th class="d-none d-md-table-cell">Department</th>
                                 <th>Faculty</th>
                                 <th>Merit %</th>
                                 <th class="d-none d-md-table-cell">Campus</th>
+                                <th class="d-none d-lg-table-cell">Semester</th>
                                 <th class="d-none d-sm-table-cell">Category</th>
                                 <th class="d-none d-md-table-cell">Margin</th>
+                                <th class="d-none d-lg-table-cell">Year</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -183,6 +282,9 @@
                             <tr>
                                 <td>
                                     <strong>{{ rec.program }}</strong>
+                                </td>
+                                <td class="d-none d-md-table-cell">
+                                    <small class="text-muted">{{ rec.department }}</small>
                                 </td>
                                 <td>
                                     <small class="text-muted">{{ rec.faculty }}</small>
@@ -192,6 +294,9 @@
                                 </td>
                                 <td class="d-none d-md-table-cell">
                                     <small>{{ rec.campus }}</small>
+                                </td>
+                                <td class="d-none d-lg-table-cell">
+                                    <small>{{ rec.semester }}</small>
                                 </td>
                                 <td class="d-none d-sm-table-cell">
                                                                         <span class="badge {% if rec.badge == 'success' %}bg-success{% elif rec.badge == 'warning' %}bg-warning text-dark{% elif rec.badge == 'danger' %}bg-danger{% else %}bg-secondary{% endif %}">
@@ -206,6 +311,9 @@
                                             <span class="text-danger">{{ rec.margin }}</span>
                                         {% endif %}
                                     </small>
+                                </td>
+                                <td class="d-none d-lg-table-cell">
+                                    <small>{{ rec.year }}</small>
                                 </td>
                             </tr>
                             {% endfor %}
