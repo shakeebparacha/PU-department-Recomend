@@ -1,7 +1,7 @@
 # PU Merit Recommendation System - Django Version
 
 A comprehensive web application for Punjab University students to discover suitable academic programs based on their merit percentage.
-
+``` https://aftab-t0xq.onrender.com/ ```
 ## Features
 
 ✨ **Core Features:**
