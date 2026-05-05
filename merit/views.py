@@ -360,3 +360,42 @@ def recommendations(request):
         'filter_options': filter_options,
     }
     return render(request, 'merit/recommendations.html', context)
+
+
+def debug_csv_status(request):
+    """Debug endpoint to check CSV loading status"""
+    import json
+    from django.http import JsonResponse
+    from django.conf import settings
+    
+    debug_info = {
+        "status": "checking",
+        "base_dir": str(settings.BASE_DIR),
+        "data_file_path": str(settings.DATA_FILE_PATH),
+        "csv_files": [],
+        "csv_loaded": False,
+        "row_count": 0,
+        "error": None
+    }
+    
+    try:
+        # Check what CSV files exist
+        data_dir = settings.BASE_DIR / 'data'
+        if data_dir.exists():
+            for csv_file in data_dir.glob('*.csv'):
+                debug_info["csv_files"].append(str(csv_file))
+        
+        # Try loading
+        df = load_merit_data()
+        if df is not None:
+            debug_info["csv_loaded"] = True
+            debug_info["row_count"] = len(df)
+            debug_info["status"] = "success"
+        else:
+            debug_info["status"] = "error"
+            debug_info["error"] = "load_merit_data() returned None"
+    except Exception as e:
+        debug_info["status"] = "error"
+        debug_info["error"] = str(e)
+    
+    return JsonResponse(debug_info)

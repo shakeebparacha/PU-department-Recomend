@@ -8,4 +8,5 @@ urlpatterns = [
     path('calculator/', views.merit_calculator, name='calculator'),
     path('program-finder/', views.program_finder, name='program_finder'),
     path('recommendations/', views.recommendations, name='recommendations'),
+    path('debug/csv-status/', views.debug_csv_status, name='debug_csv_status'),
 ]
