@@ -11,170 +11,130 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <!-- Filter Form -->
-        <div class="col-lg-4 mb-4">
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-sliders-h"></i> Filters & Criteria
+    <!-- Horizontal Filters Section -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-sliders-h"></i> Filters & Criteria
+        </div>
+        <div class="card-body">
+            <form method="POST" id="filterForm">
+                {% csrf_token %}
+                
+                <!-- Merit Percentage Input -->
+                <div class="row g-3 align-items-end">
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <label for="studentMerit" class="form-label">
+                            <i class="fas fa-percentage"></i> Merit % <span class="text-danger">*</span>
+                        </label>
+                        <input type="number" class="form-control" id="studentMerit" 
+                               name="student_merit" placeholder="0-100" 
+                               step="0.01" min="0" max="100" required
+                               value="{{ student_merit|default:'' }}">
+                    </div>
+
+                    <!-- Faculty Filter -->
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <label for="faculties" class="form-label">
+                            <i class="fas fa-building"></i> Faculty
+                        </label>
+                        <select class="form-select" name="faculties" id="faculties" multiple style="height: 40px;" data-live-search="true">
+                            {% for faculty in filter_options.faculties %}
+                                <option value="{{ faculty }}" {% if faculty in selected_faculties %}selected{% endif %}>{{ faculty }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Campus Filter -->
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <label for="campuses" class="form-label">
+                            <i class="fas fa-map-marker-alt"></i> Campus
+                        </label>
+                        <select class="form-select" name="campuses" id="campuses" multiple style="height: 40px;">
+                            {% for campus in filter_options.campuses %}
+                                <option value="{{ campus }}" {% if campus in selected_campuses %}selected{% endif %}>{{ campus }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Semester Filter -->
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <label for="semesters" class="form-label">
+                            <i class="fas fa-calendar"></i> Semester
+                        </label>
+                        <select class="form-select" name="semesters" id="semesters" multiple style="height: 40px;">
+                            {% for semester in filter_options.semesters %}
+                                <option value="{{ semester }}" {% if semester in selected_semesters %}selected{% endif %}>{{ semester }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Year Filter -->
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <label for="years" class="form-label">
+                            <i class="fas fa-calendar-alt"></i> Year
+                        </label>
+                        <select class="form-select" name="years" id="years" multiple style="height: 40px;">
+                            {% for year in filter_options.years %}
+                                <option value="{{ year }}" {% if year|stringformat:"s" in selected_years %}selected{% endif %}>{{ year }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="col-12 col-sm-6 col-lg-2 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary w-100" style="margin-top: 21px;">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button type="reset" class="btn btn-secondary w-100" style="margin-top: 21px;">
+                            <i class="fas fa-redo"></i> Clear
+                        </button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form method="POST" id="filterForm">
-                        {% csrf_token %}
-                        
-                        <!-- Merit Percentage Input -->
-                        <div class="mb-3">
-                            <label for="studentMerit" class="form-label">
-                                <i class="fas fa-percentage"></i> Your Merit Percentage <span class="text-danger">*</span>
-                            </label>
-                            <input type="number" class="form-control form-control-lg" id="studentMerit" 
-                                   name="student_merit" placeholder="Enter merit percentage" 
-                                   step="0.01" min="0" max="100" required
-                                   value="{{ student_merit|default:'' }}">
-                            <small class="text-muted d-block mt-2">
-                                <i class="fas fa-info-circle"></i> Enter your merit percentage (0-100)
-                            </small>
-                        </div>
-
-                        <hr class="my-4">
-
-                        <!-- Faculty Filter -->
-                        <div class="mb-3">
-                            <label for="faculties" class="form-label">
-                                <i class="fas fa-building"></i> Faculty
-                            </label>
-                            <div class="border rounded p-2" style="max-height: 220px; overflow-y: auto;">
-                                {% for faculty in filter_options.faculties %}
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="faculties" id="faculty-{{ forloop.counter }}" value="{{ faculty }}" {% if faculty in selected_faculties %}checked{% endif %}>
-                                        <label class="form-check-label" for="faculty-{{ forloop.counter }}">{{ faculty }}</label>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <small class="text-muted d-block mt-2">All are selected by default.</small>
-                        </div>
-
+                
+                <hr class="my-3">
+                
+                <!-- Additional Filters (Collapsible) -->
+                <div class="collapse" id="advancedFilters">
+                    <div class="row g-3">
                         <!-- Department Filter -->
-                        <div class="mb-3">
+                        <div class="col-12 col-sm-6 col-lg-3">
                             <label for="departments" class="form-label">
                                 <i class="fas fa-sitemap"></i> Department
                             </label>
-                            <div class="border rounded p-2" style="max-height: 220px; overflow-y: auto;">
+                            <select class="form-select" name="departments" id="departments" multiple style="height: 100px;">
                                 {% for department in filter_options.departments %}
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="departments" id="department-{{ forloop.counter }}" value="{{ department }}" {% if department in selected_departments %}checked{% endif %}>
-                                        <label class="form-check-label" for="department-{{ forloop.counter }}">{{ department }}</label>
-                                    </div>
+                                    <option value="{{ department }}" {% if department in selected_departments %}selected{% endif %}>{{ department }}</option>
                                 {% endfor %}
-                            </div>
-                            <small class="text-muted d-block mt-2">All are selected by default.</small>
+                            </select>
                         </div>
 
                         <!-- Program Filter -->
-                        <div class="mb-3">
+                        <div class="col-12 col-sm-6 col-lg-3">
                             <label for="programs" class="form-label">
                                 <i class="fas fa-book"></i> Program
                             </label>
-                            <div class="border rounded p-2" style="max-height: 220px; overflow-y: auto;">
+                            <select class="form-select" name="programs" id="programs" multiple style="height: 100px;">
                                 {% for program in filter_options.programs %}
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="programs" id="program-{{ forloop.counter }}" value="{{ program }}" {% if program in selected_programs %}checked{% endif %}>
-                                        <label class="form-check-label" for="program-{{ forloop.counter }}">{{ program }}</label>
-                                    </div>
+                                    <option value="{{ program }}" {% if program in selected_programs %}selected{% endif %}>{{ program }}</option>
                                 {% endfor %}
-                            </div>
-                            <small class="text-muted d-block mt-2">All are selected by default.</small>
+                            </select>
                         </div>
-
-                        <!-- Campus Filter -->
-                        <div class="mb-3">
-                            <label for="campuses" class="form-label">
-                                <i class="fas fa-map-marker-alt"></i> Campus
-                            </label>
-                            <div class="border rounded p-2" style="max-height: 180px; overflow-y: auto;">
-                                {% for campus in filter_options.campuses %}
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="campuses" id="campus-{{ forloop.counter }}" value="{{ campus }}" {% if campus in selected_campuses %}checked{% endif %}>
-                                        <label class="form-check-label" for="campus-{{ forloop.counter }}">{{ campus }}</label>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <small class="text-muted d-block mt-2">All are selected by default.</small>
-                        </div>
-
-                        <!-- Semester Filter -->
-                        <div class="mb-3">
-                            <label for="semesters" class="form-label">
-                                <i class="fas fa-calendar"></i> Semester
-                            </label>
-                            <div class="border rounded p-2" style="max-height: 180px; overflow-y: auto;">
-                                {% for semester in filter_options.semesters %}
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="semesters" id="semester-{{ forloop.counter }}" value="{{ semester }}" {% if semester in selected_semesters %}checked{% endif %}>
-                                        <label class="form-check-label" for="semester-{{ forloop.counter }}">{{ semester }}</label>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <small class="text-muted d-block mt-2">All are selected by default.</small>
-                        </div>
-
-                        <!-- Year Filter -->
-                        <div class="mb-3">
-                            <label for="years" class="form-label">
-                                <i class="fas fa-calendar-alt"></i> Year
-                            </label>
-                            <div class="border rounded p-2" style="max-height: 160px; overflow-y: auto;">
-                                {% for year in filter_options.years %}
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="years" id="year-{{ forloop.counter }}" value="{{ year }}" {% if year|stringformat:"s" in selected_years %}checked{% endif %}>
-                                        <label class="form-check-label" for="year-{{ forloop.counter }}">{{ year }}</label>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <small class="text-muted d-block mt-2">All are selected by default.</small>
-                        </div>
-
-                        <hr class="my-4">
-
-                        <!-- Action Buttons -->
-                        <button type="submit" class="btn btn-primary w-100 mb-2">
-                            <i class="fas fa-search"></i> Search Programs
-                        </button>
-                        <button type="reset" class="btn btn-secondary w-100">
-                            <i class="fas fa-redo"></i> Clear All
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Legend Card -->
-            <div class="card mt-3">
-                <div class="card-header">
-                    <i class="fas fa-list-ul"></i> Difficulty Legend
-                </div>
-                <div class="card-body p-3">
-                    <div class="mb-2">
-                        <span class="badge bg-success">Safe ✅</span>
-                        <small class="text-muted d-block mt-1">Program cutoff 10%+ below your merit</small>
-                    </div>
-                    <div class="mb-2">
-                        <span class="badge bg-warning text-dark">Moderate ⚠️</span>
-                        <small class="text-muted d-block mt-1">Program cutoff within 10% of your merit</small>
-                    </div>
-                    <div class="mb-2">
-                        <span class="badge bg-danger">Risky ⚠️⚠️</span>
-                        <small class="text-muted d-block mt-1">Program cutoff above your merit but within 10%</small>
-                    </div>
-                    <div>
-                        <span class="badge bg-dark">Not Eligible ❌</span>
-                        <small class="text-muted d-block mt-1">Program cutoff above your merit by more than 10%</small>
                     </div>
                 </div>
-            </div>
+
+                <!-- Expand/Collapse Advanced Filters -->
+                <div class="mt-2">
+                    <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#advancedFilters">
+                        <i class="fas fa-chevron-down"></i> Advanced Filters
+                    </button>
+                </div>
+            </form>
         </div>
+    </div>
 
+    <div class="row">
         <!-- Results Section -->
-        <div class="col-lg-8">
+        <div class="col-12">
             <!-- Error Message -->
             {% if error_message %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -342,6 +302,33 @@
                 </div>
             </div>
             {% endif %}
+        </div>
+    </div>
+
+    <!-- Legend Card -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <i class="fas fa-list-ul"></i> Difficulty Legend
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <span class="badge bg-success">Safe ✅</span>
+                    <small class="text-muted d-block mt-1">Program cutoff 10%+ below your merit</small>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <span class="badge bg-warning text-dark">Moderate ⚠️</span>
+                    <small class="text-muted d-block mt-1">Program cutoff within 10% of your merit</small>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <span class="badge bg-danger">Risky ⚠️⚠️</span>
+                    <small class="text-muted d-block mt-1">Program cutoff above your merit but within 10%</small>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <span class="badge bg-dark">Not Eligible ❌</span>
+                    <small class="text-muted d-block mt-1">Program cutoff above your merit by more than 10%</small>
+                </div>
+            </div>
         </div>
     </div>
 </div>
