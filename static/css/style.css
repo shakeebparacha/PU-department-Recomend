@@ -259,3 +259,230 @@
     border-image: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     border-image-slice: 1;
 }
+
+/* ============= RESPONSIVE TABLE STYLES (Result_fatch inspired) ============= */
+
+/* Table Wrapper */
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Table Base */
+.recommendations-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background: white;
+    margin-bottom: 0;
+}
+
+/* Table Header */
+.recommendations-table thead {
+    background: linear-gradient(135deg, #f8f9fa 0%, #f0f0f0 100%);
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.recommendations-table thead th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #0d2d47;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: linear-gradient(135deg, #f8f9fa 0%, #f0f0f0 100%);
+}
+
+.recommendations-table thead th:hover {
+    background: linear-gradient(135deg, #e8f1ff 0%, #d8e8ff 100%);
+    color: #00b4d8;
+}
+
+/* Table Body */
+.recommendations-table tbody tr {
+    border-bottom: 1px solid #e8e8e8;
+    transition: all 0.3s ease;
+}
+
+.recommendations-table tbody tr:hover {
+    background-color: #f8f9ff;
+    box-shadow: inset 0 1px 4px rgba(0, 180, 216, 0.08);
+    transform: scale(1.01);
+}
+
+.recommendations-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Table Cells */
+.recommendations-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e8e8e8;
+    vertical-align: middle;
+}
+
+.recommendations-table tbody td {
+    color: #333;
+}
+
+/* Badge Styling */
+.recommendations-table .badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 20px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.badge-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.badge-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.badge-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.badge-secondary {
+    background-color: #e2e3e5;
+    color: #383d41;
+    border: 1px solid #d6d8db;
+}
+
+/* Program Column Styling */
+.recommendations-table td:first-child {
+    min-width: 200px;
+    font-weight: 600;
+}
+
+.recommendations-table td:first-child .fw-semibold {
+    color: #0d2d47;
+    font-size: 0.95rem;
+}
+
+.recommendations-table td:first-child .text-muted {
+    color: #888;
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin-top: 0.3rem;
+}
+
+/* Text alignment for numeric columns */
+.recommendations-table td.text-end {
+    text-align: right;
+    font-weight: 600;
+    color: #0d2d47;
+}
+
+/* Small text in cells */
+.recommendations-table small {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Margin positive/negative colors */
+.text-success {
+    color: #28a745 !important;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+/* ============= SCROLLBAR STYLING FOR TABLES ============= */
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* ============= MOBILE RESPONSIVE TABLE ============= */
+@media (max-width: 768px) {
+    .recommendations-table {
+        font-size: 0.85rem;
+    }
+
+    .recommendations-table thead th {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .recommendations-table tbody td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .recommendations-table td:first-child {
+        min-width: 150px;
+        padding: 0.75rem;
+    }
+
+    .recommendations-table th {
+        min-width: 80px;
+    }
+
+    /* Ensure horizontal scroll is smooth on mobile */
+    .table-responsive {
+        -webkit-overflow-scrolling: touch;
+        overflow-x: auto;
+    }
+
+    .badge {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .recommendations-table {
+        font-size: 0.8rem;
+    }
+
+    .recommendations-table thead th,
+    .recommendations-table tbody td {
+        padding: 0.5rem 0.4rem;
+    }
+
+    .recommendations-table td:first-child {
+        min-width: 130px;
+    }
+
+    .badge {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+    }
+}

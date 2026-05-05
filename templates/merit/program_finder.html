@@ -222,59 +222,145 @@
             <!-- Recommendations Table -->
             {% if recommendations %}
             <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <span><i class="fas fa-table"></i> Programs Recommendations</span>
+                    <span class="badge bg-primary">{{ recommendations|length }} Found</span>
+                </div>
+
+                <!-- Search & Filter Bar -->
+                <div class="card-body border-bottom pb-3">
+                    <div class="row g-2">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label small fw-semibold">🔍 Search Program</label>
+                            <input type="text" id="programSearch" class="form-control form-control-sm" 
+                                   placeholder="Search by program or department name...">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label small fw-semibold">⚡ Quick Filters</label>
+                            <div class="btn-group btn-group-sm w-100" role="group">
+                                <input type="checkbox" class="btn-check" id="filterSafe" data-filter="safe">
+                                <label class="btn btn-outline-success btn-sm" for="filterSafe">Safe</label>
+
+                                <input type="checkbox" class="btn-check" id="filterModerate" data-filter="moderate">
+                                <label class="btn btn-outline-warning btn-sm" for="filterModerate">Moderate</label>
+
+                                <input type="checkbox" class="btn-check" id="filterRisky" data-filter="risky">
+                                <label class="btn btn-outline-danger btn-sm" for="filterRisky">Risky</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Responsive Table with Horizontal Scroll -->
                 <div class="table-responsive">
-                    <table class="table table-hover table-striped table-sm align-middle recommendations-table mb-0">
-                        <caption class="caption-top text-muted small">
-                            Showing {{ recommendations|length }} programs for {{ student_merit }}% merit.
-                        </caption>
+                    <table class="table table-hover mb-0 recommendations-table" id="recommendationsTable">
                         <thead class="table-light sticky-top">
                             <tr>
-                                <th>Program</th>
-                                <th>Faculty</th>
-                                <th class="text-end">Merit %</th>
-                                <th class="text-center">Category</th>
-                                <th class="d-none d-md-table-cell">Campus</th>
-                                <th class="d-none d-lg-table-cell">Semester</th>
-                                <th class="d-none d-md-table-cell text-end">Margin</th>
-                                <th class="d-none d-lg-table-cell text-center">Year</th>
+                                <th style="min-width: 200px;">
+                                    Program
+                                    <div class="input-group input-group-sm mt-2">
+                                        <input type="text" class="form-control form-control-sm column-filter" 
+                                               data-column="0" placeholder="Filter...">
+                                    </div>
+                                </th>
+                                <th style="min-width: 120px;">
+                                    Faculty
+                                    <div class="input-group input-group-sm mt-2">
+                                        <select class="form-select form-select-sm column-filter" data-column="1">
+                                            <option value="">All</option>
+                                            {% for fac in filter_options.faculties %}
+                                                <option value="{{ fac }}">{{ fac }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </th>
+                                <th style="min-width: 80px;" class="text-end">
+                                    Merit %
+                                    <div class="input-group input-group-sm mt-2">
+                                        <input type="text" class="form-control form-control-sm column-filter" 
+                                               data-column="2" placeholder="Filter...">
+                                    </div>
+                                </th>
+                                <th style="min-width: 90px;" class="text-center">
+                                    Category
+                                    <div class="input-group input-group-sm mt-2">
+                                        <select class="form-select form-select-sm column-filter" data-column="3">
+                                            <option value="">All</option>
+                                            <option value="Safe">Safe</option>
+                                            <option value="Moderate">Moderate</option>
+                                            <option value="Risky">Risky</option>
+                                            <option value="Not Eligible">Not Eligible</option>
+                                        </select>
+                                    </div>
+                                </th>
+                                <th style="min-width: 100px;">
+                                    Campus
+                                    <div class="input-group input-group-sm mt-2">
+                                        <select class="form-select form-select-sm column-filter" data-column="4">
+                                            <option value="">All</option>
+                                            {% for campus in filter_options.campuses %}
+                                                <option value="{{ campus }}">{{ campus }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </th>
+                                <th style="min-width: 100px;">
+                                    Semester
+                                    <div class="input-group input-group-sm mt-2">
+                                        <select class="form-select form-select-sm column-filter" data-column="5">
+                                            <option value="">All</option>
+                                            {% for sem in filter_options.semesters %}
+                                                <option value="{{ sem }}">{{ sem }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </th>
+                                <th style="min-width: 80px;" class="text-end">
+                                    Margin
+                                    <div class="input-group input-group-sm mt-2">
+                                        <input type="text" class="form-control form-control-sm column-filter" 
+                                               data-column="6" placeholder="Filter...">
+                                    </div>
+                                </th>
+                                <th style="min-width: 60px;" class="text-center">
+                                    Year
+                                    <div class="input-group input-group-sm mt-2">
+                                        <select class="form-select form-select-sm column-filter" data-column="7">
+                                            <option value="">All</option>
+                                            {% for year in filter_options.years %}
+                                                <option value="{{ year|stringformat:"s" }}">{{ year }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for rec in recommendations %}
-                            <tr>
+                            <tr data-program="{{ rec.program|lower }}" data-category="{{ rec.category|lower }}">
                                 <td>
-                                    <div class="fw-semibold">{{ rec.program }}</div>
+                                    <div class="fw-semibold text-primary">{{ rec.program }}</div>
                                     <div class="small text-muted">{{ rec.department }}</div>
                                 </td>
                                 <td>
-                                    <small class="text-muted">{{ rec.faculty }}</small>
+                                    <small>{{ rec.faculty }}</small>
                                 </td>
-                                <td class="text-end fw-semibold">
-                                    {{ rec.merit }}
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    <small>{{ rec.campus }}</small>
-                                </td>
-                                <td class="d-none d-lg-table-cell">
-                                    <small>{{ rec.semester }}</small>
-                                </td>
+                                <td class="text-end fw-bold">{{ rec.merit }}%</td>
                                 <td class="text-center">
-                                    <span class="badge {% if rec.badge == 'success' %}bg-success{% elif rec.badge == 'warning' %}bg-warning text-dark{% elif rec.badge == 'danger' %}bg-danger{% else %}bg-secondary{% endif %}">
+                                    <span class="badge {% if rec.badge == 'success' %}bg-success{% elif rec.badge == 'warning' %}bg-warning text-dark{% elif rec.badge == 'danger' %}bg-danger{% else %}bg-secondary{% endif %} rounded-pill">
                                         {{ rec.category }}
                                     </span>
                                 </td>
-                                <td class="d-none d-md-table-cell text-end">
-                                    <small>
-                                        {% if rec.margin|first != '-' %}
-                                            <span class="text-success fw-semibold">+{{ rec.margin }}</span>
-                                        {% else %}
-                                            <span class="text-danger fw-semibold">{{ rec.margin }}</span>
-                                        {% endif %}
-                                    </small>
+                                <td><small>{{ rec.campus }}</small></td>
+                                <td><small>{{ rec.semester }}</small></td>
+                                <td class="text-end">
+                                    {% if rec.margin|first != '-' %}
+                                        <span class="text-success fw-bold">+{{ rec.margin }}</span>
+                                    {% else %}
+                                        <span class="text-danger fw-bold">{{ rec.margin }}</span>
+                                    {% endif %}
                                 </td>
-                                <td class="d-none d-lg-table-cell text-center">
-                                    <small>{{ rec.year }}</small>
-                                </td>
+                                <td class="text-center"><small>{{ rec.year }}</small></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -338,15 +424,92 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Optional: Add client-side validation
+    // Form validation
     const form = document.getElementById('filterForm');
-    form.addEventListener('submit', function(e) {
-        const merit = document.getElementById('studentMerit').value;
-        if (!merit || merit <= 0 || merit > 100) {
-            e.preventDefault();
-            alert('Please enter a valid merit percentage between 0 and 100');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const merit = document.getElementById('studentMerit').value;
+            if (!merit || merit <= 0 || merit > 100) {
+                e.preventDefault();
+                alert('Please enter a valid merit percentage between 0 and 100');
+            }
+        });
+    }
+
+    // Table filtering functionality
+    const table = document.getElementById('recommendationsTable');
+    if (table) {
+        const searchInput = document.getElementById('programSearch');
+        const columnFilters = document.querySelectorAll('.column-filter');
+        const filterButtons = document.querySelectorAll('[data-filter]');
+
+        // Program search
+        if (searchInput) {
+            searchInput.addEventListener('keyup', filterTable);
         }
-    });
+
+        // Column filters
+        columnFilters.forEach(filter => {
+            filter.addEventListener('change', filterTable);
+            filter.addEventListener('keyup', filterTable);
+        });
+
+        // Category quick filters
+        filterButtons.forEach(btn => {
+            btn.addEventListener('change', filterTable);
+        });
+
+        function filterTable() {
+            const rows = table.querySelectorAll('tbody tr');
+            const programSearchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+            const activeCategoryFilters = Array.from(filterButtons)
+                .filter(btn => btn.checked)
+                .map(btn => btn.getAttribute('data-filter'));
+
+            rows.forEach(row => {
+                let show = true;
+
+                // Program search filter
+                if (programSearchTerm) {
+                    const programText = row.getAttribute('data-program') || '';
+                    const cells = row.querySelectorAll('td');
+                    const combinedText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(' ');
+                    if (!combinedText.includes(programSearchTerm)) {
+                        show = false;
+                    }
+                }
+
+                // Quick category filters
+                if (activeCategoryFilters.length > 0) {
+                    const rowCategory = row.getAttribute('data-category') || '';
+                    if (!activeCategoryFilters.includes(rowCategory)) {
+                        show = false;
+                    }
+                }
+
+                // Column-specific filters
+                if (show) {
+                    columnFilters.forEach(filter => {
+                        const colIndex = filter.getAttribute('data-column');
+                        const filterValue = filter.value.toLowerCase();
+                        if (filterValue) {
+                            const cell = row.querySelectorAll('td')[colIndex];
+                            const cellText = cell ? cell.textContent.toLowerCase() : '';
+                            if (!cellText.includes(filterValue)) {
+                                show = false;
+                            }
+                        }
+                    });
+                }
+
+                row.style.display = show ? '' : 'none';
+            });
+
+            // Update count
+            const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none').length;
+            console.log('Visible rows:', visibleRows);
+        }
+    }
 });
 </script>
 {% endblock %}
