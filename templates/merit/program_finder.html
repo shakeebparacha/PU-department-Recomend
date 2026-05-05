@@ -263,34 +263,34 @@
             {% if recommendations %}
             <div class="card">
                 <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead>
+                    <table class="table table-hover table-striped table-sm align-middle recommendations-table mb-0">
+                        <caption class="caption-top text-muted small">
+                            Showing {{ recommendations|length }} programs for {{ student_merit }}% merit.
+                        </caption>
+                        <thead class="table-light sticky-top">
                             <tr>
                                 <th>Program</th>
-                                <th class="d-none d-md-table-cell">Department</th>
                                 <th>Faculty</th>
-                                <th>Merit %</th>
+                                <th class="text-end">Merit %</th>
+                                <th class="text-center">Category</th>
                                 <th class="d-none d-md-table-cell">Campus</th>
                                 <th class="d-none d-lg-table-cell">Semester</th>
-                                <th class="d-none d-sm-table-cell">Category</th>
-                                <th class="d-none d-md-table-cell">Margin</th>
-                                <th class="d-none d-lg-table-cell">Year</th>
+                                <th class="d-none d-md-table-cell text-end">Margin</th>
+                                <th class="d-none d-lg-table-cell text-center">Year</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for rec in recommendations %}
                             <tr>
                                 <td>
-                                    <strong>{{ rec.program }}</strong>
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    <small class="text-muted">{{ rec.department }}</small>
+                                    <div class="fw-semibold">{{ rec.program }}</div>
+                                    <div class="small text-muted">{{ rec.department }}</div>
                                 </td>
                                 <td>
                                     <small class="text-muted">{{ rec.faculty }}</small>
                                 </td>
-                                <td>
-                                    <strong>{{ rec.merit }}</strong>
+                                <td class="text-end fw-semibold">
+                                    {{ rec.merit }}
                                 </td>
                                 <td class="d-none d-md-table-cell">
                                     <small>{{ rec.campus }}</small>
@@ -298,21 +298,21 @@
                                 <td class="d-none d-lg-table-cell">
                                     <small>{{ rec.semester }}</small>
                                 </td>
-                                <td class="d-none d-sm-table-cell">
-                                                                        <span class="badge {% if rec.badge == 'success' %}bg-success{% elif rec.badge == 'warning' %}bg-warning text-dark{% elif rec.badge == 'danger' %}bg-danger{% else %}bg-secondary{% endif %}">
+                                <td class="text-center">
+                                    <span class="badge {% if rec.badge == 'success' %}bg-success{% elif rec.badge == 'warning' %}bg-warning text-dark{% elif rec.badge == 'danger' %}bg-danger{% else %}bg-secondary{% endif %}">
                                         {{ rec.category }}
                                     </span>
                                 </td>
-                                <td class="d-none d-md-table-cell">
+                                <td class="d-none d-md-table-cell text-end">
                                     <small>
                                         {% if rec.margin|first != '-' %}
-                                            <span class="text-success">+{{ rec.margin }}</span>
+                                            <span class="text-success fw-semibold">+{{ rec.margin }}</span>
                                         {% else %}
-                                            <span class="text-danger">{{ rec.margin }}</span>
+                                            <span class="text-danger fw-semibold">{{ rec.margin }}</span>
                                         {% endif %}
                                     </small>
                                 </td>
-                                <td class="d-none d-lg-table-cell">
+                                <td class="d-none d-lg-table-cell text-center">
                                     <small>{{ rec.year }}</small>
                                 </td>
                             </tr>
