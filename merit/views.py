@@ -261,6 +261,7 @@ def program_finder(request):
                     semester_col = get_column_name(df, ['Semester_Type', 'Semester', 'semester'])
                     year_col = get_column_name(df, ['Year', 'year'])
                     merit_col = get_column_name(df, ['Merit_Percentage', 'merit_percentage'])
+                    stream_col = get_column_name(df, ['Sci / Arts', 'Sci/Arts', 'Stream', 'stream'])
                     
                     # Apply filters (show all suggestions, including not eligible)
                     filtered_df = df.copy()
@@ -311,6 +312,7 @@ def program_finder(request):
                             'campus': row[campus_col] if campus_col else '',
                             'semester': row[semester_col] if semester_col else '',
                             'year': row[year_col] if year_col else '',
+                            'stream': row[stream_col].lower() if stream_col and row[stream_col] else 'science',
                             'category': row.get('Category', ''),
                             'badge': row.get('Badge', ''),
                             'margin': f"{row.get('Margin', 0):.1f}%"

@@ -11,122 +11,29 @@
 </div>
 
 <div class="container">
-    <!-- Horizontal Filters Section -->
+    <!-- Simple Merit Search Section -->
     <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-sliders-h"></i> Filters & Criteria
-        </div>
         <div class="card-body">
             <form method="POST" id="filterForm">
                 {% csrf_token %}
-                
-                <!-- Merit Percentage Input -->
                 <div class="row g-3 align-items-end">
-                    <div class="col-12 col-sm-6 col-lg-2">
+                    <div class="col-12 col-md-4">
                         <label for="studentMerit" class="form-label">
                             <i class="fas fa-percentage"></i> Merit % <span class="text-danger">*</span>
                         </label>
                         <input type="number" class="form-control" id="studentMerit" 
-                               name="student_merit" placeholder="0-100" 
+                               name="student_merit" placeholder="Enter 0-100" 
                                step="0.01" min="0" max="100" required
                                value="{{ student_merit|default:'' }}">
                     </div>
-
-                    <!-- Faculty Filter -->
-                    <div class="col-12 col-sm-6 col-lg-2">
-                        <label for="faculties" class="form-label">
-                            <i class="fas fa-building"></i> Faculty
-                        </label>
-                        <select class="form-select" name="faculties" id="faculties" multiple style="height: 40px;" data-live-search="true">
-                            {% for faculty in filter_options.faculties %}
-                                <option value="{{ faculty }}" {% if faculty in selected_faculties %}selected{% endif %}>{{ faculty }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- Campus Filter -->
-                    <div class="col-12 col-sm-6 col-lg-2">
-                        <label for="campuses" class="form-label">
-                            <i class="fas fa-map-marker-alt"></i> Campus
-                        </label>
-                        <select class="form-select" name="campuses" id="campuses" multiple style="height: 40px;">
-                            {% for campus in filter_options.campuses %}
-                                <option value="{{ campus }}" {% if campus in selected_campuses %}selected{% endif %}>{{ campus }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- Semester Filter -->
-                    <div class="col-12 col-sm-6 col-lg-2">
-                        <label for="semesters" class="form-label">
-                            <i class="fas fa-calendar"></i> Semester
-                        </label>
-                        <select class="form-select" name="semesters" id="semesters" multiple style="height: 40px;">
-                            {% for semester in filter_options.semesters %}
-                                <option value="{{ semester }}" {% if semester in selected_semesters %}selected{% endif %}>{{ semester }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- Year Filter -->
-                    <div class="col-12 col-sm-6 col-lg-2">
-                        <label for="years" class="form-label">
-                            <i class="fas fa-calendar-alt"></i> Year
-                        </label>
-                        <select class="form-select" name="years" id="years" multiple style="height: 40px;">
-                            {% for year in filter_options.years %}
-                                <option value="{{ year }}" {% if year|stringformat:"s" in selected_years %}selected{% endif %}>{{ year }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="col-12 col-sm-6 col-lg-2 d-flex gap-2">
-                        <button type="submit" class="btn btn-primary w-100" style="margin-top: 21px;">
-                            <i class="fas fa-search"></i> Search
+                    <div class="col-12 col-md-8 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary flex-grow-1">
+                            <i class="fas fa-search"></i> Search Programs
                         </button>
-                        <button type="reset" class="btn btn-secondary w-100" style="margin-top: 21px;">
+                        <button type="reset" class="btn btn-secondary flex-grow-1">
                             <i class="fas fa-redo"></i> Clear
                         </button>
                     </div>
-                </div>
-                
-                <hr class="my-3">
-                
-                <!-- Additional Filters (Collapsible) -->
-                <div class="collapse" id="advancedFilters">
-                    <div class="row g-3">
-                        <!-- Department Filter -->
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <label for="departments" class="form-label">
-                                <i class="fas fa-sitemap"></i> Department
-                            </label>
-                            <select class="form-select" name="departments" id="departments" multiple style="height: 100px;">
-                                {% for department in filter_options.departments %}
-                                    <option value="{{ department }}" {% if department in selected_departments %}selected{% endif %}>{{ department }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-
-                        <!-- Program Filter -->
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <label for="programs" class="form-label">
-                                <i class="fas fa-book"></i> Program
-                            </label>
-                            <select class="form-select" name="programs" id="programs" multiple style="height: 100px;">
-                                {% for program in filter_options.programs %}
-                                    <option value="{{ program }}" {% if program in selected_programs %}selected{% endif %}>{{ program }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Expand/Collapse Advanced Filters -->
-                <div class="mt-2">
-                    <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#advancedFilters">
-                        <i class="fas fa-chevron-down"></i> Advanced Filters
-                    </button>
                 </div>
             </form>
         </div>
@@ -224,7 +131,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
                     <span><i class="fas fa-table"></i> Programs Recommendations</span>
-                    <span class="badge bg-primary">{{ recommendations|length }} Found</span>
+                    <span class="badge bg-primary" id="resultsCountBadge">{{ recommendations|length }} Found</span>
                 </div>
 
                 <!-- Search & Filter Bar -->
@@ -236,17 +143,12 @@
                                    placeholder="Search by program or department name...">
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class="form-label small fw-semibold">⚡ Quick Filters</label>
-                            <div class="btn-group btn-group-sm w-100" role="group">
-                                <input type="checkbox" class="btn-check" id="filterSafe" data-filter="safe">
-                                <label class="btn btn-outline-success btn-sm" for="filterSafe">Safe</label>
-
-                                <input type="checkbox" class="btn-check" id="filterModerate" data-filter="moderate">
-                                <label class="btn btn-outline-warning btn-sm" for="filterModerate">Moderate</label>
-
-                                <input type="checkbox" class="btn-check" id="filterRisky" data-filter="risky">
-                                <label class="btn btn-outline-danger btn-sm" for="filterRisky">Risky</label>
-                            </div>
+                            <label class="form-label small fw-semibold">📚 Stream Filter</label>
+                            <select id="streamFilter" class="form-select form-select-sm">
+                                <option value="">All Streams</option>
+                                <option value="science">Science</option>
+                                <option value="arts">Arts</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -256,17 +158,12 @@
                     <table class="table table-hover mb-0 recommendations-table" id="recommendationsTable">
                         <thead class="table-light sticky-top">
                             <tr>
-                                <th style="min-width: 200px;">
-                                    Program
-                                    <div class="input-group input-group-sm mt-2">
-                                        <input type="text" class="form-control form-control-sm column-filter" 
-                                               data-column="0" placeholder="Filter...">
-                                    </div>
-                                </th>
+                                <th style="min-width: 40px; text-align: center;">S.No.</th>
+                                <th style="min-width: 200px;">Program</th>
                                 <th style="min-width: 120px;">
                                     Faculty
                                     <div class="input-group input-group-sm mt-2">
-                                        <select class="form-select form-select-sm column-filter" data-column="1">
+                                        <select class="form-select form-select-sm column-filter" data-column="2">
                                             <option value="">All</option>
                                             {% for fac in filter_options.faculties %}
                                                 <option value="{{ fac }}">{{ fac }}</option>
@@ -278,13 +175,13 @@
                                     Merit %
                                     <div class="input-group input-group-sm mt-2">
                                         <input type="text" class="form-control form-control-sm column-filter" 
-                                               data-column="2" placeholder="Filter...">
+                                               data-column="3" placeholder="Filter...">
                                     </div>
                                 </th>
                                 <th style="min-width: 90px;" class="text-center">
                                     Category
                                     <div class="input-group input-group-sm mt-2">
-                                        <select class="form-select form-select-sm column-filter" data-column="3">
+                                        <select class="form-select form-select-sm column-filter" data-column="4">
                                             <option value="">All</option>
                                             <option value="Safe">Safe</option>
                                             <option value="Moderate">Moderate</option>
@@ -296,7 +193,7 @@
                                 <th style="min-width: 100px;">
                                     Campus
                                     <div class="input-group input-group-sm mt-2">
-                                        <select class="form-select form-select-sm column-filter" data-column="4">
+                                        <select class="form-select form-select-sm column-filter" data-column="5">
                                             <option value="">All</option>
                                             {% for campus in filter_options.campuses %}
                                                 <option value="{{ campus }}">{{ campus }}</option>
@@ -307,7 +204,7 @@
                                 <th style="min-width: 100px;">
                                     Semester
                                     <div class="input-group input-group-sm mt-2">
-                                        <select class="form-select form-select-sm column-filter" data-column="5">
+                                        <select class="form-select form-select-sm column-filter" data-column="6">
                                             <option value="">All</option>
                                             {% for sem in filter_options.semesters %}
                                                 <option value="{{ sem }}">{{ sem }}</option>
@@ -319,25 +216,15 @@
                                     Margin
                                     <div class="input-group input-group-sm mt-2">
                                         <input type="text" class="form-control form-control-sm column-filter" 
-                                               data-column="6" placeholder="Filter...">
-                                    </div>
-                                </th>
-                                <th style="min-width: 60px;" class="text-center">
-                                    Year
-                                    <div class="input-group input-group-sm mt-2">
-                                        <select class="form-select form-select-sm column-filter" data-column="7">
-                                            <option value="">All</option>
-                                            {% for year in filter_options.years %}
-                                                <option value="{{ year|stringformat:"s" }}">{{ year }}</option>
-                                            {% endfor %}
-                                        </select>
+                                               data-column="7" placeholder="Filter...">
                                     </div>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for rec in recommendations %}
-                            <tr data-program="{{ rec.program|lower }}" data-category="{{ rec.category|lower }}">
+                            <tr data-program="{{ rec.program|lower }}" data-category="{{ rec.category|lower }}" data-stream="{{ rec.stream|default:'science'|lower }}">
+                                <td style="text-align: center; font-weight: 600; color: #0d2d47;">{{ forloop.counter }}</td>
                                 <td>
                                     <div class="fw-semibold text-primary">{{ rec.program }}</div>
                                     <div class="small text-muted">{{ rec.department }}</div>
@@ -360,7 +247,6 @@
                                         <span class="text-danger fw-bold">{{ rec.margin }}</span>
                                     {% endif %}
                                 </td>
-                                <td class="text-center"><small>{{ rec.year }}</small></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -440,12 +326,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const table = document.getElementById('recommendationsTable');
     if (table) {
         const searchInput = document.getElementById('programSearch');
+        const streamFilter = document.getElementById('streamFilter');
         const columnFilters = document.querySelectorAll('.column-filter');
-        const filterButtons = document.querySelectorAll('[data-filter]');
 
         // Program search
         if (searchInput) {
             searchInput.addEventListener('keyup', filterTable);
+        }
+
+        // Stream filter
+        if (streamFilter) {
+            streamFilter.addEventListener('change', filterTable);
         }
 
         // Column filters
@@ -454,17 +345,10 @@ document.addEventListener('DOMContentLoaded', function() {
             filter.addEventListener('keyup', filterTable);
         });
 
-        // Category quick filters
-        filterButtons.forEach(btn => {
-            btn.addEventListener('change', filterTable);
-        });
-
         function filterTable() {
             const rows = table.querySelectorAll('tbody tr');
             const programSearchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-            const activeCategoryFilters = Array.from(filterButtons)
-                .filter(btn => btn.checked)
-                .map(btn => btn.getAttribute('data-filter'));
+            const selectedStream = streamFilter ? streamFilter.value.toLowerCase() : '';
 
             rows.forEach(row => {
                 let show = true;
@@ -479,10 +363,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
 
-                // Quick category filters
-                if (activeCategoryFilters.length > 0) {
-                    const rowCategory = row.getAttribute('data-category') || '';
-                    if (!activeCategoryFilters.includes(rowCategory)) {
+                // Stream filter (Science/Arts)
+                if (selectedStream && show) {
+                    const rowStream = row.getAttribute('data-stream') || '';
+                    if (!rowStream.includes(selectedStream)) {
                         show = false;
                     }
                 }
@@ -504,6 +388,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 row.style.display = show ? '' : 'none';
             });
+
+            // Update the count badge
+            const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none').length;
+            const countBadge = document.getElementById('resultsCountBadge');
+            if (countBadge) {
+                countBadge.textContent = visibleRows + ' Found';
+            }
 
             // Update count
             const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none').length;
