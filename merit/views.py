@@ -9,6 +9,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.units import inch
 import os
+from pathlib import Path
 
 
 def load_merit_data():
@@ -17,15 +18,25 @@ def load_merit_data():
         # List of possible CSV file names and paths to try
         candidate_paths = [
             settings.DATA_FILE_PATH,
-            settings.BASE_DIR / 'pu-merit-app' / 'data' / 'merit_data.csv',
             settings.BASE_DIR / 'data' / 'merit_data.csv',
+            settings.BASE_DIR / 'data' / '2024 merit.csv',
+            settings.BASE_DIR / 'pu-merit-app' / 'data' / 'merit_data.csv',
+            settings.BASE_DIR / 'pu-merit-app' / 'data' / '2024 merit.csv',
+            Path('./data/merit_data.csv'),
+            Path('./data/2024 merit.csv'),
+            Path('../data/merit_data.csv'),
+            Path('../data/2024 merit.csv'),
         ]
         
         # Also search for any CSV file in the data directory
-        data_dir = settings.BASE_DIR / 'data'
-        if data_dir.exists() and data_dir.is_dir():
-            for csv_file in data_dir.glob('*.csv'):
-                candidate_paths.append(csv_file)
+        for data_search_path in [settings.BASE_DIR / 'data', settings.BASE_DIR / 'pu-merit-app' / 'data', Path('./data'), Path('../data')]:
+            try:
+                if data_search_path.exists() and data_search_path.is_dir():
+                    for csv_file in data_search_path.glob('*.csv'):
+                        if csv_file not in candidate_paths:
+                            candidate_paths.append(csv_file)
+            except:
+                pass
         
         for path in candidate_paths:
             if path and os.path.exists(path):
@@ -41,6 +52,8 @@ def load_merit_data():
                     continue
         
         print("No valid CSV file found in candidate paths")
+        print(f"BASE_DIR: {settings.BASE_DIR}")
+        print(f"Available candidate paths checked: {[str(p) for p in candidate_paths[:5]]}")
         return None
     except Exception as e:
         print(f"Error loading data: {e}")
