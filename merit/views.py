@@ -14,17 +14,33 @@ import os
 def load_merit_data():
     """Load merit data from CSV file"""
     try:
+        # List of possible CSV file names and paths to try
         candidate_paths = [
             settings.DATA_FILE_PATH,
-            settings.BASE_DIR / 'pu-merit-app' / 'data' / 'merit_data.csv'
+            settings.BASE_DIR / 'pu-merit-app' / 'data' / 'merit_data.csv',
+            settings.BASE_DIR / 'data' / 'merit_data.csv',
         ]
+        
+        # Also search for any CSV file in the data directory
+        data_dir = settings.BASE_DIR / 'data'
+        if data_dir.exists() and data_dir.is_dir():
+            for csv_file in data_dir.glob('*.csv'):
+                candidate_paths.append(csv_file)
+        
         for path in candidate_paths:
             if path and os.path.exists(path):
-                df = pd.read_csv(path)
-                merit_col = 'Merit_Percentage' if 'Merit_Percentage' in df.columns else 'merit_percentage'
-                if merit_col in df.columns:
-                    df = df[df[merit_col] > 0]
-                return df
+                try:
+                    df = pd.read_csv(path)
+                    merit_col = 'Merit_Percentage' if 'Merit_Percentage' in df.columns else 'merit_percentage'
+                    if merit_col in df.columns:
+                        df = df[df[merit_col] > 0]
+                    print(f"Successfully loaded merit data from: {path}")
+                    return df
+                except Exception as e:
+                    print(f"Error loading data from {path}: {e}")
+                    continue
+        
+        print("No valid CSV file found in candidate paths")
         return None
     except Exception as e:
         print(f"Error loading data: {e}")
