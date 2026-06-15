@@ -237,17 +237,42 @@ def program_finder(request):
     selected_semesters = filter_options.get('semesters', [])
     selected_years = [str(year) for year in filter_options.get('years', [])]
     
-    if request.method == 'POST':
+    # Check for GET parameter (from merit calculator)
+    if request.method == 'GET' and 'merit' in request.GET:
         try:
-            student_merit = float(request.POST.get('student_merit', 0))
+            student_merit = float(request.GET.get('merit', 0))
+            # Auto-trigger the calculation with the passed merit value
+            if student_merit > 0:
+                request.method = 'POST'  # Treat as POST for processing
+        except ValueError:
+            student_merit = None
+    
+    if request.method == 'POST' or student_merit:
+        try:
+            # Get merit from POST if it's a POST request, otherwise use already extracted GET value
+            if request.method == 'POST' and not student_merit:
+                student_merit = float(request.POST.get('student_merit', 0))
             
             # Get selected filters
-            selected_faculties = request.POST.getlist('faculties') or filter_options.get('faculties', [])
-            selected_departments = request.POST.getlist('departments') or filter_options.get('departments', [])
-            selected_programs = request.POST.getlist('programs') or filter_options.get('programs', [])
-            selected_campuses = request.POST.getlist('campuses') or filter_options.get('campuses', [])
-            selected_semesters = request.POST.getlist('semesters') or filter_options.get('semesters', [])
-            selected_years = request.POST.getlist('years') or [str(year) for year in filter_options.get('years', [])]
+            selected_faculties = request.POST.getlist('faculties') if request.method == 'POST' else filter_options.get('faculties', [])
+            selected_departments = request.POST.getlist('departments') if request.method == 'POST' else filter_options.get('departments', [])
+            selected_programs = request.POST.getlist('programs') if request.method == 'POST' else filter_options.get('programs', [])
+            selected_campuses = request.POST.getlist('campuses') if request.method == 'POST' else filter_options.get('campuses', [])
+            selected_semesters = request.POST.getlist('semesters') if request.method == 'POST' else filter_options.get('semesters', [])
+            selected_years = request.POST.getlist('years') if request.method == 'POST' else [str(year) for year in filter_options.get('years', [])]
+            
+            if not selected_faculties:
+                selected_faculties = filter_options.get('faculties', [])
+            if not selected_departments:
+                selected_departments = filter_options.get('departments', [])
+            if not selected_programs:
+                selected_programs = filter_options.get('programs', [])
+            if not selected_campuses:
+                selected_campuses = filter_options.get('campuses', [])
+            if not selected_semesters:
+                selected_semesters = filter_options.get('semesters', [])
+            if not selected_years:
+                selected_years = [str(year) for year in filter_options.get('years', [])]
             
             if student_merit <= 0:
                 error_message = "Please enter a valid merit percentage (greater than 0)"
@@ -339,7 +364,7 @@ def program_finder(request):
         'page_title': 'Program Finder',
         'filter_options': filter_options,
         'recommendations': recommendations,
-        'student_merit': student_merit,
+        'student_merit': round(student_merit, 2) if student_merit else None,
         'error_message': error_message,
         'pdf_url': pdf_url,
         'metrics': metrics,

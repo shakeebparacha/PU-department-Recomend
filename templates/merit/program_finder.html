@@ -24,7 +24,8 @@
                         <input type="number" class="form-control" id="studentMerit" 
                                name="student_merit" placeholder="Enter 0-100" 
                                step="0.01" min="0" max="100" required
-                               value="{{ student_merit|default:'' }}">
+                               data-default-value="{{ student_merit|default:'' }}"
+                               value="">
                     </div>
                     <div class="col-12 col-md-8 d-flex gap-2">
                         <button type="submit" class="btn btn-primary flex-grow-1">
@@ -310,6 +311,40 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Auto-populate merit from URL parameter or localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    const meritFromUrl = urlParams.get('merit');
+    const studentMeritInput = document.getElementById('studentMerit');
+    const defaultValue = studentMeritInput ? studentMeritInput.getAttribute('data-default-value') : '';
+    const filterForm = document.getElementById('filterForm');
+    
+    // Set the initial merit value
+    if (meritFromUrl && studentMeritInput) {
+        const meritValue = parseFloat(meritFromUrl).toFixed(2);
+        studentMeritInput.value = meritValue;
+        console.log('Merit auto-populated from URL:', meritValue);
+        
+        // Auto-submit the form if it comes from URL
+        setTimeout(function() {
+            if (filterForm && meritFromUrl) {
+                console.log('Auto-submitting form with merit:', meritValue);
+                filterForm.submit();
+            }
+        }, 100);
+    } else if (!defaultValue && studentMeritInput) {
+        // Try to get from localStorage if available and no default value
+        const savedMerit = localStorage.getItem('calculatedMerit');
+        if (savedMerit) {
+            const meritValue = parseFloat(savedMerit).toFixed(2);
+            studentMeritInput.value = meritValue;
+            console.log('Merit auto-populated from localStorage:', meritValue);
+        }
+    } else if (defaultValue && studentMeritInput) {
+        // Set default value from Django context
+        studentMeritInput.value = defaultValue;
+        console.log('Merit set to default value:', defaultValue);
+    }
+
     // Form validation
     const form = document.getElementById('filterForm');
     if (form) {

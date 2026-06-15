@@ -159,6 +159,11 @@
                                                     <strong style="font-size: 1.8rem;" id="type2_total_merit">0.00</strong>
                                                 </p>
                                                 <small>Final merit percentage</small>
+                                                <div class="mt-3">
+                                                    <button type="button" class="btn btn-light w-100" onclick="goToProgramFinder('type2_total_merit')">
+                                                        <i class="fas fa-arrow-right"></i> Best Program Finder
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -344,6 +349,11 @@
                                                     <strong style="font-size: 1.8rem;" id="type5_total_merit">0.00</strong>
                                                 </p>
                                                 <small>Final merit percentage</small>
+                                                <div class="mt-3">
+                                                    <button type="button" class="btn btn-light w-100" onclick="goToProgramFinder('type5_total_merit')">
+                                                        <i class="fas fa-arrow-right"></i> Best Program Finder
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -656,5 +666,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Function to navigate to Program Finder with merit value
+function goToProgramFinder(meritElementId) {
+    const meritValue = document.getElementById(meritElementId).textContent.trim();
+    
+    // Check if merit has been calculated (should not be 0.00)
+    if (meritValue === '0.00') {
+        alert('Please calculate your merit first before proceeding to Program Finder.');
+        return;
+    }
+    
+    // Navigate to program finder with merit as query parameter
+    // Also store in localStorage as backup
+    localStorage.setItem('calculatedMerit', meritValue);
+    window.location.href = `/program-finder/?merit=${encodeURIComponent(meritValue)}`;
+}
 </script>
 {% endblock %}
