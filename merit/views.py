@@ -234,7 +234,16 @@ def program_finder(request):
     selected_departments = filter_options.get('departments', [])
     selected_programs = filter_options.get('programs', [])
     selected_campuses = filter_options.get('campuses', [])
-    selected_semesters = filter_options.get('semesters', [])
+    # ---- default semester filter (only first‑semester options) ----
+    default_semester_names = [
+        '1st Semester Morning',
+        '1st Semester Evening/Replica/Self Support',
+       
+    ]
+    default_selected_semesters = [
+        sem for sem in filter_options.get('semesters', []) if sem in default_semester_names
+    ]
+    selected_semesters = default_selected_semesters
     selected_years = [str(year) for year in filter_options.get('years', [])]
     
     # Check for GET parameter (from merit calculator)
@@ -258,7 +267,13 @@ def program_finder(request):
             selected_departments = request.POST.getlist('departments') if request.method == 'POST' else filter_options.get('departments', [])
             selected_programs = request.POST.getlist('programs') if request.method == 'POST' else filter_options.get('programs', [])
             selected_campuses = request.POST.getlist('campuses') if request.method == 'POST' else filter_options.get('campuses', [])
-            selected_semesters = request.POST.getlist('semesters') if request.method == 'POST' else filter_options.get('semesters', [])
+            if request.method == 'POST':
+                selected_semesters = request.POST.getlist('semesters')
+                # If the form was auto‑submitted (no semesters sent), keep the defaults
+                if not selected_semesters:
+                    selected_semesters = default_selected_semesters
+            else:
+                selected_semesters = default_selected_semesters
             selected_years = request.POST.getlist('years') if request.method == 'POST' else [str(year) for year in filter_options.get('years', [])]
             
             if not selected_faculties:

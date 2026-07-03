@@ -176,7 +176,7 @@
                                     Merit %
                                     <div class="input-group input-group-sm mt-2">
                                         <input type="text" class="form-control form-control-sm column-filter" 
-                                               data-column="3" placeholder="Filter...">
+                                               data-column="3" data-type="range" placeholder="e.g., 60-65 or 70">
                                     </div>
                                 </th>
                                 <th style="min-width: 90px;" class="text-center">
@@ -199,7 +199,7 @@
                                          </button>
                                          <div class="dropdown-menu p-3" aria-labelledby="semesterDropdownBtn" style="min-width: 200px; max-height: 250px; overflow-y: auto;" id="semesterDropdownMenu">
                                              <div class="form-check mb-2">
-                                                 <input class="form-check-input select-all-semesters" type="checkbox" id="selectAllSemesters" checked>
+                                                 <input class="form-check-input select-all-semesters" type="checkbox" id="selectAllSemesters">
                                                  <label class="form-check-label fw-bold" for="selectAllSemesters">
                                                      Select All
                                                  </label>
@@ -207,7 +207,7 @@
                                              <hr class="dropdown-divider">
                                              {% for sem in filter_options.semesters %}
                                              <div class="form-check">
-                                                 <input class="form-check-input semester-checkbox" type="checkbox" value="{{ sem }}" id="sem_{{ forloop.counter }}" checked>
+                                                 <input class="form-check-input semester-checkbox" type="checkbox" value="{{ sem }}" id="sem_{{ forloop.counter }}"{% if sem in selected_semesters %} checked{% endif %}>
                                                  <label class="form-check-label" for="sem_{{ forloop.counter }}">
                                                      {{ sem }}
                                                  </label>
@@ -457,12 +457,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (show) {
                     columnFilters.forEach(filter => {
                         const colIndex = filter.getAttribute('data-column');
+                        const filterType = filter.getAttribute('data-type');
                         const filterValue = filter.value.toLowerCase();
+                        
                         if (filterValue) {
                             const cell = row.querySelectorAll('td')[colIndex];
-                            const cellText = cell ? cell.textContent.toLowerCase() : '';
-                            if (!cellText.includes(filterValue)) {
-                                show = false;
+                            const cellText = cell ? cell.textContent.trim() : '';
+
+                            if (filterType === 'range') {
+                                const [min, max] = filterValue.split('-').map(v => parseFloat(v));
+                                const cellValue = parseFloat(cellText);
+                                if (isNaN(cellValue) || (min && cellValue < min) || (max && cellValue > max)) {
+                                    show = false;
+                                }
+                            } else {
+                                if (!cellText.toLowerCase().includes(filterValue)) {
+                                    show = false;
+                                }
                             }
                         }
                     });
