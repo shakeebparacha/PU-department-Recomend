@@ -271,8 +271,9 @@
 }
 
 .table-responsive {
-    overflow-x: auto;
+    overflow: auto; /* both axes */
     -webkit-overflow-scrolling: touch;
+    max-height: 540px; /* Show ~10 rows, then scroll */
 }
 
 /* Table Base */
@@ -488,10 +489,20 @@
 }
 
 @media (max-width: 576px) {
-    .recommendations-table th:nth-child(5),
-    .recommendations-table td:nth-child(5),
-    .recommendations-table th:nth-child(6),
-    .recommendations-table td:nth-child(6) {
-        display: none;
+    .recommendations-table {
+        min-width: 800px; /* Force width to enable scrolling */
     }
+}
+/* Wrapper for dual scrolling & max-height (≈10 rows) */
+.table-scroll-wrapper {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 540px; /* ~10 rows */
+    border-radius: 8px;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
+}
+
+/* Ensure table inside wrapper keeps min-width for horizontal scroll */
+.table-scroll-wrapper .recommendations-table {
+    min-width: 800px;
 }

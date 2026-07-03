@@ -508,6 +508,14 @@
                 }
 
                 console.log('Visible rows:', visibleRows);
+            // ---- Table Wrapper for scrolling ----
+            const recTable = document.getElementById('recommendationsTable');
+            if (recTable && !recTable.parentElement.classList.contains('table-scroll-wrapper')) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'table-scroll-wrapper';
+                recTable.parentNode.insertBefore(wrapper, recTable);
+                wrapper.appendChild(recTable);
+            }
             }
         }
     });
