@@ -21,11 +21,9 @@
                         <label for="studentMerit" class="form-label">
                             <i class="fas fa-percentage"></i> Merit % <span class="text-danger">*</span>
                         </label>
-                        <input type="number" class="form-control" id="studentMerit" 
-                               name="student_merit" placeholder="Enter 0-100" 
-                               step="0.01" min="0" max="100" required
-                               data-default-value="{{ student_merit|default:'' }}"
-                               value="">
+                        <input type="number" class="form-control" id="studentMerit" name="student_merit"
+                            placeholder="Enter 0-100" step="0.01" min="0" max="100" required
+                            data-default-value="{{ student_merit|default:'' }}" value="">
                     </div>
                     <div class="col-12 col-md-8 d-flex gap-2">
                         <button type="submit" class="btn btn-primary flex-grow-1">
@@ -57,7 +55,8 @@
                 <div class="card-body p-5 text-center">
                     <i class="fas fa-search fa-5x text-muted mb-3" style="opacity: 0.3;"></i>
                     <h5>Enter your merit percentage to get started</h5>
-                    <p class="text-muted">Fill in your details on the left and click "Search Programs" to see recommendations.</p>
+                    <p class="text-muted">Fill in your details on the left and click "Search Programs" to see
+                        recommendations.</p>
                 </div>
             </div>
             {% endif %}
@@ -68,9 +67,9 @@
                 <i class="fas fa-info-circle"></i>
                 <strong>Merit Percentage:</strong> {{ student_merit }}%
                 {% if recommendations %}
-                    | <strong>Programs Found:</strong> {{ recommendations|length }}
+                | <strong>Programs Found:</strong> {{ recommendations|length }}
                 {% else %}
-                    | <strong>No programs found</strong>
+                | <strong>No programs found</strong>
                 {% endif %}
             </div>
             {% endif %}
@@ -140,8 +139,8 @@
                     <div class="row g-2">
                         <div class="col-12 col-md-6">
                             <label class="form-label small fw-semibold">🔍 Search Program</label>
-                            <input type="text" id="programSearch" class="form-control form-control-sm" 
-                                   placeholder="Search by program or department name...">
+                            <input type="text" id="programSearch" class="form-control form-control-sm"
+                                placeholder="Search by program or department name...">
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label small fw-semibold">📚 Stream Filter</label>
@@ -153,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Responsive Table with Horizontal Scroll -->
                 <div class="table-responsive">
                     <table class="table table-hover mb-0 recommendations-table" id="recommendationsTable">
@@ -167,7 +166,7 @@
                                         <select class="form-select form-select-sm column-filter" data-column="2">
                                             <option value="">All</option>
                                             {% for fac in filter_options.faculties %}
-                                                <option value="{{ fac }}">{{ fac }}</option>
+                                            <option value="{{ fac }}">{{ fac }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -175,8 +174,8 @@
                                 <th style="min-width: 80px;" class="text-end">
                                     Merit %
                                     <div class="input-group input-group-sm mt-2">
-                                        <input type="text" class="form-control form-control-sm column-filter" 
-                                               data-column="3" data-type="range" placeholder="e.g., 60-65 or 70">
+                                        <input type="text" class="form-control form-control-sm column-filter"
+                                            data-column="3" data-type="range" placeholder="e.g., 60-65 or 70">
                                     </div>
                                 </th>
                                 <th style="min-width: 90px;" class="text-center">
@@ -191,37 +190,46 @@
                                         </select>
                                     </div>
                                 </th>
-                                 <th style="min-width: 140px;">
-                                     Semester
-                                     <div class="dropdown mt-2" id="semesterDropdownContainer">
-                                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle w-100 text-start d-flex justify-content-between align-items-center bg-white" type="button" id="semesterDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false" style="border: 1px solid #ced4da; font-size: 0.875rem;">
-                                             <span id="semesterDropdownText">All Semesters</span>
-                                         </button>
-                                         <div class="dropdown-menu p-3" aria-labelledby="semesterDropdownBtn" style="min-width: 200px; max-height: 250px; overflow-y: auto;" id="semesterDropdownMenu">
-                                             <div class="form-check mb-2">
-                                                 <input class="form-check-input select-all-semesters" type="checkbox" id="selectAllSemesters">
-                                                 <label class="form-check-label fw-bold" for="selectAllSemesters">
-                                                     Select All
-                                                 </label>
-                                             </div>
-                                             <hr class="dropdown-divider">
-                                             {% for sem in filter_options.semesters %}
-                                             <div class="form-check">
-                                                 <input class="form-check-input semester-checkbox" type="checkbox" value="{{ sem }}" id="sem_{{ forloop.counter }}"{% if sem in selected_semesters %} checked{% endif %}>
-                                                 <label class="form-check-label" for="sem_{{ forloop.counter }}">
-                                                     {{ sem }}
-                                                 </label>
-                                             </div>
-                                             {% endfor %}
-                                         </div>
-                                     </div>
-                                 </th>
+                                <th style="min-width: 140px;">
+                                    Semester
+                                    <div class="dropdown mt-2" id="semesterDropdownContainer">
+                                        <button
+                                            class="btn btn-sm btn-outline-secondary dropdown-toggle w-100 text-start d-flex justify-content-between align-items-center bg-white"
+                                            type="button" id="semesterDropdownBtn" data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                            style="border: 1px solid #ced4da; font-size: 0.875rem;">
+                                            <span id="semesterDropdownText">All Semesters</span>
+                                        </button>
+                                        <div class="dropdown-menu p-3" aria-labelledby="semesterDropdownBtn"
+                                            style="min-width: 200px; max-height: 250px; overflow-y: auto;"
+                                            id="semesterDropdownMenu">
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input select-all-semesters" type="checkbox"
+                                                    id="selectAllSemesters">
+                                                <label class="form-check-label fw-bold" for="selectAllSemesters">
+                                                    Select All
+                                                </label>
+                                            </div>
+                                            <hr class="dropdown-divider">
+                                            {% for sem in filter_options.semesters %}
+                                            <div class="form-check">
+                                                <input class="form-check-input semester-checkbox" type="checkbox" value="{{ sem }}" id="sem_{{ forloop.counter }}"{% if sem in selected_semesters %} checked{% endif %}>
+                                                <label class="form-check-label" for="sem_{{ forloop.counter }}">
+                                                    {{ sem }}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for rec in recommendations %}
-                            <tr data-program="{{ rec.program|lower }}" data-category="{{ rec.category|lower }}" data-stream="{{ rec.stream|default:'science'|lower }}">
-                                <td style="text-align: center; font-weight: 600; color: #0d2d47;">{{ forloop.counter }}</td>
+                            <tr data-program="{{ rec.program|lower }}" data-category="{{ rec.category|lower }}"
+                                data-stream="{{ rec.stream|default:'science'|lower }}">
+                                <td style="text-align: center; font-weight: 600; color: #0d2d47;">{{ forloop.counter }}
+                                </td>
                                 <td>
                                     <div class="fw-semibold text-primary">{{ rec.program }}</div>
                                     <div class="small text-muted">{{ rec.department }}</div>
@@ -231,7 +239,8 @@
                                 </td>
                                 <td class="text-end fw-bold">{{ rec.merit }}%</td>
                                 <td class="text-center">
-                                    <span class="badge {% if rec.badge == 'success' %}bg-success{% elif rec.badge == 'warning' %}bg-warning text-dark{% elif rec.badge == 'danger' %}bg-danger{% else %}bg-secondary{% endif %} rounded-pill">
+                                    <span
+                                        class="badge {% if rec.badge == 'success' %}bg-success{% elif rec.badge == 'warning' %}bg-warning text-dark{% elif rec.badge == 'danger' %}bg-danger{% else %}bg-secondary{% endif %} rounded-pill">
                                         {{ rec.category }}
                                     </span>
                                 </td>
@@ -298,209 +307,209 @@
 
 {% block extra_js %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Auto-populate merit from URL parameter or localStorage
-    const urlParams = new URLSearchParams(window.location.search);
-    const meritFromUrl = urlParams.get('merit');
-    const studentMeritInput = document.getElementById('studentMerit');
-    const defaultValue = studentMeritInput ? studentMeritInput.getAttribute('data-default-value') : '';
-    const filterForm = document.getElementById('filterForm');
-    
-    // Set the initial merit value
-    if (meritFromUrl && studentMeritInput) {
-        const meritValue = parseFloat(meritFromUrl).toFixed(2);
-        studentMeritInput.value = meritValue;
-        console.log('Merit auto-populated from URL:', meritValue);
-        
-        // Auto-submit the form if it comes from URL
-        setTimeout(function() {
-            if (filterForm && meritFromUrl) {
-                console.log('Auto-submitting form with merit:', meritValue);
-                filterForm.submit();
-            }
-        }, 100);
-    } else if (!defaultValue && studentMeritInput) {
-        // Try to get from localStorage if available and no default value
-        const savedMerit = localStorage.getItem('calculatedMerit');
-        if (savedMerit) {
-            const meritValue = parseFloat(savedMerit).toFixed(2);
+    document.addEventListener('DOMContentLoaded', function () {
+        // Auto-populate merit from URL parameter or localStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        const meritFromUrl = urlParams.get('merit');
+        const studentMeritInput = document.getElementById('studentMerit');
+        const defaultValue = studentMeritInput ? studentMeritInput.getAttribute('data-default-value') : '';
+        const filterForm = document.getElementById('filterForm');
+
+        // Set the initial merit value
+        if (meritFromUrl && studentMeritInput) {
+            const meritValue = parseFloat(meritFromUrl).toFixed(2);
             studentMeritInput.value = meritValue;
-            console.log('Merit auto-populated from localStorage:', meritValue);
-        }
-    } else if (defaultValue && studentMeritInput) {
-        // Set default value from Django context
-        studentMeritInput.value = defaultValue;
-        console.log('Merit set to default value:', defaultValue);
-    }
+            console.log('Merit auto-populated from URL:', meritValue);
 
-    // Form validation
-    const form = document.getElementById('filterForm');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            const merit = document.getElementById('studentMerit').value;
-            if (!merit || merit <= 0 || merit > 100) {
-                e.preventDefault();
-                alert('Please enter a valid merit percentage between 0 and 100');
+            // Auto-submit the form if it comes from URL
+            setTimeout(function () {
+                if (filterForm && meritFromUrl) {
+                    console.log('Auto-submitting form with merit:', meritValue);
+                    filterForm.submit();
+                }
+            }, 100);
+        } else if (!defaultValue && studentMeritInput) {
+            // Try to get from localStorage if available and no default value
+            const savedMerit = localStorage.getItem('calculatedMerit');
+            if (savedMerit) {
+                const meritValue = parseFloat(savedMerit).toFixed(2);
+                studentMeritInput.value = meritValue;
+                console.log('Merit auto-populated from localStorage:', meritValue);
             }
-        });
-    }
+        } else if (defaultValue && studentMeritInput) {
+            // Set default value from Django context
+            studentMeritInput.value = defaultValue;
+            console.log('Merit set to default value:', defaultValue);
+        }
 
-    // Table filtering functionality
-    const table = document.getElementById('recommendationsTable');
-    if (table) {
-        const searchInput = document.getElementById('programSearch');
-        const streamFilter = document.getElementById('streamFilter');
-        const columnFilters = document.querySelectorAll('.column-filter');
-
-        // Semester checkbox elements
-        const selectAllSemesters = document.getElementById('selectAllSemesters');
-        const semesterCheckboxes = document.querySelectorAll('.semester-checkbox');
-        const semesterDropdownText = document.getElementById('semesterDropdownText');
-        const semesterDropdownMenu = document.getElementById('semesterDropdownMenu');
-
-        // Keep dropdown open when selecting multiple checkboxes
-        if (semesterDropdownMenu) {
-            semesterDropdownMenu.addEventListener('click', function(e) {
-                e.stopPropagation();
+        // Form validation
+        const form = document.getElementById('filterForm');
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                const merit = document.getElementById('studentMerit').value;
+                if (!merit || merit <= 0 || merit > 100) {
+                    e.preventDefault();
+                    alert('Please enter a valid merit percentage between 0 and 100');
+                }
             });
         }
 
-        // Update dropdown button text showing selected count
-        function updateSemesterDropdownState() {
-            const checkedCount = Array.from(semesterCheckboxes).filter(cb => cb.checked).length;
-            const totalCount = semesterCheckboxes.length;
+        // Table filtering functionality
+        const table = document.getElementById('recommendationsTable');
+        if (table) {
+            const searchInput = document.getElementById('programSearch');
+            const streamFilter = document.getElementById('streamFilter');
+            const columnFilters = document.querySelectorAll('.column-filter');
 
-            if (checkedCount === totalCount) {
-                semesterDropdownText.textContent = "All Semesters";
-                if (selectAllSemesters) selectAllSemesters.checked = true;
-            } else if (checkedCount === 0) {
-                semesterDropdownText.textContent = "None Selected";
-                if (selectAllSemesters) selectAllSemesters.checked = false;
-            } else {
-                semesterDropdownText.textContent = `${checkedCount} Selected`;
-                if (selectAllSemesters) selectAllSemesters.checked = false;
-            }
-        }
+            // Semester checkbox elements
+            const selectAllSemesters = document.getElementById('selectAllSemesters');
+            const semesterCheckboxes = document.querySelectorAll('.semester-checkbox');
+            const semesterDropdownText = document.getElementById('semesterDropdownText');
+            const semesterDropdownMenu = document.getElementById('semesterDropdownMenu');
 
-        // Initialize state on load
-        updateSemesterDropdownState();
-        filterTable();
-
-        // Handle "Select All" checkbox change
-        if (selectAllSemesters) {
-            selectAllSemesters.addEventListener('change', function() {
-                const isChecked = this.checked;
-                semesterCheckboxes.forEach(cb => {
-                    cb.checked = isChecked;
+            // Keep dropdown open when selecting multiple checkboxes
+            if (semesterDropdownMenu) {
+                semesterDropdownMenu.addEventListener('click', function (e) {
+                    e.stopPropagation();
                 });
-                updateSemesterDropdownState();
-                filterTable();
-            });
-        }
+            }
 
-        // Handle individual checkbox changes
-        semesterCheckboxes.forEach(cb => {
-            cb.addEventListener('change', function() {
-                updateSemesterDropdownState();
-                filterTable();
-            });
-        });
+            // Update dropdown button text showing selected count
+            function updateSemesterDropdownState() {
+                const checkedCount = Array.from(semesterCheckboxes).filter(cb => cb.checked).length;
+                const totalCount = semesterCheckboxes.length;
 
-        // Program search
-        if (searchInput) {
-            searchInput.addEventListener('keyup', filterTable);
-        }
-
-        // Stream filter
-        if (streamFilter) {
-            streamFilter.addEventListener('change', filterTable);
-        }
-
-        // Column filters
-        columnFilters.forEach(filter => {
-            filter.addEventListener('change', filterTable);
-            filter.addEventListener('keyup', filterTable);
-        });
-
-        function filterTable() {
-            const rows = table.querySelectorAll('tbody tr');
-            const programSearchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-            const selectedStream = streamFilter ? streamFilter.value.toLowerCase() : '';
-
-            // Get active semester values
-            const activeSemesters = Array.from(semesterCheckboxes)
-                .filter(cb => cb.checked)
-                .map(cb => cb.value.trim().toLowerCase());
-
-            rows.forEach(row => {
-                let show = true;
-
-                // Program search filter
-                if (programSearchTerm) {
-                    const programText = row.getAttribute('data-program') || '';
-                    const cells = row.querySelectorAll('td');
-                    const combinedText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(' ');
-                    if (!combinedText.includes(programSearchTerm)) {
-                        show = false;
-                    }
+                if (checkedCount === totalCount) {
+                    semesterDropdownText.textContent = "All Semesters";
+                    if (selectAllSemesters) selectAllSemesters.checked = true;
+                } else if (checkedCount === 0) {
+                    semesterDropdownText.textContent = "None Selected";
+                    if (selectAllSemesters) selectAllSemesters.checked = false;
+                } else {
+                    semesterDropdownText.textContent = `${checkedCount} Selected`;
+                    if (selectAllSemesters) selectAllSemesters.checked = false;
                 }
+            }
 
-                // Stream filter (Science/Arts)
-                if (selectedStream && show) {
-                    const rowStream = row.getAttribute('data-stream') || '';
-                    if (!rowStream.includes(selectedStream)) {
-                        show = false;
+            // Initialize state on load
+            updateSemesterDropdownState();
+            filterTable();
+
+            // Handle "Select All" checkbox change
+            if (selectAllSemesters) {
+                selectAllSemesters.addEventListener('change', function () {
+                    const isChecked = this.checked;
+                    semesterCheckboxes.forEach(cb => {
+                        cb.checked = isChecked;
+                    });
+                    updateSemesterDropdownState();
+                    filterTable();
+                });
+            }
+
+            // Handle individual checkbox changes
+            semesterCheckboxes.forEach(cb => {
+                cb.addEventListener('change', function () {
+                    updateSemesterDropdownState();
+                    filterTable();
+                });
+            });
+
+            // Program search
+            if (searchInput) {
+                searchInput.addEventListener('keyup', filterTable);
+            }
+
+            // Stream filter
+            if (streamFilter) {
+                streamFilter.addEventListener('change', filterTable);
+            }
+
+            // Column filters
+            columnFilters.forEach(filter => {
+                filter.addEventListener('change', filterTable);
+                filter.addEventListener('keyup', filterTable);
+            });
+
+            function filterTable() {
+                const rows = table.querySelectorAll('tbody tr');
+                const programSearchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+                const selectedStream = streamFilter ? streamFilter.value.toLowerCase() : '';
+
+                // Get active semester values
+                const activeSemesters = Array.from(semesterCheckboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.value.trim().toLowerCase());
+
+                rows.forEach(row => {
+                    let show = true;
+
+                    // Program search filter
+                    if (programSearchTerm) {
+                        const programText = row.getAttribute('data-program') || '';
+                        const cells = row.querySelectorAll('td');
+                        const combinedText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(' ');
+                        if (!combinedText.includes(programSearchTerm)) {
+                            show = false;
+                        }
                     }
-                }
 
-                // Column-specific filters
-                if (show) {
-                    columnFilters.forEach(filter => {
-                        const colIndex = filter.getAttribute('data-column');
-                        const filterType = filter.getAttribute('data-type');
-                        const filterValue = filter.value.toLowerCase();
-                        
-                        if (filterValue) {
-                            const cell = row.querySelectorAll('td')[colIndex];
-                            const cellText = cell ? cell.textContent.trim() : '';
+                    // Stream filter (Science/Arts)
+                    if (selectedStream && show) {
+                        const rowStream = row.getAttribute('data-stream') || '';
+                        if (!rowStream.includes(selectedStream)) {
+                            show = false;
+                        }
+                    }
 
-                            if (filterType === 'range') {
-                                const [min, max] = filterValue.split('-').map(v => parseFloat(v));
-                                const cellValue = parseFloat(cellText);
-                                if (isNaN(cellValue) || (min && cellValue < min) || (max && cellValue > max)) {
-                                    show = false;
-                                }
-                            } else {
-                                if (!cellText.toLowerCase().includes(filterValue)) {
-                                    show = false;
+                    // Column-specific filters
+                    if (show) {
+                        columnFilters.forEach(filter => {
+                            const colIndex = filter.getAttribute('data-column');
+                            const filterType = filter.getAttribute('data-type');
+                            const filterValue = filter.value.toLowerCase();
+
+                            if (filterValue) {
+                                const cell = row.querySelectorAll('td')[colIndex];
+                                const cellText = cell ? cell.textContent.trim() : '';
+
+                                if (filterType === 'range') {
+                                    const [min, max] = filterValue.split('-').map(v => parseFloat(v));
+                                    const cellValue = parseFloat(cellText);
+                                    if (isNaN(cellValue) || (min && cellValue < min) || (max && cellValue > max)) {
+                                        show = false;
+                                    }
+                                } else {
+                                    if (!cellText.toLowerCase().includes(filterValue)) {
+                                        show = false;
+                                    }
                                 }
                             }
-                        }
-                    });
-                }
-
-                // Semester multi-select filter
-                if (show) {
-                    const cell = row.querySelectorAll('td')[5];
-                    const cellText = cell ? cell.textContent.trim().toLowerCase() : '';
-                    if (!activeSemesters.includes(cellText)) {
-                        show = false;
+                        });
                     }
+
+                    // Semester multi-select filter
+                    if (show) {
+                        const cell = row.querySelectorAll('td')[5];
+                        const cellText = cell ? cell.textContent.trim().toLowerCase() : '';
+                        if (!activeSemesters.includes(cellText)) {
+                            show = false;
+                        }
+                    }
+
+                    row.style.display = show ? '' : 'none';
+                });
+
+                // Update the count badge
+                const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none').length;
+                const countBadge = document.getElementById('resultsCountBadge');
+                if (countBadge) {
+                    countBadge.textContent = visibleRows + ' Found';
                 }
 
-                row.style.display = show ? '' : 'none';
-            });
-
-            // Update the count badge
-            const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none').length;
-            const countBadge = document.getElementById('resultsCountBadge');
-            if (countBadge) {
-                countBadge.textContent = visibleRows + ' Found';
+                console.log('Visible rows:', visibleRows);
             }
-
-            console.log('Visible rows:', visibleRows);
         }
-    }
-});
+    });
 </script>
 {% endblock %}
