@@ -184,7 +184,7 @@
                                     <div class="input-group input-group-sm mt-2">
                                         <select class="form-select form-select-sm column-filter" data-column="4">
                                             <option value="">All</option>
-                                            <option value="Safe">Safe</option>
+                                            <option value="Safe" selected>Safe</option>
                                             <option value="Moderate">Moderate</option>
                                             <option value="Risky">Risky</option>
                                             <option value="Not Eligible">Not Eligible</option>
@@ -384,6 +384,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initialize state on load
         updateSemesterDropdownState();
+        filterTable();
 
         // Handle "Select All" checkbox change
         if (selectAllSemesters) {
