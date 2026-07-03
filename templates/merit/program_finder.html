@@ -191,35 +191,31 @@
                                         </select>
                                     </div>
                                 </th>
-                                <th style="min-width: 100px;">
-                                    Campus
-                                    <div class="input-group input-group-sm mt-2">
-                                        <select class="form-select form-select-sm column-filter" data-column="5">
-                                            <option value="">All</option>
-                                            {% for campus in filter_options.campuses %}
-                                                <option value="{{ campus }}">{{ campus }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                </th>
-                                <th style="min-width: 100px;">
-                                    Semester
-                                    <div class="input-group input-group-sm mt-2">
-                                        <select class="form-select form-select-sm column-filter" data-column="6">
-                                            <option value="">All</option>
-                                            {% for sem in filter_options.semesters %}
-                                                <option value="{{ sem }}">{{ sem }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                </th>
-                                <th style="min-width: 80px;" class="text-end">
-                                    Margin
-                                    <div class="input-group input-group-sm mt-2">
-                                        <input type="text" class="form-control form-control-sm column-filter" 
-                                               data-column="7" placeholder="Filter...">
-                                    </div>
-                                </th>
+                                 <th style="min-width: 140px;">
+                                     Semester
+                                     <div class="dropdown mt-2" id="semesterDropdownContainer">
+                                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle w-100 text-start d-flex justify-content-between align-items-center bg-white" type="button" id="semesterDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false" style="border: 1px solid #ced4da; font-size: 0.875rem;">
+                                             <span id="semesterDropdownText">All Semesters</span>
+                                         </button>
+                                         <div class="dropdown-menu p-3" aria-labelledby="semesterDropdownBtn" style="min-width: 200px; max-height: 250px; overflow-y: auto;" id="semesterDropdownMenu">
+                                             <div class="form-check mb-2">
+                                                 <input class="form-check-input select-all-semesters" type="checkbox" id="selectAllSemesters" checked>
+                                                 <label class="form-check-label fw-bold" for="selectAllSemesters">
+                                                     Select All
+                                                 </label>
+                                             </div>
+                                             <hr class="dropdown-divider">
+                                             {% for sem in filter_options.semesters %}
+                                             <div class="form-check">
+                                                 <input class="form-check-input semester-checkbox" type="checkbox" value="{{ sem }}" id="sem_{{ forloop.counter }}" checked>
+                                                 <label class="form-check-label" for="sem_{{ forloop.counter }}">
+                                                     {{ sem }}
+                                                 </label>
+                                             </div>
+                                             {% endfor %}
+                                         </div>
+                                     </div>
+                                 </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -239,15 +235,7 @@
                                         {{ rec.category }}
                                     </span>
                                 </td>
-                                <td><small>{{ rec.campus }}</small></td>
                                 <td><small>{{ rec.semester }}</small></td>
-                                <td class="text-end">
-                                    {% if rec.margin|first != '-' %}
-                                        <span class="text-success fw-bold">+{{ rec.margin }}</span>
-                                    {% else %}
-                                        <span class="text-danger fw-bold">{{ rec.margin }}</span>
-                                    {% endif %}
-                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -364,6 +352,59 @@ document.addEventListener('DOMContentLoaded', function() {
         const streamFilter = document.getElementById('streamFilter');
         const columnFilters = document.querySelectorAll('.column-filter');
 
+        // Semester checkbox elements
+        const selectAllSemesters = document.getElementById('selectAllSemesters');
+        const semesterCheckboxes = document.querySelectorAll('.semester-checkbox');
+        const semesterDropdownText = document.getElementById('semesterDropdownText');
+        const semesterDropdownMenu = document.getElementById('semesterDropdownMenu');
+
+        // Keep dropdown open when selecting multiple checkboxes
+        if (semesterDropdownMenu) {
+            semesterDropdownMenu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+
+        // Update dropdown button text showing selected count
+        function updateSemesterDropdownState() {
+            const checkedCount = Array.from(semesterCheckboxes).filter(cb => cb.checked).length;
+            const totalCount = semesterCheckboxes.length;
+
+            if (checkedCount === totalCount) {
+                semesterDropdownText.textContent = "All Semesters";
+                if (selectAllSemesters) selectAllSemesters.checked = true;
+            } else if (checkedCount === 0) {
+                semesterDropdownText.textContent = "None Selected";
+                if (selectAllSemesters) selectAllSemesters.checked = false;
+            } else {
+                semesterDropdownText.textContent = `${checkedCount} Selected`;
+                if (selectAllSemesters) selectAllSemesters.checked = false;
+            }
+        }
+
+        // Initialize state on load
+        updateSemesterDropdownState();
+
+        // Handle "Select All" checkbox change
+        if (selectAllSemesters) {
+            selectAllSemesters.addEventListener('change', function() {
+                const isChecked = this.checked;
+                semesterCheckboxes.forEach(cb => {
+                    cb.checked = isChecked;
+                });
+                updateSemesterDropdownState();
+                filterTable();
+            });
+        }
+
+        // Handle individual checkbox changes
+        semesterCheckboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                updateSemesterDropdownState();
+                filterTable();
+            });
+        });
+
         // Program search
         if (searchInput) {
             searchInput.addEventListener('keyup', filterTable);
@@ -384,6 +425,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const rows = table.querySelectorAll('tbody tr');
             const programSearchTerm = searchInput ? searchInput.value.toLowerCase() : '';
             const selectedStream = streamFilter ? streamFilter.value.toLowerCase() : '';
+
+            // Get active semester values
+            const activeSemesters = Array.from(semesterCheckboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value.trim().toLowerCase());
 
             rows.forEach(row => {
                 let show = true;
@@ -421,6 +467,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
 
+                // Semester multi-select filter
+                if (show) {
+                    const cell = row.querySelectorAll('td')[5];
+                    const cellText = cell ? cell.textContent.trim().toLowerCase() : '';
+                    if (!activeSemesters.includes(cellText)) {
+                        show = false;
+                    }
+                }
+
                 row.style.display = show ? '' : 'none';
             });
 
@@ -431,8 +486,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 countBadge.textContent = visibleRows + ' Found';
             }
 
-            // Update count
-            const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none').length;
             console.log('Visible rows:', visibleRows);
         }
     }
