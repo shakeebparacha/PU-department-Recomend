@@ -486,3 +486,12 @@
         font-size: 0.7rem;
     }
 }
+
+@media (max-width: 576px) {
+    .recommendations-table th:nth-child(5),
+    .recommendations-table td:nth-child(5),
+    .recommendations-table th:nth-child(6),
+    .recommendations-table td:nth-child(6) {
+        display: none;
+    }
+}
