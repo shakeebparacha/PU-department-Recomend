@@ -321,13 +321,26 @@
             studentMeritInput.value = meritValue;
             console.log('Merit auto-populated from URL:', meritValue);
 
-            // Auto-submit the form if it comes from URL
-            setTimeout(function () {
-                if (filterForm && meritFromUrl) {
-                    console.log('Auto-submitting form with merit:', meritValue);
-                    filterForm.submit();
-                }
-            }, 100);
+            // If the server hasn't processed this value yet, auto-submit
+            if (!defaultValue || parseFloat(defaultValue).toFixed(2) !== meritValue) {
+                setTimeout(function () {
+                    if (filterForm) {
+                        console.log('Auto-submitting form with merit:', meritValue);
+                        
+                        // Clean up URL to prevent infinite loop on POST reload
+                        const url = new URL(window.location);
+                        url.searchParams.delete('merit');
+                        window.history.replaceState({}, '', url);
+                        
+                        filterForm.submit();
+                    }
+                }, 100);
+            } else {
+                // Already processed, just clean up the URL
+                const url = new URL(window.location);
+                url.searchParams.delete('merit');
+                window.history.replaceState({}, '', url);
+            }
         } else if (!defaultValue && studentMeritInput) {
             // Try to get from localStorage if available and no default value
             const savedMerit = localStorage.getItem('calculatedMerit');
