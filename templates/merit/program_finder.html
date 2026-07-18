@@ -555,12 +555,14 @@
                     const department = programCell.querySelector('.small') ? programCell.querySelector('.small').textContent.trim() : '';
                     
                     const merit = cells[3].textContent.trim();
+                    const semester = cells[5] ? cells[5].textContent.trim() : '';
                     
                     data.push({
                         faculty: faculty,
                         program: program,
                         department: department,
-                        merit: merit
+                        merit: merit,
+                        semester: semester
                     });
                 }
             }

@@ -164,16 +164,17 @@ def download_filtered_pdf(request):
         elements.append(Paragraph(info_text, info_style))
         elements.append(Spacer(1, 0.15 * inch))
 
-        pdf_table_data = [['Faculty', 'Department', 'Program', 'Cutoff %']]
+        pdf_table_data = [['Faculty', 'Department', 'Program', 'Semester', 'Cutoff %']]
         for row in table_data:
             pdf_table_data.append([
-                str(row.get('faculty', ''))[:25],
-                str(row.get('department', ''))[:30],
-                str(row.get('program', ''))[:35],
+                str(row.get('faculty', ''))[:20],
+                str(row.get('department', ''))[:25],
+                str(row.get('program', ''))[:30],
+                str(row.get('semester', ''))[:25],
                 str(row.get('merit', ''))
             ])
 
-        table = Table(pdf_table_data, colWidths=[1.8 * inch, 2.2 * inch, 2.5 * inch, 1.0 * inch])
+        table = Table(pdf_table_data, colWidths=[1.5 * inch, 1.8 * inch, 2.0 * inch, 1.5 * inch, 0.7 * inch])
         table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0d2d47')),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
