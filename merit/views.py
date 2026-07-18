@@ -10,6 +10,8 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, 
 from reportlab.lib.units import inch
 import os
 from pathlib import Path
+import json
+from django.http import HttpResponse
 
 
 def load_merit_data():
@@ -127,76 +129,71 @@ def categorize_difficulty(student_merit, program_merit):
     return category, badge, margin
 
 
-def generate_pdf_report(student_merit, year_label, recommendations_df):
-    if recommendations_df is None or recommendations_df.empty:
-        return None
+def download_filtered_pdf(request):
+    if request.method == 'POST':
+        table_data_str = request.POST.get('table_data', '[]')
+        student_merit = request.POST.get('student_merit', '')
+        
+        try:
+            table_data = json.loads(table_data_str)
+        except:
+            table_data = []
 
-    reports_dir = settings.MEDIA_ROOT / 'reports'
-    os.makedirs(reports_dir, exist_ok=True)
+        buffer = BytesIO()
+        doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5 * inch, bottomMargin=0.5 * inch)
+        elements = []
+        styles = getSampleStyleSheet()
 
-    merit_tag = str(student_merit).replace('.', '_')
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    filename = f"pu_merit_recommendations_{merit_tag}_{timestamp}.pdf"
-    output_path = reports_dir / filename
+        title_style = ParagraphStyle(
+            'ReportTitle',
+            parent=styles['Heading1'],
+            fontSize=16,
+            textColor=colors.HexColor('#0d2d47'),
+            spaceAfter=6,
+            alignment=1
+        )
+        elements.append(Paragraph("University of the Punjab", title_style))
+        elements.append(Paragraph("Merit-Based Program Recommendation Report", styles['Heading2']))
+        elements.append(Spacer(1, 0.2 * inch))
 
-    buffer = BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5 * inch, bottomMargin=0.5 * inch)
-    elements = []
-    styles = getSampleStyleSheet()
+        info_style = ParagraphStyle('ReportInfo', parent=styles['Normal'], fontSize=10)
+        info_text = (
+            f"<b>Student Merit:</b> {student_merit}% | "
+            f"<b>Generated:</b> {datetime.now().strftime('%d-%m-%Y %H:%M')}"
+        )
+        elements.append(Paragraph(info_text, info_style))
+        elements.append(Spacer(1, 0.15 * inch))
 
-    title_style = ParagraphStyle(
-        'ReportTitle',
-        parent=styles['Heading1'],
-        fontSize=16,
-        textColor=colors.HexColor('#0d2d47'),
-        spaceAfter=6,
-        alignment=1
-    )
-    elements.append(Paragraph("University of the Punjab", title_style))
-    elements.append(Paragraph("Merit-Based Program Recommendation Report", styles['Heading2']))
-    elements.append(Spacer(1, 0.2 * inch))
+        pdf_table_data = [['Faculty', 'Department', 'Program', 'Cutoff %']]
+        for row in table_data:
+            pdf_table_data.append([
+                str(row.get('faculty', ''))[:25],
+                str(row.get('department', ''))[:30],
+                str(row.get('program', ''))[:35],
+                str(row.get('merit', ''))
+            ])
 
-    info_style = ParagraphStyle('ReportInfo', parent=styles['Normal'], fontSize=10)
-    info_text = (
-        f"<b>Student Merit:</b> {student_merit}% | "
-        f"<b>Year:</b> {year_label} | "
-        f"<b>Generated:</b> {datetime.now().strftime('%d-%m-%Y %H:%M')}"
-    )
-    elements.append(Paragraph(info_text, info_style))
-    elements.append(Spacer(1, 0.15 * inch))
+        table = Table(pdf_table_data, colWidths=[1.8 * inch, 2.2 * inch, 2.5 * inch, 1.0 * inch])
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0d2d47')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 10),
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f4f4f4')])
+        ]))
 
-    table_data = [['Faculty', 'Department', 'Program', 'Campus', 'Semester', 'Cutoff %', 'Category']]
-    for _, row in recommendations_df.iterrows():
-        table_data.append([
-            str(row.get('Faculty', ''))[:18],
-            str(row.get('Department', ''))[:20],
-            str(row.get('Program', ''))[:20],
-            str(row.get('Campus', ''))[:12],
-            str(row.get('Semester', row.get('Semester_Type', '')))[:14],
-            f"{row.get('Merit_Percentage', 0):.1f}%",
-            str(row.get('Category', ''))
-        ])
+        elements.append(table)
+        doc.build(elements)
 
-    table = Table(table_data, colWidths=[1.2 * inch, 1.5 * inch, 1.5 * inch, 1.0 * inch, 1.2 * inch, 0.8 * inch, 1.0 * inch])
-    table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0d2d47')),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, 0), 9),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 10),
-        ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
-        ('FONTSIZE', (0, 1), (-1, -1), 8),
-        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f4f4f4')])
-    ]))
-
-    elements.append(table)
-    doc.build(elements)
-
-    with open(output_path, 'wb') as output_file:
-        output_file.write(buffer.getvalue())
-
-    return f"{settings.MEDIA_URL}reports/{filename}"
+        response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="pu_merit_recommendations.pdf"'
+        return response
+    
+    return HttpResponse("Invalid request")
 
 
 def home(request):
@@ -364,8 +361,6 @@ def program_finder(request):
                         metrics['moderate'] = int((filtered_df['Category'] == 'Moderate').sum())
                         metrics['risky'] = int((filtered_df['Category'] == 'Risky').sum())
                         metrics['not_eligible'] = int((filtered_df['Category'] == 'Not Eligible').sum())
-                        year_label = ', '.join(selected_years) if selected_years else 'All'
-                        pdf_url = generate_pdf_report(student_merit, year_label, filtered_df)
 
                     if not recommendations:
                         error_message = "No programs found matching your merit and selected filters."
